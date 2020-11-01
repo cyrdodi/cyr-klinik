@@ -40,10 +40,10 @@ class Registrasi_model extends CI_Model
       'jk' => $this->input->post('jk', TRUE),
       'tempat_lahir' => $this->input->post('tempat_lahir', TRUE),
       'tgl_lahir' => $tglLahir,
-      'provinsi' => $this->input->post('provinsi', TRUE),
-      'kabupaten' => $this->input->post('kabupaten', TRUE),
-      'kecamatan' => $this->input->post('kecamatan', TRUE),
-      'kelurahan' => $this->input->post('kelurahan', TRUE),
+      'provinsi' => ucfirst(strtolower($this->input->post('provinsi', TRUE))),
+      'kabupaten' => ucfirst(strtolower($this->input->post('kabupaten', TRUE))),
+      'kecamatan' => ucfirst(strtolower($this->input->post('kecamatan', TRUE))),
+      'kelurahan' => ucfirst(strtolower($this->input->post('kelurahan', TRUE))),
       'alamat' => $this->input->post('alamat', TRUE),
       'no_hp' => $this->input->post('no_hp', TRUE),
       'agama' => $this->input->post('agama', TRUE),
@@ -72,5 +72,21 @@ class Registrasi_model extends CI_Model
       $count = $lastRecord + 1;
     }
     return $count;
+  }
+
+  public function searchPasien($keyword)
+  {
+    return $this->db->query(
+      "SELECT * FROM data_pasien 
+      WHERE nama_depan LIKE '%" . $keyword . "%'
+      OR nama_belakang LIKE '%" . $keyword . "%'
+      OR medrek LIKE'%" . $keyword . "%'
+      LIMIT 50"
+    )->result_array();
+  }
+
+  public function getDataPasien($mr)
+  {
+    return $this->db->get_where('data_pasien', ['medrek' => $mr])->row_array();
   }
 }

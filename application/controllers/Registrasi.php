@@ -11,6 +11,15 @@ class Registrasi extends CI_Controller
   public function index()
   {
     $data['title'] = 'Registrasi';
+    $data['is_keyword'] = FALSE;
+    $keyword = $this->input->get('keyword');
+
+    if ($keyword !== NULL) {
+      if (strlen($keyword) > 0) {
+        $data['is_keyword'] = TRUE;
+        $data['search_result'] = $this->Registrasi_model->searchPasien($keyword);
+      }
+    }
 
     $this->load->view('templates/header', $data);
     $this->load->view('registrasi/index', $data);
@@ -53,12 +62,13 @@ class Registrasi extends CI_Controller
     }
   }
 
-  public function pendaftaran()
+  public function pendaftaran($mr)
   {
     $data['title'] = 'Pendaftaran';
+    $data['pasien'] = $this->Registrasi_model->getDataPasien($mr);
 
-    $this->$this->load->view('templates/header', $data);
-    $this->load->view('templates/pendaftaran', $data);
+    $this->load->view('templates/header', $data);
+    $this->load->view('registrasi/pendaftaran', $data);
     $this->load->view('templates/footer');
   }
 

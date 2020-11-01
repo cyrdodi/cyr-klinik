@@ -33,42 +33,22 @@
               </div>
               <hr>
               <div class="form-group">
-                <label for="jk">Jenis Kelamin</label>
-                <div class="row">
-                  <div class="col">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="jk" id="radiojk1" value="l" <?= 'l' === set_value('jk') ? 'checked' : '' ?>>
-                      <label class="form-check-label" for="radiojk1">
-                        Laki - laki
-                      </label>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="jk" id="radiojk2" value="p" <?= 'p' === set_value('jk') ? 'checked' : '' ?>>
-                      <label class="form-check-label" for="radiojk2">
-                        Perempuan
-                      </label>
-                    </div>
-                  </div>
-                </div>
+                <label for="jk">Jenis Kelamin <i class="fas fa-venus-mars"></i></label>
+                <select name="jk" id="jk" class="form-control">
+                  <option value="l" <?= set_select('jk', 'l') ?>>Laki-laki</option>
+                  <option value="p" <?= set_select('jk', 'p') ?>>Perempuan</option>
+                </select>
                 <?= form_error('jk', '<small class="text-danger ">', '</small>') ?>
               </div>
               <hr>
+
               <div class="form-group">
+                <label for="tgl_lhr">Tempat & Tanggal Lahir</label>
                 <div class="row">
-                  <div class="col-lg-3">
-                    <label for="tempat_lahir">Tempat Lahir</label>
-                  </div>
-                  <div class="col-lg-9">
-                    <input type="text" class="form-control" name="tempat_lahir" value="<?= set_value('tempat_lahir') ?>">
+                  <div class="col">
+                    <input type="text" class="form-control" name="tempat_lahir" value="<?= set_value('tempat_lahir') ?>" placeholder="tempat lahir">
                     <?= form_error('tempat_lahir', '<small class="text-danger ">', '</small>') ?>
                   </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="tgl_lhr">Tanggal Lahir</label>
-                <div class="row">
                   <div class="col">
                     <input type="number" name="tgl_lhr" class="form-control" id="tgl_lhr" placeholder="tanggal" min="1" max="31" value="<?= set_value('tgl_lhr') ?>">
                     <?= form_error('tgl_lhr', '<small class="text-danger ">', '</small>') ?>

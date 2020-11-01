@@ -2,20 +2,67 @@
   <div class="col">
     <div class="card shadow-sm">
       <div class="card-body">
-        <h3>Pendaftaran</h3>
+        <h3>Pendaftaran Klinik</h3>
         <hr>
         <div class="row">
           <div class="col-lg-6">
-            <form action="" method="get">
+            <form action="" method="get" autocomplete="off">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Masukan Nama / Medrek ..." aria-label="Example text with button addon" aria-describedby="button-addon1">
+                <input type="text" class="form-control" placeholder="Masukan Nama / Medrek ..." aria-label="Example text with button addon" name="keyword" aria-describedby="button-addon1" value="<?= $is_keyword ? $this->input->get('keyword') : '' ?>" autofocus>
                 <div class="input-group-prepend">
-                  <button class="btn btn-primary" type="button" id="button-addon1"><i class="fas fa-search"></i></button>
+                  <button class="btn btn-primary" type="submit" id="button-addon1"><i class="fas fa-search"></i> Cari</button>
                 </div>
               </div>
             </form>
           </div>
         </div>
+        <hr>
+        <?php if ($is_keyword) : ?>
+          <div class="row">
+            <div class="col">
+              <?php if (count($search_result) > 0) : ?>
+
+                <table class="table table-responsive">
+                  <thead>
+                    <tr>
+                      <th>Medrek</th>
+                      <th>Nama</th>
+                      <th>NIK</th>
+                      <th>No. BPJS</th>
+                      <th>Umur</th>
+                      <th>Alamat</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($search_result as $result) : ?>
+                      <tr>
+                        <td><?= $result['medrek'] ?></td>
+                        <td><?= $result['nama_depan'] . " " . $result['nama_belakang'] ?></td>
+                        <td><?= $result['nik'] ?></td>
+                        <td><?= $result['no_bpjs'] ?></td>
+                        <td><?= $result['tgl_lahir'] ?></td>
+                        <td><?= $result['alamat'] ?></td>
+                        <td><a href="" class="btn btn-primary">Pilih</a></td>
+                      </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+                <div class="text-secondary">Search limit 50 records</div>
+              <?php else : ?>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="alert alert-warning" role="alert">
+                      <h4><i class="fas fa-exclamation-circle"></i> Data Pasien tidak ditemukan</h4>
+                      <hr>
+                      <a href="<?= base_url('Registrasi/pasien_baru') ?>" class="btn btn-primary"><i class="fas fa-user-plus"></i> Pasien Baru</a>
+                    </div>
+                  </div>
+                </div>
+              <?php endif; ?>
+            </div>
+          </div>
+        <?php endif; ?>
       </div>
     </div>
   </div>
