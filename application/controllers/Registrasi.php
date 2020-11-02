@@ -67,9 +67,15 @@ class Registrasi extends CI_Controller
     $data['title'] = 'Pendaftaran';
     $data['pasien'] = $this->Registrasi_model->getDataPasien($mr);
 
+
     $this->load->view('templates/header', $data);
     $this->load->view('registrasi/pendaftaran', $data);
     $this->load->view('templates/footer');
+  }
+
+  public function proses_klinik()
+  {
+    $data['title'] = 'Proses Klinik';
   }
 
   public function test()

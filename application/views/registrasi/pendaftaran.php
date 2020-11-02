@@ -73,8 +73,9 @@
                 <div class="form-group">
                   <label for="penjamin">Cara Bayar</label>
                   <select name="caraBayar" id="caraBayar" class="form-control">
-                    <option value="umum">Umum/Pribadi</option>
-                    <option value="bpjsk">Bpjs Kesehatan</option>
+                    <option value="p1">BPJS Kesehatan</option>
+                    <option value="p2">Asuransi Lain</option>
+                    <option value="p3">Umum / Pribadi</option>
                   </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Daftar</button>
