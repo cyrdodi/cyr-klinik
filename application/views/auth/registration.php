@@ -9,11 +9,12 @@
         </div>
         <h1 class="text-center">simklinik</h1>
         <hr>
-        <?= $this->session->flashdata('message') ?>
         <form action="" method="POST">
-          <input type="text" class="form-control" name="username" placeholder="username">
-          <input type="password" class="form-control mt-2" name="password" placeholder="password">
-          <button class="btn btn-primary btn-block mt-2">Login</button>
+          <input type="text" class="form-control" name="nama" placeholder="nama pengguna">
+          <input type="text" class="form-control mt-2" name="username" placeholder="username">
+          <input type="password" class="form-control mt-2" name="password1" placeholder="password">
+          <input type="password" class="form-control mt-2" name="password2" placeholder="ulangi password">
+          <button class="btn btn-primary btn-block mt-2">Register</button>
         </form>
         <hr>
         <p class="text-center">cyrdodi</p>

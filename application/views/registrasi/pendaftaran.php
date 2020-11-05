@@ -71,8 +71,8 @@
             <div class="card">
               <div class="card-body">
                 <form action="" method="post">
-                  <input type="text" value="<?= $pasien['medrek'] ?>">
-                  <input type="text" value="<?= $pasien['medrek'] ?>">
+                  <input type="text" name="medrek" value="<?= $pasien['medrek'] ?>" hidden>
+                  <input type="text" name="user_id" value="<?= $this->session->userdata('user_id') ?>" hidden>
                   <div class="form-group">
                     <label for="penjamin">Cara Bayar</label>
                     <select name="caraBayar" id="caraBayar" class="form-control">

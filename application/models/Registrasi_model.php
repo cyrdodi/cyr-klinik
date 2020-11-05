@@ -89,4 +89,13 @@ class Registrasi_model extends CI_Model
   {
     return $this->db->get_where('data_pasien', ['medrek' => $mr])->row_array();
   }
+
+  public function insertPendaftaran()
+  {
+    $data = [
+      // 'id' => $this->_generateReg(),
+      'cara_bayar' => $this->input->post('caraBayar', TRUE),
+      'medrek' => $this->input->post('user_id')
+    ];
+  }
 }
