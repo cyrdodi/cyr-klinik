@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2020 at 07:51 AM
+-- Generation Time: Nov 07, 2020 at 07:50 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.26
 
@@ -88496,6 +88496,67 @@ INSERT INTO `data_pasien` (`medrek`, `nama_depan`, `nama_belakang`, `nik`, `no_b
 ('000002', 'Naruto', 'Uzumaki', '123', '321', 'l', 'asd', '1992-10-2', 'JAWA TIMUR', 'KABUPATEN LAMONGAN', 'KEMBANGBAHU', 'MAOR', 'sds', '34534', 'katolik', 'fdg', 'belum menikah', 'ads', '3434', 'Suami', '1', '2020-10-31 06:47:11'),
 ('000003', 'amin', 'rais', '1312', '231', 'l', 'asdas', '2014-02-02', 'KALIMANTAN TIMUR', 'KOTA BONTANG', 'BONTANG BARAT', 'KANAAN', 'adsa', '342', 'kristen', 'sads', 'belum menikah', '132', 'sdad21', 'dsad', '1', '2020-10-31 06:49:05');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dokter`
+--
+
+CREATE TABLE `dokter` (
+  `id` char(11) NOT NULL,
+  `nama_dokter` varchar(45) DEFAULT NULL,
+  `jenis` varchar(45) DEFAULT NULL,
+  `is_active` varchar(45) DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dokter`
+--
+
+INSERT INTO `dokter` (`id`, `nama_dokter`, `jenis`, `is_active`, `timestamp`) VALUES
+('BYD-001', 'dr.Acula', 'umum', '1', '2020-11-07 06:07:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `klinik_transaction`
+--
+
+CREATE TABLE `klinik_transaction` (
+  `id` int(11) NOT NULL,
+  `tgl_berobat` date DEFAULT NULL,
+  `cara_bayar` varchar(10) DEFAULT NULL,
+  `medrek` varchar(125) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `timestamp` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `username` varchar(256) DEFAULT NULL,
+  `password` varchar(500) DEFAULT NULL,
+  `nama` varchar(125) DEFAULT NULL,
+  `role_id` char(10) DEFAULT NULL,
+  `is_active` char(10) DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `nama`, `role_id`, `is_active`, `timestamp`) VALUES
+(1, 'admin', '$2y$10$JGCT0okRwdu2pJWxqh5Cd.FWgTzhkheBxvjwFOpFBEHXnsTIOylya', 'Admin', '1', '1', '2020-11-02 09:08:43'),
+(2, 'superuser', '$2y$10$2q6u3UaajC0ZJPYzcmIPSuqhTkU/7dXMORNqsLMJLqu2Kged6BYyS', 'Super User', '2', '1', '2020-11-05 11:49:24'),
+(3, '', '$2y$10$2q6u3UaajC0ZJPYzcmIPSuqhTkU/7dXMORNqsLMJLqu2Kged6BYyS', '', '1', '1', '2020-11-05 11:55:35');
+
 --
 -- Indexes for dumped tables
 --
@@ -88534,6 +88595,42 @@ ALTER TABLE `data_pasien`
   ADD PRIMARY KEY (`medrek`);
 
 --
+-- Indexes for table `dokter`
+--
+ALTER TABLE `dokter`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `klinik_transaction`
+--
+ALTER TABLE `klinik_transaction`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_klinik_transaction_data_pasien1_idx` (`medrek`),
+  ADD KEY `fk_klinik_transaction_user1_idx1` (`user_id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `klinik_transaction`
+--
+ALTER TABLE `klinik_transaction`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -88554,6 +88651,13 @@ ALTER TABLE `add_regencies`
 --
 ALTER TABLE `add_villages`
   ADD CONSTRAINT `villages_district_id_foreign` FOREIGN KEY (`district_id`) REFERENCES `add_districts` (`id`);
+
+--
+-- Constraints for table `klinik_transaction`
+--
+ALTER TABLE `klinik_transaction`
+  ADD CONSTRAINT `fk_klinik_transaction_data_pasien1` FOREIGN KEY (`medrek`) REFERENCES `data_pasien` (`medrek`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_klinik_transaction_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
