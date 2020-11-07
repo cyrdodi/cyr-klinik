@@ -36,7 +36,8 @@ class Auth extends CI_Controller
             'user_id' => $user['id'],
             'nama_akun' => $user['nama'],
             'username' => $user['username'],
-            'role_id' => $user['role_id']
+            'role_id' => $user['role_id'],
+            'is_login' => TRUE
           ];
           $this->session->set_userdata($data);
           redirect('Home');
@@ -82,9 +83,11 @@ class Auth extends CI_Controller
 
   public function logout()
   {
+    $this->session->unset_userdata('user_id');
     $this->session->unset_userdata('nama_akun');
     $this->session->unset_userdata('username');
     $this->session->unset_userdata('role_id');
+    $this->session->unset_userdata('is_login');
 
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda sudah logout</div>');
     redirect('auth');

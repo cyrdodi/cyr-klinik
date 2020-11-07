@@ -74,6 +74,10 @@
                   <input type="text" name="medrek" value="<?= $pasien['medrek'] ?>" hidden>
                   <input type="text" name="user_id" value="<?= $this->session->userdata('user_id') ?>" hidden>
                   <div class="form-group">
+                    <label for="tanggal">Tanggal Berobat</label>
+                    <input type="date" class="form-control" name="tgl_berobat" value="<?= date('Y-m-d') ?>">
+                  </div>
+                  <div class="form-group">
                     <label for="penjamin">Cara Bayar</label>
                     <select name="caraBayar" id="caraBayar" class="form-control">
                       <option value="p1">BPJS Kesehatan</option>

@@ -6,6 +6,9 @@ class Registrasi extends CI_Controller
   {
     parent::__construct();
 
+    if ($this->session->userdata('is_login') !== TRUE) {
+      redirect('Auth');
+    }
     $this->load->model('Registrasi_model');
   }
   public function index()
@@ -67,10 +70,17 @@ class Registrasi extends CI_Controller
     $data['title'] = 'Pendaftaran';
     $data['pasien'] = $this->Registrasi_model->getDataPasien($mr);
 
-
-    $this->load->view('templates/header', $data);
-    $this->load->view('registrasi/pendaftaran', $data);
-    $this->load->view('templates/footer');
+    $this->form_validation->set_rules('medrek', 'Medrek', 'required');
+    $this->form_validation->set_rules('user_id', 'User ID', 'required');
+    $this->form_validation->set_rules('caraBayar', 'Cara Bayar', 'required');
+    if ($this->form_validation->run() == FALSE) {
+      $this->load->view('templates/header', $data);
+      $this->load->view('registrasi/pendaftaran', $data);
+      $this->load->view('templates/footer');
+    } else {
+      $id_klinik = $this->Registrasi_model->insertPendaftaran();
+      redirect('Klinik/' . $id_klinik);
+    }
   }
 
   public function proses_klinik()

@@ -93,9 +93,21 @@ class Registrasi_model extends CI_Model
   public function insertPendaftaran()
   {
     $data = [
-      // 'id' => $this->_generateReg(),
+      'id' => $this->_generateReg(),
+      'medrek' => $this->input->post('user_id', TRUE),
+      'tgl_berobat' => $this->input->post('tgl_berobat', TRUE),
       'cara_bayar' => $this->input->post('caraBayar', TRUE),
-      'medrek' => $this->input->post('user_id')
+      'user_id' => $this->session->userdata('user_id')
     ];
+
+    $this->db->insert('klinik_transaction', $data);
+    return $this->db->insert_id();
+  }
+
+  public function _generateReg()
+  {
+    $date = date('Ymd');
+    $check = $this->db->get_where('klinik_transaction', ['tgl_berobat' => date('Y-m-d')])->num_rows();
+    return $date . sprintf('%04d', $check + 1);
   }
 }
