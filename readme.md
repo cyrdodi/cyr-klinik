@@ -24,3 +24,4 @@
 - prevent mr dengan antrean aktif di klinik_transaction untuk dapat diproses pendaftaran
 - generate reg dirubah dengan logika mengambil row terakhir dan ditambah 1
 - menambahkan kolom is_active di klinik_transaction untuk identifikasi status antrean
+test
