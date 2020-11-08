@@ -44,6 +44,7 @@
                         <td><?= $result['tgl_lahir'] ?></td>
                         <td><?= $result['alamat'] ?></td>
                         <td><a href="<?= base_url('Registrasi/pendaftaran/' . $result['medrek']) ?>" class="btn btn-primary">Pilih</a></td>
+
                       </tr>
                     <?php endforeach; ?>
                   </tbody>

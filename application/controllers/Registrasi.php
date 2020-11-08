@@ -15,6 +15,7 @@ class Registrasi extends CI_Controller
   {
     $data['title'] = 'Registrasi';
     $data['is_keyword'] = FALSE;
+
     $keyword = $this->input->get('keyword');
 
     if ($keyword !== NULL) {
@@ -69,6 +70,7 @@ class Registrasi extends CI_Controller
   {
     $data['title'] = 'Pendaftaran';
     $data['pasien'] = $this->Registrasi_model->getDataPasien($mr);
+    $data['antrean_aktif'] = $this->Registrasi_model->isMedrekInAntrean($mr);
 
     $this->form_validation->set_rules('medrek', 'Medrek', 'required');
     $this->form_validation->set_rules('user_id', 'User ID', 'required');
@@ -88,9 +90,9 @@ class Registrasi extends CI_Controller
     $data['title'] = 'Proses Klinik';
   }
 
-  public function test()
+  public function test($count)
   {
-    $data = $this->Registrasi_model->generateMedrek();
+    $data = $this->Registrasi_model->_generateReg($count);
     echo $data;
   }
 

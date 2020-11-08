@@ -92,22 +92,45 @@ class Registrasi_model extends CI_Model
 
   public function insertPendaftaran()
   {
+    $noreg = $this->_generateReg();
     $data = [
-      'id' => $this->_generateReg(),
-      'medrek' => $this->input->post('user_id', TRUE),
+      'id' => $noreg,
+      'medrek' => $this->input->post('medrek', TRUE),
       'tgl_berobat' => $this->input->post('tgl_berobat', TRUE),
       'cara_bayar' => $this->input->post('caraBayar', TRUE),
-      'user_id' => $this->session->userdata('user_id')
+      'user_id' => $this->session->userdata('user_id'),
+      'is_active' => 1
     ];
 
     $this->db->insert('klinik_transaction', $data);
-    return $this->db->insert_id();
+    return $noreg;
   }
 
   public function _generateReg()
   {
     $date = date('Ymd');
-    $check = $this->db->get_where('klinik_transaction', ['tgl_berobat' => date('Y-m-d')])->num_rows();
-    return $date . sprintf('%04d', $check + 1);
+    $count = $this->db->get_where('klinik_transaction', ['tgl_berobat' => date('Y-m-d')])->num_rows();
+    $noreg = $date . sprintf('%04d', $count + 1);
+    if ($count <= 0) {
+      $noreg = $date . sprintf('%04d', $count + 1);
+    } else {
+      $lastrecord = $this->db->query("SELECT id FROM klinik_transaction ORDER BY timestamp DESC")->row_array();
+      $lastrecord = $lastrecord['id'];
+      $urutan = substr($lastrecord, 8);
+      $urutan = $urutan + 1;
+      $noreg = $date . sprintf('%04d', $urutan);
+    }
+
+    return $noreg;
+  }
+
+  public function isMedrekInAntrean($mr)
+  {
+    $check = $this->db->get_where('Klinik_transaction', ['medrek' => $mr])->num_rows();
+    if ($check > 1) {
+      return TRUE;
+    } else {
+      FALSE;
+    }
   }
 }
