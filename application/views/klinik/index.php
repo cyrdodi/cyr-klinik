@@ -12,6 +12,7 @@
               <th>Register</th>
               <th>Nama</th>
               <th>Alamat</th>
+              <th>Cara Bayar</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -24,6 +25,8 @@
                 <td><?= $pasien['id'] ?></td>
                 <td><?= $pasien['nama_lengkap'] ?></td>
                 <td><?= $pasien['alamat'] ?></td>
+                <td><?= $pasien['pembayaran'] ?></td>
+                <td><a href="<?= base_url('Klinik/proses_klinik/' . $pasien['id'] . '/' . $pasien['medrek']) ?>" class="btn btn-primary">Proses</a></td>
               </tr>
               <?php $i++ ?>
             <?php endforeach; ?>
