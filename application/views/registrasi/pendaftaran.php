@@ -9,7 +9,7 @@
             <div class="col">
               <div class="alert alert-warning" role="alert">
                 <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Perhatian</h4>
-                <p class="mt-2">Pasien <?= $pasien['nama_depan'] . " " . $pasien['nama_belakang'] ?> dengan No MR <?= $pasien['medrek'] ?> masih dalam antrean klinik.</p>
+                <p class="mt-2">Pasien <?= $pasien['nama_lengkap'] ?> dengan No MR <?= $pasien['medrek'] ?> masih dalam antrean klinik.</p>
                 <hr>
                 <p class="mb-0"><a href="" class="btn btn-primary">Antrean Klinik</a></p>
               </div>
@@ -27,7 +27,7 @@
                 </tr>
                 <tr>
                   <th>Nama Pasien</th>
-                  <td><?= $pasien['nama_depan'] . " " . $pasien['nama_belakang'] ?></td>
+                  <td><?= $pasien['nama_lengkap'] ?></td>
                 </tr>
                 <tr>
                   <th>NIK</th>

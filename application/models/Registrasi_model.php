@@ -33,8 +33,7 @@ class Registrasi_model extends CI_Model
     $tglLahir = $this->input->post('tahun_lhr') . '-' . $this->input->post('bulan_lhr') . "-" . sprintf('%02d', $this->input->post('tgl_lhr'));
     $data = [
       'medrek' => sprintf($medrek),
-      'nama_depan' => $this->input->post('nama_depan', TRUE),
-      'nama_belakang' => $this->input->post('nama_belakang', TRUE),
+      'nama_lengkap' => $this->input->post('nama_lengkap', TRUE),
       'nik' => $this->input->post('nik', TRUE),
       'no_bpjs' => $this->input->post('no_bpjs', TRUE),
       'jk' => $this->input->post('jk', TRUE),
@@ -78,8 +77,7 @@ class Registrasi_model extends CI_Model
   {
     return $this->db->query(
       "SELECT * FROM data_pasien 
-      WHERE nama_depan LIKE '%" . $keyword . "%'
-      OR nama_belakang LIKE '%" . $keyword . "%'
+      WHERE nama_lengkap LIKE '%" . $keyword . "%'
       OR medrek LIKE'%" . $keyword . "%'
       LIMIT 50"
     )->result_array();
@@ -109,16 +107,16 @@ class Registrasi_model extends CI_Model
   public function _generateReg()
   {
     $date = date('Ymd');
-    $count = $this->db->get_where('klinik_transaction', ['tgl_berobat' => date('Y-m-d')])->num_rows();
-    $noreg = $date . sprintf('%04d', $count + 1);
+    $count = $this->db->get_where('klinik_transaction', ['MONTH(tgl_berobat)' => date('m'), 'YEAR(tgl_berobat)' => date('Y')])->num_rows();
+    $noreg = $date . sprintf('%05d', $count + 1);
     if ($count <= 0) {
-      $noreg = $date . sprintf('%04d', $count + 1);
+      $noreg = $date . sprintf('%05d', $count + 1);
     } else {
       $lastrecord = $this->db->query("SELECT id FROM klinik_transaction ORDER BY timestamp DESC")->row_array();
       $lastrecord = $lastrecord['id'];
       $urutan = substr($lastrecord, 8);
       $urutan = $urutan + 1;
-      $noreg = $date . sprintf('%04d', $urutan);
+      $noreg = $date . sprintf('%05d', $urutan);
     }
 
     return $noreg;

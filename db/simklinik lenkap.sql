@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2020 at 07:50 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.2.26
+-- Generation Time: Nov 09, 2020 at 05:16 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -28,6 +27,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `add_districts`
 --
 
+DROP TABLE IF EXISTS `add_districts`;
 CREATE TABLE `add_districts` (
   `id` char(7) COLLATE utf8_unicode_ci NOT NULL,
   `regency_id` char(4) COLLATE utf8_unicode_ci NOT NULL,
@@ -7265,6 +7265,7 @@ INSERT INTO `add_districts` (`id`, `regency_id`, `name`) VALUES
 -- Table structure for table `add_provinces`
 --
 
+DROP TABLE IF EXISTS `add_provinces`;
 CREATE TABLE `add_provinces` (
   `id` char(2) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
@@ -7316,6 +7317,7 @@ INSERT INTO `add_provinces` (`id`, `name`) VALUES
 -- Table structure for table `add_regencies`
 --
 
+DROP TABLE IF EXISTS `add_regencies`;
 CREATE TABLE `add_regencies` (
   `id` char(4) COLLATE utf8_unicode_ci NOT NULL,
   `province_id` char(2) COLLATE utf8_unicode_ci NOT NULL,
@@ -7848,6 +7850,7 @@ INSERT INTO `add_regencies` (`id`, `province_id`, `name`) VALUES
 -- Table structure for table `add_villages`
 --
 
+DROP TABLE IF EXISTS `add_villages`;
 CREATE TABLE `add_villages` (
   `id` char(10) COLLATE utf8_unicode_ci NOT NULL,
   `district_id` char(7) COLLATE utf8_unicode_ci NOT NULL,
@@ -88462,10 +88465,10 @@ INSERT INTO `add_villages` (`id`, `district_id`, `name`) VALUES
 -- Table structure for table `data_pasien`
 --
 
+DROP TABLE IF EXISTS `data_pasien`;
 CREATE TABLE `data_pasien` (
   `medrek` varchar(125) NOT NULL,
-  `nama_depan` varchar(256) DEFAULT NULL,
-  `nama_belakang` varchar(256) DEFAULT NULL,
+  `nama_lengkap` varchar(256) DEFAULT NULL,
   `nik` varchar(256) DEFAULT NULL,
   `no_bpjs` varchar(256) DEFAULT NULL,
   `jk` varchar(45) DEFAULT NULL,
@@ -88491,10 +88494,10 @@ CREATE TABLE `data_pasien` (
 -- Dumping data for table `data_pasien`
 --
 
-INSERT INTO `data_pasien` (`medrek`, `nama_depan`, `nama_belakang`, `nik`, `no_bpjs`, `jk`, `tempat_lahir`, `tgl_lahir`, `provinsi`, `kabupaten`, `kecamatan`, `kelurahan`, `alamat`, `no_hp`, `agama`, `pekerjaan`, `status_perkawinan`, `nama_penjamin`, `no_hp_penjamin`, `hubungan`, `is_active`, `timestamp`) VALUES
-('000001', 'Monkey D.', 'Luffy', '-', '-', 'l', 'East Blue', '1992-04-', 'JAWA BARAT', 'KABUPATEN INDRAMAYU', 'HAURGEULIS', 'SUKAJATI', 'East Blue', '-', 'katolik', 'Pegawai Negeri Sipil/PNS/ASN', 'belum menikah', 'Monkey D. Garp', '-', 'Kakek', '1', '2020-10-31 06:42:56'),
-('000002', 'Naruto', 'Uzumaki', '123', '321', 'l', 'asd', '1992-10-2', 'JAWA TIMUR', 'KABUPATEN LAMONGAN', 'KEMBANGBAHU', 'MAOR', 'sds', '34534', 'katolik', 'fdg', 'belum menikah', 'ads', '3434', 'Suami', '1', '2020-10-31 06:47:11'),
-('000003', 'amin', 'rais', '1312', '231', 'l', 'asdas', '2014-02-02', 'KALIMANTAN TIMUR', 'KOTA BONTANG', 'BONTANG BARAT', 'KANAAN', 'adsa', '342', 'kristen', 'sads', 'belum menikah', '132', 'sdad21', 'dsad', '1', '2020-10-31 06:49:05');
+INSERT INTO `data_pasien` (`medrek`, `nama_lengkap`, `nik`, `no_bpjs`, `jk`, `tempat_lahir`, `tgl_lahir`, `provinsi`, `kabupaten`, `kecamatan`, `kelurahan`, `alamat`, `no_hp`, `agama`, `pekerjaan`, `status_perkawinan`, `nama_penjamin`, `no_hp_penjamin`, `hubungan`, `is_active`, `timestamp`) VALUES
+('000001', 'Monkey D.', '-', '-', 'l', 'East Blue', '1992-04-', 'JAWA BARAT', 'KABUPATEN INDRAMAYU', 'HAURGEULIS', 'SUKAJATI', 'East Blue', '-', 'katolik', 'Pegawai Negeri Sipil/PNS/ASN', 'belum menikah', 'Monkey D. Garp', '-', 'Kakek', '1', '2020-10-31 06:42:56'),
+('000002', 'Naruto', '123', '321', 'l', 'asd', '1992-10-2', 'JAWA TIMUR', 'KABUPATEN LAMONGAN', 'KEMBANGBAHU', 'MAOR', 'sds', '34534', 'katolik', 'fdg', 'belum menikah', 'ads', '3434', 'Suami', '1', '2020-10-31 06:47:11'),
+('000003', 'amin', '1312', '231', 'l', 'asdas', '2014-02-02', 'KALIMANTAN TIMUR', 'KOTA BONTANG', 'BONTANG BARAT', 'KANAAN', 'adsa', '342', 'kristen', 'sads', 'belum menikah', '132', 'sdad21', 'dsad', '1', '2020-10-31 06:49:05');
 
 -- --------------------------------------------------------
 
@@ -88502,6 +88505,7 @@ INSERT INTO `data_pasien` (`medrek`, `nama_depan`, `nama_belakang`, `nik`, `no_b
 -- Table structure for table `dokter`
 --
 
+DROP TABLE IF EXISTS `dokter`;
 CREATE TABLE `dokter` (
   `id` char(11) NOT NULL,
   `nama_dokter` varchar(45) DEFAULT NULL,
@@ -88523,13 +88527,38 @@ INSERT INTO `dokter` (`id`, `nama_dokter`, `jenis`, `is_active`, `timestamp`) VA
 -- Table structure for table `klinik_transaction`
 --
 
+DROP TABLE IF EXISTS `klinik_transaction`;
 CREATE TABLE `klinik_transaction` (
-  `id` int(11) NOT NULL,
+  `id` varchar(100) NOT NULL,
   `tgl_berobat` date DEFAULT NULL,
   `cara_bayar` varchar(10) DEFAULT NULL,
   `medrek` varchar(125) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `is_active` char(4) DEFAULT NULL,
   `timestamp` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `klinik_transaction`
+--
+
+INSERT INTO `klinik_transaction` (`id`, `tgl_berobat`, `cara_bayar`, `medrek`, `user_id`, `is_active`, `timestamp`) VALUES
+('202011080001', '2020-11-08', 'p1', '000002', 1, '1', '2020-11-08 11:03:47'),
+('202011080003', '2020-11-08', 'p1', '000002', 1, '0', '2020-11-08 11:03:57'),
+('202011080004', '2020-11-08', 'p1', '000002', 1, '0', '2020-11-08 11:04:37'),
+('202011080005', '2020-11-08', 'p1', '000002', 1, '1', '2020-11-08 11:43:20'),
+('2020110900006', '2020-11-09', 'p1', '000003', 1, '1', '2020-11-09 15:11:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `status`
+--
+
+DROP TABLE IF EXISTS `status`;
+CREATE TABLE `status` (
+  `id` int(11) NOT NULL,
+  `status` varchar(128) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -88538,6 +88567,7 @@ CREATE TABLE `klinik_transaction` (
 -- Table structure for table `user`
 --
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(256) DEFAULT NULL,
@@ -88609,6 +88639,12 @@ ALTER TABLE `klinik_transaction`
   ADD KEY `fk_klinik_transaction_user1_idx1` (`user_id`);
 
 --
+-- Indexes for table `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -88619,10 +88655,10 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT for table `klinik_transaction`
+-- AUTO_INCREMENT for table `status`
 --
-ALTER TABLE `klinik_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`

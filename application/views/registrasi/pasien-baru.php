@@ -10,15 +10,8 @@
             <form autocomplete="off" action="" method="post">
               <div class="form-group">
                 <label for="medrek">Nama Pasien</label>
-                <div class="row">
-                  <div class="col">
-                    <input type="text" name="nama_depan" class="form-control mb-2" placeholder="Depan" value="<?= set_value('nama_depan') ?>">
-                    <?= form_error('nama_depan', '<small class="text-danger ">', '</small>') ?>
-                  </div>
-                  <div class="col">
-                    <input type="text" name="nama_belakang" class="form-control" placeholder="Belakang" value="<?= set_value('nama_belakang') ?>">
-                  </div>
-                </div>
+                <input type="text" name="nama_lengkap" class="form-control mb-2" placeholder="Nama Lengkap" value="<?= set_value('nama_lengkap') ?>">
+                <?= form_error('nama_lengkap', '<small class="text-danger ">', '</small>') ?>
               </div>
               <hr>
               <div class="form-group">

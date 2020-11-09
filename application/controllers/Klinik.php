@@ -15,6 +15,10 @@ class Klinik extends CI_Controller
 
   public function index()
   {
-    var_dump($this->Klinik_model->getDetailKlinikTrans());
+    $data['title'] = 'Daftar Antrean Klinik';
+
+    $this->load->view('templates/header', $data);
+    $this->load->view('klinik/index', $data);
+    $this->load->view('templates/footer');
   }
 }

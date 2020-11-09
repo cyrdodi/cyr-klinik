@@ -35,7 +35,7 @@ class Registrasi extends CI_Controller
     $data['title'] = 'Pasien Baru';
     $data['provinsi'] = $this->Registrasi_model->getProvinsi();
 
-    $this->form_validation->set_rules('nama_depan', 'Nama Depan', 'required');
+    $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
     $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
     $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required');
     $this->form_validation->set_rules('tgl_lhr', 'Tanggal Lahir', 'required');
@@ -90,9 +90,9 @@ class Registrasi extends CI_Controller
     $data['title'] = 'Proses Klinik';
   }
 
-  public function test($count)
+  public function test()
   {
-    $data = $this->Registrasi_model->_generateReg($count);
+    $data = $this->Registrasi_model->_generateReg();
     echo $data;
   }
 

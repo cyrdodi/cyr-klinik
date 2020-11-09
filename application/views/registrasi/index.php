@@ -38,7 +38,7 @@
                     <?php foreach ($search_result as $result) : ?>
                       <tr>
                         <td><?= $result['medrek'] ?></td>
-                        <td><?= $result['nama_depan'] . " " . $result['nama_belakang'] ?></td>
+                        <td><?= $result['nama_lengkap']  ?></td>
                         <td><?= $result['nik'] ?></td>
                         <td><?= $result['no_bpjs'] ?></td>
                         <td><?= $result['tgl_lahir'] ?></td>
