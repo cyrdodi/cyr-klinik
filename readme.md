@@ -1,5 +1,5 @@
 # CYR-SIMKLINIK
-
+[cyr-acutis](https://cyrdodi.github.io/cyr-acutis/)
 ## to do
 - [x] login page
 - [x] user registration page
