@@ -26,7 +26,7 @@
                 <td><?= $pasien['nama_lengkap'] ?></td>
                 <td><?= $pasien['alamat'] ?></td>
                 <td><?= $pasien['pembayaran'] ?></td>
-                <td><a href="<?= base_url('Klinik/proses_klinik/' . $pasien['id'] . '/' . $pasien['medrek']) ?>" class="btn btn-primary">Proses</a></td>
+                <td><a href="<?= base_url('Klinik/proses_klinik/' . $pasien['id']) ?>" class="btn btn-primary">Proses</a></td>
               </tr>
               <?php $i++ ?>
             <?php endforeach; ?>
@@ -35,4 +35,9 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="form-group">
+  <label for=""></label>
+  <input type="text" class="form-control" name="">
 </div>
