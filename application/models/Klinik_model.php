@@ -58,6 +58,55 @@ class Klinik_model extends CI_Model
     $this->db->insert('t_tindakan', $data);
   }
 
+  public function inputBiayaObat($reg)
+  {
+    $detail = $this->db->get_where('b_obat', ['id' => html_escape($this->input->post('obat', TRUE))])->row_array();
+    $data = [
+      "nama_obat" => $detail['nama_obat'],
+      "harga" => $detail['harga'],
+      "satuan" => $detail['satuan'],
+      "jumlah" => html_escape($this->input->post('jumlah', TRUE)),
+      "b_obat_id" => $detail['id'],
+      "klinik_transaction_id" => $reg
+    ];
+
+    $this->db->insert('t_obat', $data);
+  }
+
+  public function penguranganStokObat()
+  {
+    $id_obat = html_escape($this->input->post('obat', TRUE));
+    $detail = $this->db->get_where('b_obat', ['id' => $id_obat])->row_array();
+    $stok = $detail['stok'] - html_escape($this->input->post('jumlah', TRUE));
+    $data = [
+      'stok' => $stok
+    ];
+    $this->db->update('b_obat', $data, ['id' => $id_obat]);
+  }
+
+  public function penambahanStokObat($id_obat, $jml)
+  {
+    $detail = $this->db->get_where('b_obat', ['id' => $id_obat])->row_array();
+    $stok = $detail['stok'] + $jml;
+    $data = [
+      'stok' => $stok
+    ];
+    $this->db->update('b_obat', $data, ['id' => $id_obat]);
+  }
+
+  public function getObat($searchTerm = "")
+  {
+    $fetched_records = $this->db->query("SELECT * FROM b_obat WHERE nama_obat LIKE '%" . $searchTerm . "%' LIMIT 30");
+    $obat = $fetched_records->result_array();
+
+    // initialize Array with fetched data
+    $data = [];
+    foreach ($obat as $row) {
+      $data[] = ['id' => $row['id'], 'text' => $row['nama_obat'] . " / " . $row['satuan'] . " @" . number_format($row['harga'])];
+    }
+    return $data;
+  }
+
   public function getListAdmin($reg)
   {
     return $this->db->get_where('t_admin', ['klinik_transaction_id' => $reg])->result_array();
@@ -66,5 +115,10 @@ class Klinik_model extends CI_Model
   public function getListTindakan($reg)
   {
     return $this->db->get_where('t_tindakan', ['klinik_transaction_id' => $reg])->result_array();
+  }
+
+  public function getListObat($reg)
+  {
+    return $this->db->get_where('t_obat', ['klinik_transaction_id' => $reg])->result_array();
   }
 }

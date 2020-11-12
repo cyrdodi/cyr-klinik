@@ -15,9 +15,18 @@
         <hr>
         <?= $this->session->flashdata('msg_admin') ?>
         <div class="list-group">
-          <a href="<?= base_url('Klinik/input_admin/' . $detail_antrean['id']) ?>" class="list-group-item list-group-item-action">Administrasi</a>
-          <a href="<?= base_url('Klinik/input_tindakan/' . $detail_antrean['id']) ?>" class="list-group-item list-group-item-action">Tindakan</a>
-          <a href="<?= base_url('Klinik/input_admin/' . $detail_antrean['id']) ?>" class="list-group-item list-group-item-action">Obat</a>
+          <a href="<?= base_url('Klinik/input_admin/' . $detail_antrean['id']) ?>" class="list-group-item list-group-item-action">
+            <i class="fas fa-hand-holding-usd mr-2 fa-lg"></i>
+            Administrasi
+          </a>
+          <a href="<?= base_url('Klinik/input_tindakan/' . $detail_antrean['id']) ?>" class="list-group-item list-group-item-action">
+            <i class="fas fa-syringe mr-2 fa-lg"></i>
+            Tindakan
+          </a>
+          <a href="<?= base_url('Klinik/input_obat/' . $detail_antrean['id']) ?>" class="list-group-item list-group-item-action">
+            <i class="fas fa-pills mr-2 fa-lg"></i>
+            Obat
+          </a>
         </div>
 
       </div>

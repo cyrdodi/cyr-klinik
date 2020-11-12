@@ -69,4 +69,51 @@ class Klinik extends CI_Controller
       redirect('Klinik/input_tindakan/' . $reg);
     }
   }
+
+  public function input_obat($reg)
+  {
+    $data['title'] = 'Input Obat & Alkes';
+    $data['b_obat'] = $this->Klinik_model->getObat();
+    $data['l_obat'] = $this->Klinik_model->getListObat($reg);
+
+
+    $this->form_validation->set_rules('obat', 'obat', 'required');
+    $this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
+    if ($this->form_validation->run() == FALSE) {
+      $this->load->view('templates/header', $data);
+      $this->load->view('klinik/proses/obat/input-obat', $data);
+      $this->load->view('templates/footer');
+    } else {
+      $this->Klinik_model->inputBiayaObat($reg);
+      $this->Klinik_model->penguranganStokObat();
+      $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Obat berhasil diinput</div>');
+      redirect('Klinik/input_obat/' . $reg);
+    }
+  }
+
+  public function delete_obat($id)
+  {
+    $trans_obat = $this->db->get_where('t_obat', ['id' => $id])->row_array();
+    $this->Klinik_model->penambahanStokObat($trans_obat['b_obat_id'], $trans_obat['jumlah']);
+    $this->db->delete('t_obat', ['id' => $id]);
+    $this->session->set_flashdata('msg_delete', '<div class="alert alert-success" role="alert">Obat berhasil dihapus</div>');
+    redirect('Klinik/input_obat/' . $trans_obat['klinik_transaction_id']);
+  }
+
+  // ajax
+  public function searchObat()
+  {
+    $searchterm = $this->input->post('searchTerm');
+
+    $response = $this->Klinik_model->getObat($searchterm);
+
+    echo json_encode($response);
+  }
+
+  public function getStok()
+  {
+    $id = $this->input->post('id');
+    $response = $this->db->get_where('b_obat', ['id' => $id])->row_array();
+    echo json_encode($response);
+  }
 }

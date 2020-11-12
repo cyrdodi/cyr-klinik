@@ -9,3 +9,4 @@
 
 ## on progress
 - proses klinik
+- input obat
