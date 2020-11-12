@@ -1,41 +1,55 @@
+<?php
+$total = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['total']
+?>
 <div class="row">
-  <div class="col">
-    <div class="card ">
+  <div class="col mb-4">
+    <div class="card shadow">
       <div class="card-body">
         <h3>Proses Input Klinik</h3>
       </div>
     </div>
   </div>
 </div>
-<div class="row mt-1">
-  <div class="col-lg-7">
-    <div class="card h-100">
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow h-100">
       <div class="card-body">
         <h4>Input Biaya</h4>
         <hr>
         <?= $this->session->flashdata('msg_admin') ?>
-        <div class="list-group">
-          <a href="<?= base_url('Klinik/input_admin/' . $detail_antrean['id']) ?>" class="list-group-item list-group-item-action">
-            <i class="fas fa-hand-holding-usd mr-2 fa-lg"></i>
-            Administrasi
-          </a>
-          <a href="<?= base_url('Klinik/input_tindakan/' . $detail_antrean['id']) ?>" class="list-group-item list-group-item-action">
-            <i class="fas fa-syringe mr-2 fa-lg"></i>
-            Tindakan
-          </a>
-          <a href="<?= base_url('Klinik/input_obat/' . $detail_antrean['id']) ?>" class="list-group-item list-group-item-action">
-            <i class="fas fa-pills mr-2 fa-lg"></i>
-            Obat
-          </a>
-        </div>
 
+        <div class="my-2"></div>
+        <a href="<?= base_url('Klinik/input_admin/' . $detail_antrean['id']) ?>" class="btn btn-light btn-lg btn-icon-split btn-block d-flex justify-content-start border">
+          <span class="icon bg-primary text-white-50">
+            <i class="fas fa-hand-holding-usd"></i>
+          </span>
+          <span class="text">Administrasi</span>
+        </a>
+        <div class="my-2"></div>
+        <div class="my-2"></div>
+        <a href="<?= base_url('Klinik/input_tindakan/' . $detail_antrean['id']) ?>" class="btn btn-light btn-icon-split btn-lg d-flex justify-content-start border">
+          <span class="icon bg-primary text-white-50">
+            <i class="fas fa-syringe "></i>
+          </span>
+          <span class="text">Tindakan</span>
+        </a>
+        <div class="my-2"></div>
+        <div class="my-2"></div>
+        <a href="<?= base_url('Klinik/input_obat/' . $detail_antrean['id']) ?>" class="btn btn-light btn-icon-split btn-lg d-flex justify-content-start border">
+          <span class="icon bg-primary text-white-50 ">
+            <i class="fas fa-pills "></i>
+          </span>
+          <span class="text">Obat & Alkes</span>
+        </a>
+        <div class="my-2"></div>
       </div>
     </div>
   </div>
-  <div class="col-lg-5">
-    <div class="card">
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow">
       <div class="card-body">
         <h4>Biodata Pasien</h4>
+        <div class="text-sm font-weight-bold text-gray-500"># <?= $detail_antrean['id'] ?></div>
         <table class="table">
           <tr>
             <td>Medrek</td>
@@ -51,41 +65,51 @@
           </tr>
           <tr>
             <td>TTL</td>
-            <td><?= $pasien['tempat_lahir'] == 'l' ? 'Laki-laki' : 'Perempuan' ?></td>
+            <td><?= $pasien['tempat_lahir'] . ', ' . $pasien['tgl_lahir'] ?></td>
+          </tr>
+          <tr>
+            <td>Alamat</td>
+            <td><?= $pasien['alamat'] . ', ' . $pasien['kelurahan'] . ', ' . $pasien['kecamatan'] . ', ' . $pasien['kabupaten'] . ', ' . $pasien['provinsi'] ?></td>
           </tr>
         </table>
       </div>
     </div>
   </div>
 </div>
-<div class="row mt-2">
-  <div class="col">
-    <div class="card shadow-sm">
+<div class="row">
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-lg-6 col-md-6 mb-4 ">
+    <div class="card border-left-danger shadow h-100 py-2">
       <div class="card-body">
-        <h4>Daftar Biaya</h4>
-        <h5>Admin</h5>
-        <table class="table table-sm">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Nama</th>
-              <th>Harga</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php $i = 1; ?>
-            <?php foreach ($l_admin as $admin) : ?>
-              <tr>
-                <td><?= $i ?></td>
-                <td><?= $admin['nama_admin'] ?></td>
-                <td><?= $admin['harga'] ?></td>
-                <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt    "></i></a></td>
-              </tr>
-              <?php $i++ ?>
-            <?php endforeach; ?>
-          </tbody>
-        </table>
+        <div class="row no-gutters align-items-center">
+          <div class="col mb-4 mr-2">
+            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Rekap Biaya</div>
+            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= number_format($total) ?></div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fa-money-bill-alt fa-2x text-gray-300"></i>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <table class="table table-sm ">
+              <tbody>
+                <tr>
+                  <td>Administrasi</td>
+                  <td class="text-right"><?= number_format($rekap_admin['total']) ?></td>
+                </tr>
+                <tr>
+                  <td>Tindakan</td>
+                  <td class="text-right"><?= number_format($rekap_tindakan['total']) ?></td>
+                </tr>
+                <tr>
+                  <td>Obat & Alkes</td>
+                  <td class="text-right"><?= number_format($rekap_obat['total']) ?></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>

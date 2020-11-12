@@ -3,6 +3,7 @@
     <div class="card shadow-sm">
       <div class="card-body">
         <h4>Input Biaya Tindakan</h4>
+        <?= $this->session->flashdata('msg') ?>
         <hr>
         <form action="" method="post">
           <div class="form-group">
@@ -23,7 +24,8 @@
     <div class="card shadow-sm">
       <div class="card-body">
         <h4>Daftar Tindakan</h4>
-        <table class="table table-sm">
+        <?= $this->session->flashdata('msg_delete') ?>
+        <table class="table table-sm table-striped">
           <thead>
             <tr>
               <th>No</th>
@@ -34,18 +36,32 @@
           </thead>
           <tbody>
             <?php $i = 1; ?>
+            <?php $total = 0 ?>
             <?php foreach ($l_tindakan as $tindakan) : ?>
               <tr>
                 <td><?= $i ?></td>
                 <td><?= $tindakan['nama_tindakan'] ?></td>
                 <td class="text-right"><?= number_format($tindakan['tarif']) ?></td>
-                <td><a href="" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+                <td class="text-center"><a href="<?= base_url('Klinik/delete_tindakan/' . $tindakan['id']) ?>" class="btn btn-circle btn-sm btn-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></a></td>
               </tr>
+              <?php $total += $tindakan['tarif'] ?>
               <?php $i++ ?>
             <?php endforeach; ?>
           </tbody>
+          <thead>
+            <tr>
+              <th colspan="2">Total</th>
+              <th class="text-right"><?= number_format($total) ?></th>
+            </tr>
+          </thead>
         </table>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $('#tindakan').select2();
+  })
+</script>

@@ -121,4 +121,23 @@ class Klinik_model extends CI_Model
   {
     return $this->db->get_where('t_obat', ['klinik_transaction_id' => $reg])->result_array();
   }
+
+  public function getRekapAdmin($reg)
+  {
+    return $this->db->query(
+      "SELECT SUM(harga) AS total FROM t_admin WHERE klinik_transaction_id = '" . $reg . "'"
+    )->row_array();
+  }
+  public function getRekapTindakan($reg)
+  {
+    return $this->db->query(
+      "SELECT SUM(tarif) AS total FROM t_tindakan WHERE klinik_transaction_id = '" . $reg . "'"
+    )->row_array();
+  }
+  public function getRekapObat($reg)
+  {
+    return $this->db->query(
+      "SELECT SUM(harga*jumlah) AS total FROM t_obat WHERE klinik_transaction_id = '" . $reg . "'"
+    )->row_array();
+  }
 }

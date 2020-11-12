@@ -51,7 +51,7 @@
                 <td class="text-right"><?= number_format($obat['harga'])  ?></td>
                 <td class="text-right"><?= number_format($obat['jumlah']) ?></td>
                 <td class="text-right"><?= number_format($totalrow) ?></td>
-                <td><a href="<?= base_url('Klinik/delete_obat/' . $obat['id']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></a></td>
+                <td class="text-center"><a href="<?= base_url('Klinik/delete_obat/' . $obat['id']) ?>" class="btn btn-sm btn-danger btn-circle" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></a></td>
               </tr>
               <?php $total += $totalrow; ?>
               <?php $i++ ?>

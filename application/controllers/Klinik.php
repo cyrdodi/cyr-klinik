@@ -28,7 +28,11 @@ class Klinik extends CI_Controller
     $data['title'] = 'Proses Klinik';
     $data['detail_antrean'] = $this->Klinik_model->getDetailAntrean($reg);
     $data['pasien'] = $this->Klinik_model->getDetailPasien($data['detail_antrean']['medrek']);
-    $data['l_admin'] = $this->Klinik_model->getListAdmin($reg);
+
+    $data['rekap_admin'] = $this->Klinik_model->getRekapAdmin($reg);
+    $data['rekap_tindakan'] = $this->Klinik_model->getRekapTindakan($reg);
+    $data['rekap_obat'] = $this->Klinik_model->getRekapObat($reg);
+
 
     $this->load->view('templates/header', $data);
     $this->load->view('klinik/proses/index', $data);
@@ -39,6 +43,7 @@ class Klinik extends CI_Controller
   {
     $data['title'] = 'Input Admin';
     $data['b_admin'] = $this->db->get('b_admin')->result_array();
+    $data['l_admin'] = $this->Klinik_model->getListAdmin($reg);
 
     $this->form_validation->set_rules('admin', 'Admin', 'required');
     if ($this->form_validation->run() == FALSE) {
@@ -47,8 +52,8 @@ class Klinik extends CI_Controller
       $this->load->view('templates/footer');
     } else {
       $this->Klinik_model->inputBiayaAdmin($reg);
-      $this->session->set_flashdata('msg_admin', '<div class="alert alert-success" role="alert">Biaya admin berhasil diinput</div>');
-      redirect('Klinik/proses_klinik.' . $reg);
+      $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Biaya admin berhasil diinput</div>');
+      redirect('Klinik/input_admin/' . $reg);
     }
   }
 
@@ -98,6 +103,22 @@ class Klinik extends CI_Controller
     $this->db->delete('t_obat', ['id' => $id]);
     $this->session->set_flashdata('msg_delete', '<div class="alert alert-success" role="alert">Obat berhasil dihapus</div>');
     redirect('Klinik/input_obat/' . $trans_obat['klinik_transaction_id']);
+  }
+
+  public function delete_tindakan($id)
+  {
+    $reg = $this->db->get_where('t_tindakan', ['id' => $id])->row_array();
+    $this->db->delete('t_tindakan', ['id' => $id]);
+    $this->session->set_flashdata('msg_delete', '<div class="alert alert-success" role="alert">Tindakan berhasil dihapus</div>');
+    redirect('Klinik/input_tindakan/' . $reg['klinik_transaction_id']);
+  }
+
+  public function delete_admin($id)
+  {
+    $reg = $this->db->get_where('t_admin', ['id' => $id])->row_array();
+    $this->db->delete('t_admin', ['id' => $id]);
+    $this->session->set_flashdata('msg_delete', '<div class="alert alert-success" role="alert">Biaya Administrasi berhasil dihapus</div>');
+    redirect('Klinik/input_admin/' . $reg['klinik_transaction_id']);
   }
 
   // ajax
