@@ -3,10 +3,12 @@
 ## to do
 - [x] login page
 - [x] user registration page
-- [ ] proses klinik
+- [x] proses klinik
+- [ ] billing
 - [ ] inventory system
 - [ ] cetak kwitansi
 
 ## on progress
-- proses klinik
-- input obat
+- billing
+- cetak billing
+- cetak kwitansi

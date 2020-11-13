@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-6 mb-4">
-    <div class="card shadow-sm">
+    <div class="card shadow">
       <div class="card-body">
         <h4>Input Biaya admin</h4>
         <?= $this->session->flashdata('msg') ?>
@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="col-lg-6 mb-4">
-    <div class="card shadow-sm">
+    <div class="card  border-left-success shadow">
       <div class="card-body">
         <h4>Daftar Admin</h4>
         <?= $this->session->flashdata('msg_delete') ?>
@@ -42,7 +42,7 @@
                 <td><?= $i ?></td>
                 <td><?= $admin['nama_admin'] ?></td>
                 <td class="text-right"><?= number_format($admin['harga']) ?></td>
-                <td class="text-center"><a href="<?= base_url('Klinik/delete_admin/' . $admin['id']) ?>" class="btn btn-sm btn-circle btn-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></a></td>
+                <td class="text-center"><a href="<?= base_url('Klinik/delete_admin/' . encrypt_url($admin['id'])) ?>" class="btn btn-sm btn-circle btn-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></a></td>
               </tr>
               <?php $total += $admin['harga'] ?>
               <?php $i++ ?>

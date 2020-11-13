@@ -25,9 +25,20 @@ class Klinik extends CI_Controller
 
   public function proses_klinik($reg)
   {
+    $reg = decrypt_url($reg);
     $data['title'] = 'Proses Klinik';
     $data['detail_antrean'] = $this->Klinik_model->getDetailAntrean($reg);
     $data['pasien'] = $this->Klinik_model->getDetailPasien($data['detail_antrean']['medrek']);
+
+    // prevent access jika status selain antrean
+    if ($data['detail_antrean']['status'] != 1) {
+      $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">Pasien bukan dalam antrean</div>');
+      redirect('Klinik');
+    }
+
+    $data['l_admin'] = $this->Klinik_model->getListAdmin($reg);
+    $data['l_tindakan'] = $this->Klinik_model->getListTindakan($reg);
+    $data['l_obat'] = $this->Klinik_model->getListObat($reg);
 
     $data['rekap_admin'] = $this->Klinik_model->getRekapAdmin($reg);
     $data['rekap_tindakan'] = $this->Klinik_model->getRekapTindakan($reg);
@@ -41,9 +52,17 @@ class Klinik extends CI_Controller
 
   public function input_admin($reg)
   {
+    $reg = decrypt_url($reg);
     $data['title'] = 'Input Admin';
     $data['b_admin'] = $this->db->get('b_admin')->result_array();
     $data['l_admin'] = $this->Klinik_model->getListAdmin($reg);
+
+    // prevent access jika status selain antrean
+    $data['detail_antrean'] = $this->Klinik_model->getDetailAntrean($reg);
+    if ($data['detail_antrean']['status'] != 1) {
+      $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">Pasien bukan dalam antrean</div>');
+      redirect('Klinik');
+    }
 
     $this->form_validation->set_rules('admin', 'Admin', 'required');
     if ($this->form_validation->run() == FALSE) {
@@ -53,15 +72,23 @@ class Klinik extends CI_Controller
     } else {
       $this->Klinik_model->inputBiayaAdmin($reg);
       $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Biaya admin berhasil diinput</div>');
-      redirect('Klinik/input_admin/' . $reg);
+      redirect('Klinik/input_admin/' . encrypt_url($reg));
     }
   }
 
   public function input_tindakan($reg)
   {
+    $reg = decrypt_url($reg);
     $data['title'] = 'Input Tindakan';
     $data['b_tindakan'] = $this->db->get('b_tindakan')->result_array();
     $data['l_tindakan'] = $this->Klinik_model->getListTindakan($reg);
+
+    // prevent access jika status selain antrean
+    $data['detail_antrean'] = $this->Klinik_model->getDetailAntrean($reg);
+    if ($data['detail_antrean']['status'] != 1) {
+      $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">Pasien bukan dalam antrean</div>');
+      redirect('Klinik');
+    }
 
     $this->form_validation->set_rules('tindakan', 'tindakan', 'required');
     if ($this->form_validation->run() == FALSE) {
@@ -71,16 +98,23 @@ class Klinik extends CI_Controller
     } else {
       $this->Klinik_model->inputBiayaTindakan($reg);
       $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Tindakan berhasil diinput</div>');
-      redirect('Klinik/input_tindakan/' . $reg);
+      redirect('Klinik/input_tindakan/' . encrypt_url($reg));
     }
   }
 
   public function input_obat($reg)
   {
+    $reg = decrypt_url($reg);
     $data['title'] = 'Input Obat & Alkes';
     $data['b_obat'] = $this->Klinik_model->getObat();
     $data['l_obat'] = $this->Klinik_model->getListObat($reg);
 
+    // prevent access jika status selain antrean
+    $data['detail_antrean'] = $this->Klinik_model->getDetailAntrean($reg);
+    if ($data['detail_antrean']['status'] != 1) {
+      $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">Pasien bukan dalam antrean</div>');
+      redirect('Klinik');
+    }
 
     $this->form_validation->set_rules('obat', 'obat', 'required');
     $this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
@@ -92,33 +126,49 @@ class Klinik extends CI_Controller
       $this->Klinik_model->inputBiayaObat($reg);
       $this->Klinik_model->penguranganStokObat();
       $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Obat berhasil diinput</div>');
-      redirect('Klinik/input_obat/' . $reg);
+      redirect('Klinik/input_obat/' . encrypt_url($reg));
     }
   }
 
   public function delete_obat($id)
   {
+    $id = decrypt_url($id);
     $trans_obat = $this->db->get_where('t_obat', ['id' => $id])->row_array();
     $this->Klinik_model->penambahanStokObat($trans_obat['b_obat_id'], $trans_obat['jumlah']);
     $this->db->delete('t_obat', ['id' => $id]);
     $this->session->set_flashdata('msg_delete', '<div class="alert alert-success" role="alert">Obat berhasil dihapus</div>');
-    redirect('Klinik/input_obat/' . $trans_obat['klinik_transaction_id']);
+    redirect('Klinik/input_obat/' . encrypt_url($trans_obat['klinik_transaction_id']));
   }
 
   public function delete_tindakan($id)
   {
+    $id = decrypt_url($id);
     $reg = $this->db->get_where('t_tindakan', ['id' => $id])->row_array();
     $this->db->delete('t_tindakan', ['id' => $id]);
     $this->session->set_flashdata('msg_delete', '<div class="alert alert-success" role="alert">Tindakan berhasil dihapus</div>');
-    redirect('Klinik/input_tindakan/' . $reg['klinik_transaction_id']);
+    redirect('Klinik/input_tindakan/' . encrypt_url($reg['klinik_transaction_id']));
   }
 
   public function delete_admin($id)
   {
+    $id = decrypt_url($id);
     $reg = $this->db->get_where('t_admin', ['id' => $id])->row_array();
     $this->db->delete('t_admin', ['id' => $id]);
     $this->session->set_flashdata('msg_delete', '<div class="alert alert-success" role="alert">Biaya Administrasi berhasil dihapus</div>');
-    redirect('Klinik/input_admin/' . $reg['klinik_transaction_id']);
+    redirect('Klinik/input_admin/' . encrypt_url($reg['klinik_transaction_id']));
+  }
+
+  public function simpan_transaksi($reg)
+  {
+    $reg = decrypt_url($reg);
+
+    $data = [
+      'status' => '2'
+    ];
+
+    $this->db->update('klinik_transaction', $data, ['id' => $reg]);
+
+    redirect('Billing/');
   }
 
   // ajax

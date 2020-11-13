@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-lg-6">
-    <div class="card shadow-sm">
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow">
       <div class="card-body">
         <h4>Input Biaya Tindakan</h4>
         <?= $this->session->flashdata('msg') ?>
@@ -20,8 +20,8 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-6">
-    <div class="card shadow-sm">
+  <div class="col-lg-6 mb-4">
+    <div class="card border-left-success shadow">
       <div class="card-body">
         <h4>Daftar Tindakan</h4>
         <?= $this->session->flashdata('msg_delete') ?>
@@ -42,7 +42,7 @@
                 <td><?= $i ?></td>
                 <td><?= $tindakan['nama_tindakan'] ?></td>
                 <td class="text-right"><?= number_format($tindakan['tarif']) ?></td>
-                <td class="text-center"><a href="<?= base_url('Klinik/delete_tindakan/' . $tindakan['id']) ?>" class="btn btn-circle btn-sm btn-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></a></td>
+                <td class="text-center"><a href="<?= base_url('Klinik/delete_tindakan/' . encrypt_url($tindakan['id'])) ?>" class="btn btn-circle btn-sm btn-danger" onclick="return confirm('Yakin mau dihapus?')"><i class="fas fa-trash-alt"></i></a></td>
               </tr>
               <?php $total += $tindakan['tarif'] ?>
               <?php $i++ ?>

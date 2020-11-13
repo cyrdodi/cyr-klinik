@@ -57,17 +57,16 @@ class Registrasi extends CI_Controller
       $this->load->view('templates/header', $data);
       $this->load->view('registrasi/pasien-baru', $data);
       $this->load->view('templates/footer');
-    } else if ($this->Registrasi_model->insertDataPasien()) {
-      $this->session->set_flashdata('data_pasien_msg', '<div class="alert alert-success" role="alert">Data pasien berhasil ditambahkan ke database</div>');
-      redirect('Registrasi/pasien_baru');
     } else {
-      $this->session->set_flashdata('data_pasien_msg', '<div class="alert alert-danger" role="alert">Data pasien gagal ditambahkan ke database</div>');
-      redirect();
+      $mr = $this->Registrasi_model->insertDataPasien();
+      $this->session->set_flashdata('data_pasien_msg', '<div class="alert alert-success" role="alert">Data pasien berhasil ditambahkan ke database</div>');
+      redirect('Registrasi/pendaftaran/' . encrypt_url($mr));
     }
   }
 
   public function pendaftaran($mr)
   {
+    $mr = decrypt_url($mr);
     $data['title'] = 'Pendaftaran';
     $data['pasien'] = $this->Registrasi_model->getDataPasien($mr);
     $data['antrean_aktif'] = $this->Registrasi_model->isMedrekInAntrean($mr);
@@ -81,7 +80,7 @@ class Registrasi extends CI_Controller
       $this->load->view('templates/footer');
     } else {
       $id_klinik = $this->Registrasi_model->insertPendaftaran();
-      redirect('Klinik/' . $id_klinik);
+      redirect('Klinik/proses_klinik/' . encrypt_url($id_klinik));
     }
   }
 
@@ -90,10 +89,10 @@ class Registrasi extends CI_Controller
     $data['title'] = 'Proses Klinik';
   }
 
-  public function test()
+  public function test($mr)
   {
-    $data = $this->Registrasi_model->_generateReg();
-    echo $data;
+    $data = $this->Registrasi_model->isMedrekInAntrean($mr);
+    var_dump($data);
   }
 
   /**

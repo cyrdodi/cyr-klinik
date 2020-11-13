@@ -29,7 +29,7 @@ class Klinik_model extends CI_Model
       FROM klinik_transaction AS kt
       JOIN data_pasien AS dp ON dp.medrek = kt.medrek
       JOIN cara_bayar ON cara_bayar.id = kt.cara_bayar
-      WHERE kt.is_active = '1'
+      WHERE kt.status = '1'
         "
     )->result_array();
   }

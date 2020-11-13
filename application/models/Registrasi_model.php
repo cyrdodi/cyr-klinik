@@ -56,7 +56,7 @@ class Registrasi_model extends CI_Model
 
     $this->db->insert('data_pasien', $data);
 
-    return ($this->db->affected_rows() != 1) ? false : true;
+    return $data['medrek'];
   }
 
   public function generateMedrek()
@@ -97,7 +97,7 @@ class Registrasi_model extends CI_Model
       'tgl_berobat' => $this->input->post('tgl_berobat', TRUE),
       'cara_bayar' => $this->input->post('caraBayar', TRUE),
       'user_id' => $this->session->userdata('user_id'),
-      'is_active' => 1
+      'status' => 1
     ];
 
     $this->db->insert('klinik_transaction', $data);
@@ -124,11 +124,11 @@ class Registrasi_model extends CI_Model
 
   public function isMedrekInAntrean($mr)
   {
-    $check = $this->db->get_where('Klinik_transaction', ['medrek' => $mr])->num_rows();
-    if ($check > 1) {
+    $check = $this->db->query("SELECT * FROM klinik_transaction WHERE medrek = '" . $mr . "' AND status = 1")->num_rows();
+    if ($check > 0) {
       return TRUE;
     } else {
-      FALSE;
+      return FALSE;
     }
   }
 }

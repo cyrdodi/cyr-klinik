@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col">
-    <div class="card shadow-sm">
+    <div class="card shadow">
       <div class="card-body">
-        <h3>Daftar Antrean Klinik</h3>
+        <h4>Billing</h4>
         <hr>
         <?= $this->session->flashdata('msg') ?>
         <table class="table">
@@ -36,9 +36,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="form-group">
-  <label for=""></label>
-  <input type="text" class="form-control" name="">
 </div>
