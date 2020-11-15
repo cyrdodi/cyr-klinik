@@ -53,7 +53,7 @@
                         <td>
                           <div class="badge yellow"><?= $result['pembayaran'] ?></div>
                         </td>
-                        <td><a href="<?= base_url('Registrasi/pendaftaran/' . encrypt_url($result['medrek'])) ?>" class="btn btn-sm btn-primary">Pilih</a></td>
+                        <td><a href="<?= base_url('Billing/billing_detail/' . encrypt_url($result['id'])) ?>" class="btn btn-sm btn-primary">Pilih</a></td>
                         <td><?php $i++ ?></td>
                       </tr>
                     <?php endforeach; ?>
