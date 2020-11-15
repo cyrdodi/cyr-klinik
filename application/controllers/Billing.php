@@ -17,6 +17,16 @@ class Billing extends CI_Controller
   public function index()
   {
     $data['judul'] = 'Billing';
+    $data['is_keyword'] = FALSE;
+
+    $keyword = $this->input->get('keyword');
+
+    if ($keyword !== NULL) {
+      if (strlen($keyword) > 0) {
+        $data['is_keyword'] = TRUE;
+        $data['search_result'] = $this->Billing_model->searchPasien($keyword);
+      }
+    }
 
     $this->load->view('templates/header', $data);
     $this->load->view('billing/index', $data);

@@ -11,6 +11,7 @@ class Registrasi extends CI_Controller
     }
     $this->load->model('Registrasi_model');
   }
+
   public function index()
   {
     $data['title'] = 'Registrasi';

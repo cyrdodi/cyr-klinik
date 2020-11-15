@@ -2,17 +2,14 @@
 $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['total']
 ?>
 <div class="row">
-  <div class="col mb-4">
-    <div class="card shadow">
-      <div class="card-body">
-        <h3>Proses Input Klinik</h3>
-      </div>
-    </div>
+  <div class="col">
+    <div class="font-weight-bold text-lg">Proses Input Klinik</div>
+    <div class="mb-4"></div>
   </div>
 </div>
 <div class="row">
   <div class="col-lg-6 mb-4">
-    <div class="card shadow">
+    <div class="card shadow  h-100">
       <div class="card-body">
         <div class="row no-gutters align-items-center">
           <div class="col">

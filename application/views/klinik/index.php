@@ -26,8 +26,10 @@
                 <td><?= $pasien['id'] ?></td>
                 <td><?= $pasien['nama_lengkap'] ?></td>
                 <td><?= $pasien['alamat'] ?></td>
-                <td><?= $pasien['pembayaran'] ?></td>
-                <td><a href="<?= base_url('Klinik/proses_klinik/' . encrypt_url($pasien['id'])) ?>" class="btn btn-primary">Proses</a></td>
+                <td>
+                  <div class="badge badge-info"> <?= $pasien['pembayaran'] ?></div>
+                </td>
+                <td><a href="<?= base_url('Klinik/proses_klinik/' . encrypt_url($pasien['id'])) ?>" class="btn btn-sm btn-primary">Proses</a></td>
               </tr>
               <?php $i++ ?>
             <?php endforeach; ?>
