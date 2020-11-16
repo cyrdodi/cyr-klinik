@@ -21,11 +21,13 @@
   <!-- css -->
   <link rel="stylesheet" href="<?= base_url('assets/') ?>jquery-ui-1.12.1/jquery-ui.css">
   <link rel="stylesheet" href="<?= base_url('assets/css/select2.min.css') ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/vendor/datatables2/datatables.min.css') ?>">
 
   <!-- Bootstrap core JavaScript-->
   <script src="<?= base_url('assets/') ?>vendor/jquery/jquery.min.js"></script>
   <script src="<?= base_url('assets/') ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="<?= base_url('assets/') ?>jquery-ui-1.12.1/jquery-ui.min.js"></script>
+  <script src="<?= base_url('assets/') ?>vendor/datatables2/datatables.min.js"></script>
 
   <!-- Core plugin JavaScript-->
   <script src="<?= base_url('assets/') ?>vendor/jquery-easing/jquery.easing.min.js"></script>

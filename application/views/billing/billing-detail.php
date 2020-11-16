@@ -17,7 +17,20 @@ function colorBadge($status)
     overflow-y: auto;
   }
 </style>
-<div class="font-weight-bold mb-4">BILLING DETAIL</div>
+<div class="row">
+  <div class="col align-self-center">
+    <div class="font-weight-bold mb-4">BILLING DETAIL</div>
+  </div>
+  <div class="col-auto">
+    <nav aria-label="breadcrumb ">
+      <ol class="breadcrumb bg-light">
+        <li class="breadcrumb-item"><a href="<?= base_url('Billing') ?>">Billing</a></li>
+        <li class="breadcrumb-item"><a href="<?= base_url('Billing/pencarian/') ?>">Pencarian</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Detail</li>
+      </ol>
+    </nav>
+  </div>
+</div>
 <?= $this->session->flashdata('msg') ?>
 <div class="row">
   <div class="col mb-4">

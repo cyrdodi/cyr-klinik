@@ -5,7 +5,7 @@
         <h3>Daftar Antrean Klinik</h3>
         <hr>
         <?= $this->session->flashdata('msg') ?>
-        <table class="table">
+        <table class="table" id="myTable">
           <thead>
             <tr>
               <th>No</th>
@@ -44,3 +44,8 @@
   <label for=""></label>
   <input type="text" class="form-control" name="">
 </div>
+<script>
+  $(document).ready(function() {
+    $('#myTable').DataTable();
+  })
+</script>
