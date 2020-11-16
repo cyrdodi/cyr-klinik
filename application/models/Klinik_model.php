@@ -134,10 +134,72 @@ class Klinik_model extends CI_Model
       "SELECT SUM(tarif) AS total FROM t_tindakan WHERE klinik_transaction_id = '" . $reg . "'"
     )->row_array();
   }
+
   public function getRekapObat($reg)
   {
     return $this->db->query(
       "SELECT SUM(harga*jumlah) AS total FROM t_obat WHERE klinik_transaction_id = '" . $reg . "'"
     )->row_array();
+  }
+
+  public function updateStatusKlinikTransaction($reg, $status)
+  {
+    // 1 = Antrean
+    // 2 = Selesai
+    // 3 = Batal
+
+    $data = [
+      'status' => $status
+    ];
+
+    $this->db->update('klinik_transaction', $data, ['id' => $reg]);
+  }
+
+  public function insertBilling($reg)
+  {
+    $totaladmin = $this->getRekapAdmin($reg);
+    $totaltindakan = $this->getRekapTindakan($reg);
+    $totalobat = $this->getRekapObat($reg);
+    $nobilling = $this->_generateNoBilling();
+    $totalbayar = $totaladmin['total'] + $totaltindakan['total'] + $totalobat['total'];
+    $data = [
+      'no_billing' => $nobilling,
+      'status_pembayaran' => '1',
+      'is_active' => '1',
+      'total_administrasi' => $totaladmin['total'],
+      'total_tindakan' => $totaltindakan['total'],
+      'total_obat' => $totalobat['total'],
+      'total_bayar' => $totalbayar,
+      'klinik_transaction_id' => $reg,
+    ];
+
+
+    $this->db->insert('billing_transaction', $data);
+    return $nobilling;
+  }
+
+  public function _generateNoBilling()
+  {
+    $date = date('ym');
+    $count = $this->db->get_where('Billing_transaction', ['MONTH(timestamp)' => date('m'), 'YEAR(timestamp)' => date('Y')])->num_rows();
+    $nobilling = 'IBK/' . $date . '/' . sprintf('%05d', $count + 1);
+    return $nobilling;
+  }
+  public function _generateReg()
+  {
+    $date = date('Ymd');
+    $count = $this->db->get_where('klinik_transaction', ['MONTH(tgl_berobat)' => date('m'), 'YEAR(tgl_berobat)' => date('Y')])->num_rows();
+    $noreg = $date . sprintf('%05d', $count + 1);
+    if ($count <= 0) {
+      $noreg = $date . sprintf('%05d', $count + 1);
+    } else {
+      $lastrecord = $this->db->query("SELECT id FROM klinik_transaction ORDER BY timestamp DESC")->row_array();
+      $lastrecord = $lastrecord['id'];
+      $urutan = substr($lastrecord, 8);
+      $urutan = $urutan + 1;
+      $noreg = $date . sprintf('%05d', $urutan);
+    }
+
+    return $noreg;
   }
 }

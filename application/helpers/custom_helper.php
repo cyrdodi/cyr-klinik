@@ -15,3 +15,13 @@ function umur($date)
   // echo $interval->y;
   return $interval->format('%y tahun %m bulan');
 }
+
+function badgePembayaran($status)
+{
+
+  if ($status == '1') {
+    return '<div class="badge badge-warning">Belum dibayar</div>';
+  } else if ($status == '2') {
+    return '<div class="badge badge-success">Lunas</div>';
+  }
+}

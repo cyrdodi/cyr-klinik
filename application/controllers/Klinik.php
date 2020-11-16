@@ -162,13 +162,12 @@ class Klinik extends CI_Controller
   {
     $reg = decrypt_url($reg);
 
-    $data = [
-      'status' => '2'
-    ];
+    // ubah status klinik transaction menjadi selesai
+    $this->Klinik_model->updateStatusKlinikTransaction($reg, '2');
+    // buat nomor kuitansi
+    $nobilling = $this->Klinik_model->insertBilling($reg);
 
-    $this->db->update('klinik_transaction', $data, ['id' => $reg]);
-
-    redirect('Billing/');
+    redirect('Billing/billing_detail/' . encrypt_url($nobilling));
   }
 
   // ajax

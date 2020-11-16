@@ -115,6 +115,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Utilities:</h6>
             <a class="collapse-item" href="<?= base_url('Billing') ?>">Antrean</a>
+            <a class="collapse-item" href="<?= base_url('Billing/pencarian') ?>"><i class="fas fa-search"></i> Cari Pasien</a>
           </div>
         </div>
       </li>

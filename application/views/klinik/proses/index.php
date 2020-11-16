@@ -5,6 +5,7 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
   <div class="col">
     <div class="font-weight-bold text-lg">Proses Input Klinik</div>
     <div class="mb-4"></div>
+    <?= $this->session->flashdata('msg') ?>
   </div>
 </div>
 <div class="row">
@@ -54,7 +55,7 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
       <div class="card-body">
         <div class="row no-gutters align-items-center">
           <div class="col">
-            <h4>Input Biaya</h4>
+            <h4>Input</h4>
           </div>
           <div class="col-auto">
             <i class="fas fa-laptop-medical fa-2x text-gray-300"></i>
@@ -65,7 +66,7 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
 
         <div class="my-2"></div>
         <a href="<?= base_url('Klinik/input_admin/' . encrypt_url($detail_antrean['id'])) ?>" class="btn btn-light btn-lg btn-icon-split btn-block d-flex justify-content-start border">
-          <span class="icon bg-primary text-white-50">
+          <span class="icon bg-primary text-white-50 col-2">
             <i class="fas fa-hand-holding-usd"></i>
           </span>
           <span class="text">Administrasi</span>
@@ -73,7 +74,7 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
         <div class="my-2"></div>
         <div class="my-2"></div>
         <a href="<?= base_url('Klinik/input_tindakan/' . encrypt_url($detail_antrean['id'])) ?>" class="btn btn-light btn-icon-split btn-lg d-flex justify-content-start border">
-          <span class="icon bg-primary text-white-50">
+          <span class="icon bg-primary text-white-50 col-2">
             <i class="fas fa-syringe "></i>
           </span>
           <span class="text">Tindakan</span>
@@ -81,10 +82,18 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
         <div class="my-2"></div>
         <div class="my-2"></div>
         <a href="<?= base_url('Klinik/input_obat/' . encrypt_url($detail_antrean['id'])) ?>" class="btn btn-light btn-icon-split btn-lg d-flex justify-content-start border">
-          <span class="icon bg-primary text-white-50 ">
+          <span class="icon bg-primary text-white-50 col-2">
             <i class="fas fa-pills "></i>
           </span>
           <span class="text">Obat & Alkes</span>
+        </a>
+        <div class="my-2"></div>
+        <div class="my-2"></div>
+        <a href="<?= base_url('Klinik/input_obat/' . encrypt_url($detail_antrean['id'])) ?>" class="btn btn-light btn-icon-split btn-lg d-flex justify-content-start border">
+          <span class="icon bg-primary text-white-50 col-2">
+            <i class="fas fa-user-md"></i>
+          </span>
+          <span class="text">Pemeriksaan </span>
         </a>
         <div class="my-2"></div>
         <hr>
@@ -118,8 +127,8 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
           </div>
         </div>
         <hr>
-        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-check  mr-2  "></i>Simpan</button>
-        <a href="<?= base_url('Klinik') ?>" class="btn btn-secondary">Kembali</a>
+        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-check  mr-2  "></i>OK</button>
+        <a href="<?= base_url('Klinik') ?>" class="btn btn-secondary"><i class="fas fa-chevron-left mr-2   "></i>Kembali</a>
       </div>
 
     </div>
@@ -262,12 +271,13 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
                 </table>
               </div>
             </div>
+
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-        <a href="<?= base_url('Klinik/simpan_transaksi/' . encrypt_url($detail_antrean['id'])) ?>" class="btn btn-primary" onclick="checkBiaya(event)">Simpan</a>
+        <a href="<?= base_url('Klinik/simpan_transaksi/' . encrypt_url($detail_antrean['id'])) ?>" class="btn btn-primary" onclick="checkBiaya(event)">Kirim ke billing</a>
       </div>
     </div>
   </div>

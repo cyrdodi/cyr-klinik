@@ -4,19 +4,17 @@
     overflow-y: auto;
   }
 </style>
-<div class="font-weight-bold mb-4">BILLING</div>
+<div class="font-weight-bold mb-4">PENCARIAN BILLING</div>
 <?= $this->session->flashdata('msg') ?>
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col">
     <div class="card shadow">
       <div class="card-body">
-        <h4>Pencarian</h4>
-        <hr>
         <div class="row">
-          <div class="col">
+          <div class="col-lg-6">
             <form action="" method="get" autocomplete="off">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Masukan Nama / Medrek ..." aria-label="Example text with button addon" name="keyword" aria-describedby="button-addon1" value="<?= $is_keyword ? $this->input->get('keyword') : '' ?>" autofocus>
+                <input type="text" minlength="2" class="form-control" placeholder="Masukan Nama / Medrek ..." aria-label="Example text with button addon" name="keyword" aria-describedby="button-addon1" value="<?= $is_keyword ? $this->input->get('keyword') : '' ?>" autofocus>
                 <div class="input-group-prepend">
                   <button class="btn btn-primary" type="submit" id="button-addon1"><i class="fas fa-search"></i> Cari</button>
                 </div>
@@ -43,6 +41,7 @@
                           <th>Nama</th>
                           <th>Alamat</th>
                           <th>PJ</th>
+                          <th>Status</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -57,6 +56,9 @@
                             <td><?= $result['kecamatan'] ?></td>
                             <td>
                               <div class="badge badge-primary"><?= $result['pembayaran'] ?></div>
+                            </td>
+                            <td>
+                              <?= badgePembayaran($result['status_pembayaran']) ?>
                             </td>
                             <td><a href="<?= base_url('Billing/billing_detail/' . encrypt_url($result['no_billing'])) ?>" class="btn btn-sm btn-primary">Pilih</a></td>
                             <td><?php $i++ ?></td>
