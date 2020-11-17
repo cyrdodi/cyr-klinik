@@ -73,6 +73,25 @@ class Billing extends CI_Controller
     }
   }
 
+  public function test_print($nobilling)
+  {
+    $nobilling = decrypt_url($nobilling);
+    $data['title'] = 'Billing Detail';
+    $data['detail_billing'] = $this->Billing_model->getBillingDetail($nobilling);
+
+    $reg = $data['detail_billing']['id'];
+
+    $data['l_admin'] = $this->Klinik_model->getListAdmin($reg);
+    $data['l_tindakan'] = $this->Klinik_model->getListTindakan($reg);
+    $data['l_obat'] = $this->Klinik_model->getListObat($reg);
+
+    $data['rekap_admin'] = $this->Klinik_model->getRekapAdmin($reg);
+    $data['rekap_tindakan'] = $this->Klinik_model->getRekapTindakan($reg);
+    $data['rekap_obat'] = $this->Klinik_model->getRekapObat($reg);
+
+    $this->load->view('exportpdf/billing', $data);
+  }
+
   public function billing_not_legit($nobilling)
   {
     $nobilling = decrypt_url($nobilling);

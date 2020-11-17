@@ -214,7 +214,8 @@ function colorBadge($status)
         </div>
         <div class="row">
           <div class="col">
-            <a href="" class="btn btn-primary btn-block">Cetak Billing</a>
+            <a href="<?= base_url('Exportpdf/billing/' . encrypt_url($detail_billing['no_billing'])) ?>" class="btn btn-primary btn-block">Cetak Billing</a>
+            <a href="<?= base_url('Billing/test_print/' . encrypt_url($detail_billing['no_billing'])) ?>" class="btn btn-primary btn-block">Cetak Billing test</a>
             <?php if ($detail_billing['status_pembayaran'] == '1') : ?>
               <button type="button" class="btn btn-primary btn-primary btn-block" data-toggle="modal" data-target="#savebillingmodal">Simpan</button>
               <hr>

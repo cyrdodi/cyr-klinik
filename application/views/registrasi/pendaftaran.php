@@ -15,6 +15,17 @@
               </div>
             </div>
           </div>
+        <?php elseif ($billing_nunggak) : ?>
+          <div class="row">
+            <div class="col">
+              <div class="alert alert-warning" role="alert">
+                <h4 class="alert-heading"><i class="fas fa-exclamation-triangle"></i> Perhatian</h4>
+                <p class="mt-2">Pasien <?= $pasien['nama_lengkap'] ?> dengan No MR <?= $pasien['medrek'] ?> masih dalam antrean billing belum lunas.</p>
+                <hr>
+                <p class="mb-0"><a href="<?= base_url('Billing') ?>" class="btn btn-primary">Antrean Billing</a></p>
+              </div>
+            </div>
+          </div>
         <?php else : ?>
           <div class="row">
             <div class="col-lg-8">

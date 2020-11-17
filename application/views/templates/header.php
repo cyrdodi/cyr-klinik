@@ -107,16 +107,31 @@
         </div>
       </li>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
+      <!-- Nav Item - Billing Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBilling" aria-expanded="true" aria-controls="collapseBilling">
           <i class="fas fa-file-invoice-dollar"></i>
           <span>Billing</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div id="collapseBilling" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Utilities:</h6>
             <a class="collapse-item" href="<?= base_url('Billing') ?>">Antrean</a>
+            <a class="collapse-item" href="<?= base_url('Billing/pencarian') ?>"><i class="fas fa-search"></i> Cari Pasien</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Nav Item - Inventory Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventory" aria-expanded="true" aria-controls="collapseInventory">
+          <i class="fas fa-dolly-flatbed"></i>
+          <span>Inventory</span>
+        </a>
+        <div id="collapseInventory" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Daftar Obat & Alkes</h6>
+            <a class="collapse-item" href="<?= base_url('Billing') ?>">Stock</a>
             <a class="collapse-item" href="<?= base_url('Billing/pencarian') ?>"><i class="fas fa-search"></i> Cari Pasien</a>
           </div>
         </div>

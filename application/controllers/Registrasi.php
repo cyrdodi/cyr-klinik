@@ -70,7 +70,18 @@ class Registrasi extends CI_Controller
     $mr = decrypt_url($mr);
     $data['title'] = 'Pendaftaran';
     $data['pasien'] = $this->Registrasi_model->getDataPasien($mr);
+
+    /**
+     * Pasien tidak bisa didaftarkan jika:
+     * - Masih dalam antrean aktif 
+     *    ::(klinik_transaction.status = 1)
+     * - Masih dalam antrean billing aktif dan belum lunas 
+     *    ::(billing_transaction.is_active = 1 AND billing_transaction. status_pembayaran = 1)
+     */
+
     $data['antrean_aktif'] = $this->Registrasi_model->isMedrekInAntrean($mr);
+    $data['billing_nunggak'] = $this->Registrasi_model->isBillingNunggak($mr);
+
 
     $this->form_validation->set_rules('medrek', 'Medrek', 'required');
     $this->form_validation->set_rules('user_id', 'User ID', 'required');
@@ -85,10 +96,6 @@ class Registrasi extends CI_Controller
     }
   }
 
-  public function proses_klinik()
-  {
-    $data['title'] = 'Proses Klinik';
-  }
 
   public function test($mr)
   {

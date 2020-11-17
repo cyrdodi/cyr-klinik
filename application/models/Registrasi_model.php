@@ -77,8 +77,7 @@ class Registrasi_model extends CI_Model
   {
     return $this->db->query(
       "SELECT * FROM data_pasien 
-      WHERE nama_lengkap LIKE '%" . $keyword . "%'
-      OR medrek LIKE'%" . $keyword . "%'
+      WHERE CONCAT(nama_lengkap, medrek) LIKE '%" . $keyword . "%'
       LIMIT 50"
     )->result_array();
   }
@@ -125,6 +124,23 @@ class Registrasi_model extends CI_Model
   public function isMedrekInAntrean($mr)
   {
     $check = $this->db->query("SELECT * FROM klinik_transaction WHERE medrek = '" . $mr . "' AND status = 1")->num_rows();
+    if ($check > 0) {
+      return TRUE;
+    } else {
+      return FALSE;
+    }
+  }
+
+  public function isBillingNunggak($mr)
+  {
+    //cek apakah medrek punya billing aktif yang belum lunas
+    $check = $this->db->query(
+      "SELECT * 
+      FROM billing_transaction AS bt
+      JOIN klinik_transaction AS kt ON kt.id = bt.klinik_transaction_id
+      WHERE kt.medrek = '" . $mr . "' AND bt.status_pembayaran= '1' AND bt.is_active = '1'
+      "
+    )->num_rows();
     if ($check > 0) {
       return TRUE;
     } else {
