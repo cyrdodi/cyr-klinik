@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') or exit('no direct access alowed');
-
 class Billing extends CI_Controller
 {
   public function __construct()
@@ -63,6 +62,7 @@ class Billing extends CI_Controller
 
     $total_detail = $data['rekap_admin']['total'] + $data['rekap_tindakan']['total'] + $data['rekap_obat']['total'];
 
+
     // cek apakah total bayar di billing dan di detail transaksi sesuai
     if ($total_detail == $data['detail_billing']['total_bayar']) {
       $this->load->view('templates/header', $data);
@@ -88,7 +88,7 @@ class Billing extends CI_Controller
     $data['rekap_admin'] = $this->Klinik_model->getRekapAdmin($reg);
     $data['rekap_tindakan'] = $this->Klinik_model->getRekapTindakan($reg);
     $data['rekap_obat'] = $this->Klinik_model->getRekapObat($reg);
-
+    $data['petugas'] = $this->session->userdata('nama_akun');
     $this->load->view('exportpdf/billing', $data);
   }
 

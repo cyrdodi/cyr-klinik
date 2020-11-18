@@ -180,9 +180,9 @@ class Klinik_model extends CI_Model
 
   public function _generateNoBilling()
   {
-    $date = date('ym');
-    $count = $this->db->get_where('Billing_transaction', ['MONTH(timestamp)' => date('m'), 'YEAR(timestamp)' => date('Y')])->num_rows();
-    $nobilling = 'IBK/' . $date . '/' . sprintf('%05d', $count + 1);
+    $date = date('y-m');
+    $count = $this->db->get_where('billing_transaction', ['MONTH(timestamp)' => date('m'), 'YEAR(timestamp)' => date('Y')])->num_rows();
+    $nobilling = 'IBK-' . $date . '-' . sprintf('%05d', $count + 1);
     return $nobilling;
   }
   public function _generateReg()

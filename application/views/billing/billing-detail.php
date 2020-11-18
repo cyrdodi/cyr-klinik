@@ -10,7 +10,6 @@ function colorBadge($status)
   }
 }
 
-var_dump($detail_billing);
 ?>
 <style>
   .scroll {
@@ -222,7 +221,7 @@ var_dump($detail_billing);
               <hr>
               <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModal">Kembalikan ke antrean</button>
             <?php else : ?>
-              <a href="<?= base_url('Exportpdf/kwitansi/' . encrypt_url($detail_billing['no_billing'])) ?>" class="btn btn-primary btn-block">Cetak Kwitansi</a>
+              <button type="button" class="btn btn-primary btn-primary btn-block" id="btnkwitansi" data-toggle="modal" data-target="#kwitansimodal">Cetak Kwitansi</button>
             <?php endif; ?>
           </div>
         </div>
@@ -286,3 +285,45 @@ var_dump($detail_billing);
     </div>
   </div>
 </div>
+
+<!-- Modal Penerima-->
+<div class="modal fade" id="kwitansimodal" tabindex="-1" aria-labelledby="kwitansimodalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="kwitansimodalLabel">Cetak Kwitansi</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="<?= base_url('Exportpdf/kwitansi') ?>" name="kwitansi" id="kwitansiform" method="get">
+          <div class="form-group">
+            <label for="penerima">Edit Nama Penerima</label>
+            <input type="text" class="form-control" name="penerima" id="penerima" aria-describedby="helpId" placeholder="">
+            <input type="text" name="no_billing" value="<?= $detail_billing['no_billing'] ?>" hidden>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button type="submit" name="kwitansi" id="kwitansibtn" class="btn btn-primary">Cetak Kwitansi</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let pasien = <?= json_encode($detail_billing['nama_lengkap']) ?>;
+  $(document).ready(function() {
+    $('#btnkwitansi').click(function() {
+      $('#penerima').val(pasien);
+    })
+    $('#kwitansiform').submit(function(e) {
+      // Coding
+      $('#kwitansimodal').modal('hide'); //or  $('#IDModal').modal('hide');
+      console.log('Mukegile');
+    });
+  })
+</script>

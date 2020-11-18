@@ -94,7 +94,7 @@ class Billing_model extends CI_Model
       'is_active' => '0'
     ];
 
-    $this->db->update('Billing_transaction', $data, ['no_billing' => $nobilling]);
+    $this->db->update('billing_transaction', $data, ['no_billing' => $nobilling]);
   }
 
   public function simpanBilling($nobilling)
@@ -107,12 +107,13 @@ class Billing_model extends CI_Model
     $this->db->update('billing_transaction', $data, ['no_billing' => $nobilling]);
   }
 
-  public function addPrintLog($nobilling, $jenis)
+  public function addPrintLog($nobilling, $jenis, $penerima)
   {
     $data = [
       'no_billing' => $nobilling,
       'jenis_dokumen' => $jenis,
-      'user_id' => $this->session->userdata('user_id')
+      'user_id' => $this->session->userdata('user_id'),
+      'penerima' => $penerima
     ];
 
     $this->db->insert('log_print_billing', $data);

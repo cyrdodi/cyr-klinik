@@ -129,6 +129,13 @@ function terbilang($nilai)
     background-color: #9ad3bc;
     padding: 5px;
   }
+
+  .border-top {
+    border-right: none;
+    border-left: none;
+    border-bottom: none;
+    margin-right: 10px;
+  }
 </style>
 
 <body>
@@ -150,7 +157,7 @@ function terbilang($nilai)
       <table>
         <tr>
           <th class="profil-table" style="width: 200px">Terima dari</th>
-          <td class="profil-table">:</td>
+          <td class="profil-table">: <?= $penerima ?></td>
         </tr>
         <tr>
           <th class="profil-table" style="width: 150px">Pembayaran</th>
@@ -158,7 +165,7 @@ function terbilang($nilai)
         </tr>
         <tr>
           <th class="profil-table">No Billing/Registrasi</th>
-          <td class="profil-table">: <?= $detail_billing['no_billing'] . ' - ' . $detail_billing['id'] ?></td>
+          <td class="profil-table">: <?= $detail_billing['no_billing'] . ' / ' . $detail_billing['id'] ?></td>
         </tr>
         <tr>
           <th class="profil-table">Nama Pasien/MR</th>
@@ -171,7 +178,6 @@ function terbilang($nilai)
     <div id="terbilang">
       <span><?= ucfirst(terbilang($detail_billing['total_bayar'])) ?> rupiah</span>
     </div>
-    <hr>
     <table>
       <tr>
         <th rowspan="4" class="profil-table" style="font-size: 24px">
@@ -188,7 +194,7 @@ function terbilang($nilai)
         <td class="profil-table"></td>
       </tr>
       <tr>
-        <td style="text-align: center;" class="profil-table"><?= $petugas ?></td>
+        <td style="text-align: center;" class="border-top"><?= $petugas ?></td>
       </tr>
     </table>
   </div>

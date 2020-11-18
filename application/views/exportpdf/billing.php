@@ -15,7 +15,7 @@
   }
 
   body {
-    font-family: fontku, arial, sans-serif;
+    font-family: fontku, helvetica, arial, sans-serif;
     font-size: 14px;
   }
 
@@ -71,6 +71,13 @@
     border-width: thin;
     margin: 5px;
     padding: 3px 6px;
+  }
+
+  .border-top {
+    border-right: none;
+    border-left: none;
+    border-bottom: none;
+    margin-right: 10px;
   }
 </style>
 
@@ -246,6 +253,29 @@
           <th style="text-align: right;">Rp. <?= number_format($detail_billing['total_bayar']) ?></th>
         </tr>
       </tfoot>
+    </table>
+  </div>
+  <br>
+  <div id="footnote">
+    <table>
+      <tr>
+        <th width="100px" class="profil-table" style="text-align: center;">Petugas:</th>
+        <th width="100px" class="profil-table"></th>
+        <th>Keterangan</th>
+      </tr>
+      <tr>
+        <td class="profil-table"></td>
+        <td class="profil-table"></td>
+        <td rowspan="3"></td>
+      </tr>
+      <tr>
+        <td class="profil-table"></td>
+        <td class="profil-table"></td>
+      </tr>
+      <tr>
+        <td class="border-top" style="text-align: center;"><?= $petugas ?></td>
+        <td class="profil-table"></td>
+      </tr>
     </table>
   </div>
 </body>
