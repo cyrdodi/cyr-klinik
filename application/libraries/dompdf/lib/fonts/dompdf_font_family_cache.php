@@ -87,4 +87,7 @@
     'italic' => $fontDir . '\f6d0e68c27be7b625e489f9420785870',
     'normal' => $fontDir . '\bd9c1a842531b8bf254ce84d58e5f9de',
   ),
+  'fontku' => array(
+    'normal' => $fontDir . '\a78731bc0c601a3da7b195a61e0f4724',
+  ),
 ) ?>

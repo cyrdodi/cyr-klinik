@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2020 at 01:32 AM
--- Server version: 10.4.10-MariaDB
--- PHP Version: 7.3.12
+-- Generation Time: Nov 18, 2020 at 08:05 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.2.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,40 @@ SET time_zone = "+00:00";
 --
 -- Database: `simklinik`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `billing_transaction`
+--
+
+CREATE TABLE `billing_transaction` (
+  `no_billing` varchar(100) NOT NULL,
+  `tgl_pembayaran` date DEFAULT NULL,
+  `status_pembayaran` char(4) DEFAULT NULL,
+  `is_active` enum('0','1') DEFAULT NULL,
+  `total_administrasi` double DEFAULT NULL,
+  `total_tindakan` double DEFAULT NULL,
+  `total_obat` double DEFAULT NULL,
+  `total_bayar` double DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT current_timestamp(),
+  `klinik_transaction_id` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `billing_transaction`
+--
+
+INSERT INTO `billing_transaction` (`no_billing`, `tgl_pembayaran`, `status_pembayaran`, `is_active`, `total_administrasi`, `total_tindakan`, `total_obat`, `total_bayar`, `timestamp`, `klinik_transaction_id`) VALUES
+('IBK/2011/00001', NULL, '1', '0', 10000, 25000, 848500, NULL, '2020-11-15 11:25:54', '2020111200007'),
+('IBK/2011/00002', NULL, '1', '0', 5000, 25000, 388100, 418200, '2020-11-16 03:12:50', '2020111200007'),
+('IBK/2011/00003', '2020-11-16', '2', '1', 5000, 55000, 345950, 405950, '2020-11-16 03:29:50', '202011080004'),
+('IBK/2011/00004', NULL, '1', '0', 5000, 16000, 14300, 35300, '2020-11-16 05:34:59', '2020110900006'),
+('IBK/2011/00005', '2020-11-16', '2', '1', 5000, 25000, 388100, 418100, '2020-11-16 06:02:45', '2020111200007'),
+('IBK/2011/00006', NULL, '1', '0', 5000, 2000, 98400, 105400, '2020-11-16 06:26:28', '2020111600008'),
+('IBK/2011/00007', '2020-11-18', '2', '1', 5000, 2000, 98400, 105400, '2020-11-18 01:05:11', '2020111600008'),
+('IBK/2011/00008', '2020-11-18', '2', '1', 5000, 17000, 326100, 348100, '2020-11-18 01:06:16', '2020111800010'),
+('IBK/2011/00009', NULL, '1', '1', 5000, 2000, 225600, 232600, '2020-11-18 03:28:47', '202011080003');
 
 -- --------------------------------------------------------
 
@@ -65,16 +99,16 @@ CREATE TABLE `b_obat` (
 --
 
 INSERT INTO `b_obat` (`id`, `nama_obat`, `satuan`, `jenis_obat`, `stok`, `harga`, `is_active`, `timestamp`) VALUES
-(1, 'Xylestesin', 'PCS', 'Alat Kesehatan', 100, 15700, '1', '2020-11-12 02:15:20'),
+(1, 'Xylestesin', 'PCS', 'Alat Kesehatan', 94, 15700, '1', '2020-11-12 02:15:20'),
 (2, 'Abbocath No. 20', 'PCS', 'Alat Kesehatan', 100, 25500, '1', '2020-11-12 02:15:20'),
-(3, 'Abbocath No.14', 'PCS', 'Alat Kesehatan', 98, 28200, '1', '2020-11-12 02:15:20'),
+(3, 'Abbocath No.14', 'PCS', 'Alat Kesehatan', 83, 28200, '1', '2020-11-12 02:15:20'),
 (4, 'Abbocath No.16', 'PCS', 'Alat Kesehatan', 100, 28200, '1', '2020-11-12 02:15:20'),
 (5, 'Abbocath No.18', 'PCS', 'Alat Kesehatan', 100, 24800, '1', '2020-11-12 02:15:20'),
 (6, 'Alat cukur', 'PCS', 'Alat Kesehatan', 100, 9800, '1', '2020-11-12 02:15:20'),
-(7, 'Arm Sling M', 'PCS', 'Alat Kesehatan', 100, 42000, '1', '2020-11-12 02:15:20'),
+(7, 'Arm Sling M', 'PCS', 'Alat Kesehatan', 98, 42000, '1', '2020-11-12 02:15:20'),
 (8, 'Abbocath no.24', 'PCS', 'Alat Kesehatan', 100, 10750, '1', '2020-11-12 02:15:20'),
 (9, 'Abbocath No 22', 'PCS', 'Alat Kesehatan', 100, 25000, '1', '2020-11-12 02:15:20'),
-(10, 'Arm Sling L', 'PCS', 'Alat Kesehatan', 100, 42000, '1', '2020-11-12 02:15:20'),
+(10, 'Arm Sling L', 'PCS', 'Alat Kesehatan', 94, 42000, '1', '2020-11-12 02:15:20'),
 (11, 'Bisturi BB 10', 'PCS', 'Alat Kesehatan', 100, 2250, '1', '2020-11-12 02:15:20'),
 (12, 'Bisturi BB 11', 'PCS', 'Alat Kesehatan', 100, 4400, '1', '2020-11-12 02:15:20'),
 (13, 'Bisturi BB 12', 'PCS', 'Alat Kesehatan', 100, 2250, '1', '2020-11-12 02:15:20'),
@@ -85,7 +119,7 @@ INSERT INTO `b_obat` (`id`, `nama_obat`, `satuan`, `jenis_obat`, `stok`, `harga`
 (18, 'Catheter Nelaton 8', 'PCS', 'Alat Kesehatan', 100, 5300, '1', '2020-11-12 02:15:20'),
 (19, 'Catheter Nelaton 10', 'PCS', 'Alat Kesehatan', 100, 5300, '1', '2020-11-12 02:15:20'),
 (20, 'Catheter Nelaton 12', 'PCS', 'Alat Kesehatan', 100, 5300, '1', '2020-11-12 02:15:20'),
-(21, 'Catheter Nelaton 14', 'PCS', 'Alat Kesehatan', 100, 5300, '1', '2020-11-12 02:15:20'),
+(21, 'Catheter Nelaton 14', 'PCS', 'Alat Kesehatan', 96, 5300, '1', '2020-11-12 02:15:20'),
 (22, 'Catgut Chromic 0 (D-TREX)', 'CM', 'Alat Kesehatan', 100, 800, '1', '2020-11-12 02:15:20'),
 (23, 'Catgut Chromic 1', 'CM', 'Alat Kesehatan', 100, 300, '1', '2020-11-12 02:15:20'),
 (24, 'Catgut Chromic 2', 'CM', 'Alat Kesehatan', 100, 400, '1', '2020-11-12 02:15:20'),
@@ -422,7 +456,7 @@ INSERT INTO `b_obat` (`id`, `nama_obat`, `satuan`, `jenis_obat`, `stok`, `harga`
 (355, 'Vicryl (PGA) No 2 Otot', 'CM', 'Alat Kesehatan', 100, 49900, '1', '2020-11-12 02:15:20'),
 (356, 'Vicryl (PGA) no 3/0 Otot', 'PCS', 'Alat Kesehatan', 100, 169900, '1', '2020-11-12 02:15:20'),
 (357, 'Wound dressing 10x35 cm', 'PCS', 'Alat Kesehatan', 66, 33000, '1', '2020-11-12 02:15:20'),
-(358, 'Winner Transpraent Film Dreassing 6x7', 'PCS', 'Alat Kesehatan', 100, 4100, '1', '2020-11-12 02:15:20'),
+(358, 'Winner Transpraent Film Dreassing 6x7', 'PCS', 'Alat Kesehatan', 96, 4100, '1', '2020-11-12 02:15:20'),
 (359, 'Winner Transparent Film Dresing 6x7 With Notch', 'PCS', 'Alat Kesehatan', 100, 4300, '1', '2020-11-12 02:15:20'),
 (360, 'Winner Adhesive Wound Dresing 5cm x 5m', 'CM', 'Alat Kesehatan', 100, 57, '1', '2020-11-12 02:15:20'),
 (361, 'Winner Adhesive Wound Dresing 10cm x 5m', 'CM', 'Alat Kesehatan', 100, 100, '1', '2020-11-12 02:15:20'),
@@ -548,7 +582,7 @@ INSERT INTO `b_obat` (`id`, `nama_obat`, `satuan`, `jenis_obat`, `stok`, `harga`
 (481, 'Oxygen VGL', 'LITER', 'GAS MEDIS', 100, 55, '1', '2020-11-12 02:15:20'),
 (482, 'Dextros 500 Widatra', 'BOTOL', 'INFUS', 100, 16800, '1', '2020-11-12 02:15:20'),
 (483, 'Nacl 500 Widatra', 'BOTOL', 'INFUS', 100, 20000, '1', '2020-11-12 02:15:20'),
-(484, 'Paracetamol inf', 'BOTOL', 'INFUS', 97, 64350, '1', '2020-11-12 02:15:20'),
+(484, 'Paracetamol inf', 'BOTOL', 'INFUS', 94, 64350, '1', '2020-11-12 02:15:20'),
 (485, 'Ringerfundin ', 'BOTOL', 'INFUS', 100, 14300, '1', '2020-11-12 02:15:20'),
 (486, 'Aquades Sanbe 2000 ML', 'ML', 'INFUS', 100, 19, '1', '2020-11-12 02:15:20'),
 (487, 'Benutrion VE inf', 'FLS', 'INFUS', 100, 160000, '1', '2020-11-12 02:15:20'),
@@ -623,9 +657,9 @@ INSERT INTO `b_obat` (`id`, `nama_obat`, `satuan`, `jenis_obat`, `stok`, `harga`
 (556, 'Equal tab', 'TABLET', 'Obat Bebas', 100, 250, '1', '2020-11-12 02:15:20'),
 (557, 'Fluconazol tab', 'KAPLET', 'Obat Bebas', 100, 36700, '1', '2020-11-12 02:15:20'),
 (558, 'Folaplus', 'KAPLET', 'Obat Bebas', 100, 1350, '1', '2020-11-12 02:15:20'),
-(559, 'Ferospat', 'TUBE', 'Obat Bebas', 100, 85800, '1', '2020-11-12 02:15:20');
+(559, 'Ferospat', 'TUBE', 'Obat Bebas', 100, 85800, '1', '2020-11-12 02:15:20'),
+(560, 'Formuno extra', 'TUBE', 'Obat Bebas', 100, 136000, '1', '2020-11-12 02:15:20');
 INSERT INTO `b_obat` (`id`, `nama_obat`, `satuan`, `jenis_obat`, `stok`, `harga`, `is_active`, `timestamp`) VALUES
-(560, 'Formuno extra', 'TUBE', 'Obat Bebas', 100, 136000, '1', '2020-11-12 02:15:20'),
 (561, 'Ferriz syr', 'BOTOL', 'Obat Bebas', 100, 37700, '1', '2020-11-12 02:15:20'),
 (562, 'Ferro-k', 'BOTOL', 'Obat Bebas', 100, 50000, '1', '2020-11-12 02:15:20'),
 (563, 'Gestamag', 'BOTOL', 'Obat Bebas', 100, 28600, '1', '2020-11-12 02:15:20'),
@@ -1202,9 +1236,9 @@ INSERT INTO `b_obat` (`id`, `nama_obat`, `satuan`, `jenis_obat`, `stok`, `harga`
 (1134, 'Cortidex inj', 'AMPUL', 'Obat Keras', 100, 8900, '1', '2020-11-12 02:15:20'),
 (1135, 'Cardisan 5 mg', 'TABLET', 'Obat Keras', 100, 8300, '1', '2020-11-12 02:15:20'),
 (1136, 'Cetafloxo tab', 'TABLET', 'Obat Keras', 100, 17200, '1', '2020-11-12 02:15:20'),
-(1137, 'Celestamin 30 ml', 'BOTOL', 'Obat Keras', 100, 45700, '1', '2020-11-12 02:15:20');
+(1137, 'Celestamin 30 ml', 'BOTOL', 'Obat Keras', 100, 45700, '1', '2020-11-12 02:15:20'),
+(1138, 'Cetafloxo infus', 'BOTOL', 'Obat Keras', 100, 257400, '1', '2020-11-12 02:15:20');
 INSERT INTO `b_obat` (`id`, `nama_obat`, `satuan`, `jenis_obat`, `stok`, `harga`, `is_active`, `timestamp`) VALUES
-(1138, 'Cetafloxo infus', 'BOTOL', 'Obat Keras', 100, 257400, '1', '2020-11-12 02:15:20'),
 (1139, 'Cinogenta crem', 'TUBE', 'Obat keras', 100, 50000, '1', '2020-11-12 02:15:20'),
 (1140, 'Cefratam', 'VIAL', 'Obat Keras', 100, 214500, '1', '2020-11-12 02:15:20'),
 (1141, 'Citicoline 500 inj', 'AMPUL', 'Obat Keras', 100, 40000, '1', '2020-11-12 02:15:20'),
@@ -1791,9 +1825,9 @@ INSERT INTO `b_obat` (`id`, `nama_obat`, `satuan`, `jenis_obat`, `stok`, `harga`
 (1722, 'Propanolol 40mg', 'TABLET', 'Obat Tablet', 100, 500, '1', '2020-11-12 02:15:20'),
 (1723, 'Diaform', 'TABLET', 'Obat Tablet', 100, 300, '1', '2020-11-12 02:15:20'),
 (1724, 'Prokalk Tablet', 'TABLET', 'Obat Tablet', 100, 300, '1', '2020-11-12 02:15:20'),
-(1725, 'Corsagrif ', 'TABLET', 'Obat Tablet', 100, 800, '1', '2020-11-12 02:15:20');
+(1725, 'Corsagrif ', 'TABLET', 'Obat Tablet', 100, 800, '1', '2020-11-12 02:15:20'),
+(1726, 'Hupagrif', 'TABLET', 'Obat Tablet', 100, 500, '1', '2020-11-12 02:15:20');
 INSERT INTO `b_obat` (`id`, `nama_obat`, `satuan`, `jenis_obat`, `stok`, `harga`, `is_active`, `timestamp`) VALUES
-(1726, 'Hupagrif', 'TABLET', 'Obat Tablet', 100, 500, '1', '2020-11-12 02:15:20'),
 (1727, 'Kompolax Sirup', 'BOTOL', 'Obat Tablet', 100, 13000, '1', '2020-11-12 02:15:20'),
 (1728, 'Baby Cought Syr', 'TABLET', 'Obat Tablet', 100, 7500, '1', '2020-11-12 02:15:20'),
 (1729, 'Neurodex', 'TABLET', 'Obat Tablet', 100, 850, '1', '2020-11-12 02:15:20'),
@@ -1830,7 +1864,7 @@ INSERT INTO `b_obat` (`id`, `nama_obat`, `satuan`, `jenis_obat`, `stok`, `harga`
 (1760, 'Cataflam Fast 50 mg', 'SACHET', 'Obat Tablet', 100, 10500, '1', '2020-11-12 02:15:20'),
 (1761, 'Cataflam Disp 50 mg', 'TABLET', 'Obat Tablet', 100, 7300, '1', '2020-11-12 02:15:20'),
 (1762, 'Calos (caco3)', 'TABLET', 'Obat Tablet', 100, 1100, '1', '2020-11-12 02:15:20'),
-(1763, 'Combantrin', 'TABLET', 'Obat Tablet', 100, 7400, '1', '2020-11-12 02:15:20'),
+(1763, 'Combantrin', 'TABLET', 'Obat Tablet', 96, 7400, '1', '2020-11-12 02:15:20'),
 (1764, 'Ciflon Tablet', 'TABLET', 'Obat Tablet', 100, 12100, '1', '2020-11-12 02:15:20'),
 (1765, 'Degrium 5 mg', 'TABLET', 'Obat Tablet', 100, 7550, '1', '2020-11-12 02:15:20'),
 (1766, 'Diklovit tablet', 'TABLET', 'Obat Tablet', 100, 3700, '1', '2020-11-12 02:15:20'),
@@ -1876,7 +1910,7 @@ INSERT INTO `b_obat` (`id`, `nama_obat`, `satuan`, `jenis_obat`, `stok`, `harga`
 (1806, 'Opicef kapsul', 'KAPSUL', 'Obat Tablet', 100, 13600, '1', '2020-11-12 02:15:20'),
 (1807, 'Opicort Tablet', 'TABLET', 'Obat Tablet', 100, 4600, '1', '2020-11-12 02:15:20'),
 (1808, 'Proliver', 'KAPLET', 'Obat Tablet', 100, 7150, '1', '2020-11-12 02:15:20'),
-(1809, 'Prenatin DF', 'TABLET', 'Obat Tablet', 100, 3600, '1', '2020-11-12 02:15:20'),
+(1809, 'Prenatin DF', 'TABLET', 'Obat Tablet', 88, 3600, '1', '2020-11-12 02:15:20'),
 (1810, 'preabor', 'KAPLET', 'Obat Tablet', 100, 4900, '1', '2020-11-12 02:15:20'),
 (1811, 'PRO TB', 'TABLET', 'Obat Tablet', 100, 7100, '1', '2020-11-12 02:15:20'),
 (1812, 'Pepzol tablet', 'TABLET', 'Obat Tablet', 100, 18600, '1', '2020-11-12 02:15:20'),
@@ -2316,11 +2350,137 @@ CREATE TABLE `klinik_transaction` (
 
 INSERT INTO `klinik_transaction` (`id`, `tgl_berobat`, `cara_bayar`, `medrek`, `user_id`, `status`, `timestamp`) VALUES
 ('202011080001', '2020-11-08', 'p1', '000002', 1, '2', '2020-11-08 11:03:47'),
-('202011080003', '2020-11-08', 'p1', '000002', 1, '0', '2020-11-08 11:03:57'),
-('202011080004', '2020-11-08', 'p1', '000002', 1, '0', '2020-11-08 11:04:37'),
-('202011080005', '2020-11-08', 'p1', '000002', 1, '1', '2020-11-08 11:43:20'),
-('2020110900006', '2020-11-09', 'p1', '000003', 1, '2', '2020-11-09 15:11:59'),
-('2020111200007', '2020-11-12', 'p1', '000003', 1, '1', '2020-11-12 12:36:35');
+('202011080003', '2020-11-08', 'p1', '000002', 1, '2', '2020-11-08 11:03:57'),
+('202011080004', '2020-11-08', 'p1', '000002', 1, '2', '2020-11-08 11:04:37'),
+('202011080005', '2020-11-08', 'p1', '000002', 1, '2', '2020-11-08 11:43:20'),
+('2020110900006', '2020-11-09', 'p3', '000003', 1, '2', '2020-11-09 15:11:59'),
+('2020111200007', '2020-11-12', 'p2', '000003', 1, '2', '2020-11-12 12:36:35'),
+('2020111600008', '2020-11-16', 'p3', '000003', 1, '2', '2020-11-16 06:20:50'),
+('2020111700009', '2020-11-17', 'p1', '000001', 1, '1', '2020-11-17 00:21:56'),
+('2020111800010', '2020-11-18', 'p2', '000003', 1, '2', '2020-11-18 01:05:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_print_billing`
+--
+
+CREATE TABLE `log_print_billing` (
+  `id_log` int(11) NOT NULL,
+  `no_billing` varchar(150) NOT NULL,
+  `jenis_dokumen` enum('billing','kwitansi') NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `log_print_billing`
+--
+
+INSERT INTO `log_print_billing` (`id_log`, `no_billing`, `jenis_dokumen`, `timestamp`, `user_id`) VALUES
+(1, 'IBK/2011/00009', 'billing', '2020-11-18 04:08:17', 1),
+(2, 'IBK/2011/00009', 'billing', '2020-11-18 04:08:30', 1),
+(3, 'IBK/2011/00009', 'billing', '2020-11-18 04:09:12', 1),
+(4, 'IBK/2011/00009', 'billing', '2020-11-18 04:09:15', 1),
+(5, 'IBK/2011/00009', 'billing', '2020-11-18 04:09:17', 1),
+(6, 'IBK/2011/00009', 'billing', '2020-11-18 04:09:20', 1),
+(7, 'IBK/2011/00009', 'billing', '2020-11-18 04:12:09', 1),
+(8, 'IBK/2011/00009', 'billing', '2020-11-18 04:13:56', 1),
+(9, 'IBK/2011/00009', 'billing', '2020-11-18 04:13:57', 1),
+(10, 'IBK/2011/00009', 'billing', '2020-11-18 04:14:00', 1),
+(11, 'IBK/2011/00009', 'billing', '2020-11-18 04:14:02', 1),
+(49, 'IBK/2011/00008', 'billing', '2020-11-18 05:55:27', 1),
+(50, 'IBK/2011/00008', 'billing', '2020-11-18 05:55:55', 1),
+(51, 'IBK/2011/00008', 'billing', '2020-11-18 05:56:11', 1),
+(52, 'IBK/2011/00008', 'billing', '2020-11-18 05:56:27', 1),
+(53, 'IBK/2011/00008', 'billing', '2020-11-18 05:56:43', 1),
+(54, 'IBK/2011/00008', 'billing', '2020-11-18 05:57:05', 1),
+(55, 'IBK/2011/00008', 'billing', '2020-11-18 06:01:57', 1),
+(56, 'IBK/2011/00008', 'billing', '2020-11-18 06:05:52', 1),
+(57, 'IBK/2011/00008', 'billing', '2020-11-18 06:12:50', 1),
+(58, 'IBK/2011/00008', 'billing', '2020-11-18 06:13:21', 1),
+(59, 'IBK/2011/00008', 'billing', '2020-11-18 06:14:28', 1),
+(60, 'IBK/2011/00008', 'billing', '2020-11-18 06:15:42', 1),
+(61, 'IBK/2011/00008', 'billing', '2020-11-18 06:20:10', 1),
+(62, 'IBK/2011/00008', 'billing', '2020-11-18 06:20:26', 1),
+(63, 'IBK/2011/00008', 'billing', '2020-11-18 06:20:57', 1),
+(64, 'IBK/2011/00008', 'billing', '2020-11-18 06:21:15', 1),
+(65, 'IBK/2011/00008', 'billing', '2020-11-18 06:22:13', 1),
+(66, 'IBK/2011/00008', 'billing', '2020-11-18 06:26:08', 1),
+(67, 'IBK/2011/00008', 'billing', '2020-11-18 06:30:11', 1),
+(68, 'IBK/2011/00008', 'billing', '2020-11-18 06:30:46', 1),
+(69, 'IBK/2011/00008', 'billing', '2020-11-18 06:31:25', 1),
+(70, 'IBK/2011/00008', 'billing', '2020-11-18 06:32:01', 1),
+(71, 'IBK/2011/00008', 'billing', '2020-11-18 06:32:43', 1),
+(72, 'IBK/2011/00008', 'billing', '2020-11-18 06:33:11', 1),
+(73, 'IBK/2011/00008', 'billing', '2020-11-18 06:34:17', 1),
+(74, 'IBK/2011/00008', 'billing', '2020-11-18 06:35:32', 1),
+(75, 'IBK/2011/00008', 'billing', '2020-11-18 06:36:59', 1),
+(76, 'IBK/2011/00008', 'billing', '2020-11-18 06:41:05', 1),
+(77, 'IBK/2011/00008', 'billing', '2020-11-18 06:42:50', 1),
+(78, 'IBK/2011/00008', 'billing', '2020-11-18 06:48:41', 1),
+(79, 'IBK/2011/00008', 'billing', '2020-11-18 06:48:57', 1),
+(80, 'IBK/2011/00008', 'billing', '2020-11-18 06:51:19', 1),
+(81, 'IBK/2011/00008', 'billing', '2020-11-18 06:52:04', 1),
+(82, 'IBK/2011/00008', 'billing', '2020-11-18 06:52:38', 1),
+(83, 'IBK/2011/00008', 'billing', '2020-11-18 06:53:22', 1),
+(84, 'IBK/2011/00008', 'billing', '2020-11-18 06:53:41', 1),
+(85, 'IBK/2011/00008', 'billing', '2020-11-18 06:54:38', 1),
+(86, 'IBK/2011/00008', 'billing', '2020-11-18 06:55:14', 1),
+(87, 'IBK/2011/00008', 'billing', '2020-11-18 06:55:40', 1),
+(88, 'IBK/2011/00008', 'billing', '2020-11-18 06:58:22', 1),
+(89, 'IBK/2011/00008', 'billing', '2020-11-18 06:59:50', 1),
+(90, 'IBK/2011/00008', 'billing', '2020-11-18 07:00:39', 1),
+(91, 'IBK/2011/00008', 'billing', '2020-11-18 07:01:01', 1),
+(92, 'IBK/2011/00008', 'billing', '2020-11-18 07:01:37', 1),
+(93, 'IBK/2011/00008', 'billing', '2020-11-18 07:02:52', 1),
+(94, 'IBK/2011/00008', 'billing', '2020-11-18 07:03:13', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `m_status_pembayaran`
+--
+
+CREATE TABLE `m_status_pembayaran` (
+  `id` int(11) NOT NULL,
+  `nama_status` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `m_status_pembayaran`
+--
+
+INSERT INTO `m_status_pembayaran` (`id`, `nama_status`) VALUES
+(1, 'Belum Dibayar'),
+(2, 'Lunas');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pemeriksaan_klinik`
+--
+
+CREATE TABLE `pemeriksaan_klinik` (
+  `klinik_transaction_id` varchar(100) NOT NULL,
+  `diagnosa` varchar(45) DEFAULT NULL,
+  `keterangan` varchar(45) DEFAULT NULL,
+  `suhu_tubuh` char(5) DEFAULT NULL,
+  `tensi` varchar(45) DEFAULT NULL,
+  `tinggi` varchar(45) DEFAULT NULL,
+  `berat` varchar(45) DEFAULT NULL,
+  `keluhan` varchar(500) DEFAULT NULL,
+  `pemeriksaan` varchar(450) DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT current_timestamp(),
+  `dokter_id` char(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pemeriksaan_klinik`
+--
+
+INSERT INTO `pemeriksaan_klinik` (`klinik_transaction_id`, `diagnosa`, `keterangan`, `suhu_tubuh`, `tensi`, `tinggi`, `berat`, `keluhan`, `pemeriksaan`, `timestamp`, `dokter_id`) VALUES
+('202011080004', 's2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-11-15 08:38:23', '');
 
 -- --------------------------------------------------------
 
@@ -2365,7 +2525,11 @@ INSERT INTO `t_admin` (`id`, `nama_admin`, `harga`, `timestamp`, `b_admin_id`, `
 (1, 'Biaya Administrasi', 5000, '2020-11-11 13:47:04', 1, '202011080001'),
 (2, 'Biaya Administrasi', 5000, '2020-11-12 10:01:41', 1, '202011080005'),
 (7, 'Biaya Administrasi', 5000, '2020-11-12 11:44:17', 1, '2020110900006'),
-(8, 'Biaya Administrasi', 5000, '2020-11-12 12:43:35', 1, '2020111200007');
+(8, 'Biaya Administrasi', 5000, '2020-11-12 12:43:35', 1, '2020111200007'),
+(10, 'Biaya Administrasi', 5000, '2020-11-16 03:29:01', 1, '202011080004'),
+(11, 'Biaya Administrasi', 5000, '2020-11-16 06:19:40', 1, '202011080003'),
+(12, 'Biaya Administrasi', 5000, '2020-11-16 06:26:14', 1, '2020111600008'),
+(13, 'Biaya Administrasi', 5000, '2020-11-18 01:05:37', 1, '2020111800010');
 
 -- --------------------------------------------------------
 
@@ -2394,7 +2558,21 @@ INSERT INTO `t_obat` (`id`, `nama_obat`, `harga`, `satuan`, `jumlah`, `timestamp
 (18, 'Kasa gulung', 3, 'CM', 10, '2020-11-12 10:46:06', 177, '202011080005'),
 (20, 'Wound dressing 10x35 cm', 33000, 'PCS', 34, '2020-11-12 11:25:39', 357, '202011080005'),
 (21, 'Paracetamol syr', 7150, 'BOTOL', 2, '2020-11-12 11:44:33', 524, '2020110900006'),
-(22, 'Slang Nebulezer Dewasa', 45500, 'PCS', 5, '2020-11-12 12:43:55', 352, '2020111200007');
+(22, 'Slang Nebulezer Dewasa', 45500, 'PCS', 5, '2020-11-12 12:43:55', 352, '2020111200007'),
+(23, 'Xylestesin', 15700, 'PCS', 1, '2020-11-15 06:17:32', 1, '2020111200007'),
+(26, 'Prenatin DF', 3600, 'TABLET', 3, '2020-11-15 06:17:52', 1809, '2020111200007'),
+(27, 'Xylestesin', 15700, 'PCS', 5, '2020-11-15 06:17:58', 1, '2020111200007'),
+(28, 'Catheter Nelaton 14', 5300, 'PCS', 4, '2020-11-15 06:18:07', 21, '2020111200007'),
+(29, 'Winner Transpraent Film Dreassing 6x7', 4100, 'PCS', 4, '2020-11-15 06:18:12', 358, '2020111200007'),
+(30, 'Prenatin DF', 3600, 'TABLET', 5, '2020-11-15 06:18:20', 1809, '2020111200007'),
+(31, 'Paracetamol inf', 64350, 'BOTOL', 1, '2020-11-16 03:29:28', 484, '202011080004'),
+(32, 'Combantrin', 7400, 'TABLET', 4, '2020-11-16 03:29:35', 1763, '202011080004'),
+(33, 'Arm Sling L', 42000, 'PCS', 6, '2020-11-16 03:29:42', 10, '202011080004'),
+(34, 'Arm Sling M', 42000, 'PCS', 2, '2020-11-16 06:26:03', 7, '2020111600008'),
+(35, 'Prenatin DF', 3600, 'TABLET', 4, '2020-11-16 06:26:08', 1809, '2020111600008'),
+(36, 'Abbocath No.14', 28200, 'PCS', 7, '2020-11-18 01:05:54', 3, '2020111800010'),
+(37, 'Paracetamol inf', 64350, 'BOTOL', 2, '2020-11-18 01:06:01', 484, '2020111800010'),
+(38, 'Abbocath No.14', 28200, 'PCS', 8, '2020-11-18 03:28:41', 3, '202011080003');
 
 -- --------------------------------------------------------
 
@@ -2421,7 +2599,16 @@ INSERT INTO `t_tindakan` (`id`, `nama_tindakan`, `tarif`, `timestamp`, `b_tindak
 (17, 'Pemeriksaan Dokter', 2000, '2020-11-12 11:44:22', 67, '2020110900006'),
 (18, 'Injeksi IM 5 1x', 5000, '2020-11-12 12:43:44', 84, '2020111200007'),
 (19, 'Pemeriksaan Dokter', 2000, '2020-11-14 12:18:22', 67, '202011080001'),
-(20, 'Irigasi Telinga 2', 14000, '2020-11-14 17:34:55', 95, '2020110900006');
+(20, 'Irigasi Telinga 2', 14000, '2020-11-14 17:34:55', 95, '2020110900006'),
+(21, 'Imunisasi BCG', 5000, '2020-11-15 06:18:32', 77, '2020111200007'),
+(22, 'Memasang Catheter 10', 15000, '2020-11-15 06:18:35', 96, '2020111200007'),
+(23, 'Corpal  telinga 1', 15000, '2020-11-16 03:29:08', 69, '202011080004'),
+(24, 'Periksa Dalam', 15000, '2020-11-16 03:29:13', 124, '202011080004'),
+(25, 'Membuka jahitan 5', 25000, '2020-11-16 03:29:17', 110, '202011080004'),
+(26, 'Pemeriksaan Dokter', 2000, '2020-11-16 06:19:43', 67, '202011080003'),
+(27, 'Pemeriksaan Dokter', 2000, '2020-11-16 06:26:18', 67, '2020111600008'),
+(28, 'Pemeriksaan Dokter', 2000, '2020-11-18 01:05:43', 67, '2020111800010'),
+(29, 'Corpal  telinga 2', 15000, '2020-11-18 01:05:46', 70, '2020111800010');
 
 -- --------------------------------------------------------
 
@@ -2451,6 +2638,13 @@ INSERT INTO `user` (`id`, `username`, `password`, `nama`, `role_id`, `is_active`
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `billing_transaction`
+--
+ALTER TABLE `billing_transaction`
+  ADD PRIMARY KEY (`no_billing`),
+  ADD KEY `fk_kuitansi_transaction_klinik_transaction1_idx` (`klinik_transaction_id`);
 
 --
 -- Indexes for table `b_admin`
@@ -2495,6 +2689,29 @@ ALTER TABLE `klinik_transaction`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_klinik_transaction_data_pasien1_idx` (`medrek`),
   ADD KEY `fk_klinik_transaction_user1_idx1` (`user_id`);
+
+--
+-- Indexes for table `log_print_billing`
+--
+ALTER TABLE `log_print_billing`
+  ADD PRIMARY KEY (`id_log`),
+  ADD KEY `no_billing` (`no_billing`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `m_status_pembayaran`
+--
+ALTER TABLE `m_status_pembayaran`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pemeriksaan_klinik`
+--
+ALTER TABLE `pemeriksaan_klinik`
+  ADD PRIMARY KEY (`klinik_transaction_id`),
+  ADD UNIQUE KEY `klinik_transaction_id_UNIQUE` (`klinik_transaction_id`),
+  ADD KEY `fk_data_medis_klinik_transaction1_idx` (`klinik_transaction_id`),
+  ADD KEY `fk_pemeriksaan_klinik_dokter1_idx` (`dokter_id`);
 
 --
 -- Indexes for table `status`
@@ -2555,6 +2772,12 @@ ALTER TABLE `b_tindakan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
+-- AUTO_INCREMENT for table `log_print_billing`
+--
+ALTER TABLE `log_print_billing`
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+
+--
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
@@ -2564,19 +2787,19 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT for table `t_admin`
 --
 ALTER TABLE `t_admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `t_obat`
 --
 ALTER TABLE `t_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `t_tindakan`
 --
 ALTER TABLE `t_tindakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -2589,11 +2812,30 @@ ALTER TABLE `user`
 --
 
 --
+-- Constraints for table `billing_transaction`
+--
+ALTER TABLE `billing_transaction`
+  ADD CONSTRAINT `fk_kuitansi_transaction_klinik_transaction1` FOREIGN KEY (`klinik_transaction_id`) REFERENCES `klinik_transaction` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `klinik_transaction`
 --
 ALTER TABLE `klinik_transaction`
   ADD CONSTRAINT `fk_klinik_transaction_data_pasien1` FOREIGN KEY (`medrek`) REFERENCES `data_pasien` (`medrek`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_klinik_transaction_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `log_print_billing`
+--
+ALTER TABLE `log_print_billing`
+  ADD CONSTRAINT `log_print_billing_ibfk_1` FOREIGN KEY (`no_billing`) REFERENCES `billing_transaction` (`no_billing`),
+  ADD CONSTRAINT `log_print_billing_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `pemeriksaan_klinik`
+--
+ALTER TABLE `pemeriksaan_klinik`
+  ADD CONSTRAINT `fk_data_medis_klinik_transaction1` FOREIGN KEY (`klinik_transaction_id`) REFERENCES `klinik_transaction` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `t_admin`

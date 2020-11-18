@@ -10,6 +10,7 @@ function colorBadge($status)
   }
 }
 
+var_dump($detail_billing);
 ?>
 <style>
   .scroll {
@@ -221,7 +222,7 @@ function colorBadge($status)
               <hr>
               <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModal">Kembalikan ke antrean</button>
             <?php else : ?>
-              <a href="" class="btn btn-primary btn-block">Cetak Kwitansi</a>
+              <a href="<?= base_url('Exportpdf/kwitansi/' . encrypt_url($detail_billing['no_billing'])) ?>" class="btn btn-primary btn-block">Cetak Kwitansi</a>
             <?php endif; ?>
           </div>
         </div>

@@ -135,4 +135,31 @@ class Billing extends CI_Controller
     $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Billing sudah disimpan, silahkan cetak kwitansi</div>');
     redirect('Billing/billing_detail/' . encrypt_url($nobilling));
   }
+
+  public function test()
+  {
+    $nobilling = 'IBK/2011/00008';
+    $lastlog = $this->db->query("SELECT 
+    timestamp 
+    FROM log_print_billing 
+    WHERE no_billing = '" . $nobilling . "'
+    ORDER BY id_log DESC
+    LIMIT 1")->row_array();
+    $lastlog = $lastlog['timestamp'];
+    $now = date('Y-m-d H:i:s');
+    if ($lastlog == NULL) {
+      $lastlog = $now;
+    }
+
+
+    /**
+     * add log jika 
+     *  */
+
+
+    $diff = (strtotime($now) - strtotime($lastlog)) / 60;
+    if ($diff < 1) {
+      echo "cetak log";
+    }
+  }
 }

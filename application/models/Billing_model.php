@@ -106,4 +106,20 @@ class Billing_model extends CI_Model
 
     $this->db->update('billing_transaction', $data, ['no_billing' => $nobilling]);
   }
+
+  public function addPrintLog($nobilling, $jenis)
+  {
+    $data = [
+      'no_billing' => $nobilling,
+      'jenis_dokumen' => $jenis,
+      'user_id' => $this->session->userdata('user_id')
+    ];
+
+    $this->db->insert('log_print_billing', $data);
+  }
+
+  public function getBillingCounter($nobilling, $jenis)
+  {
+    return $this->db->get_where('log_print_billing', ['no_billing' => $nobilling, 'jenis_dokumen' => $jenis])->num_rows();
+  }
 }
