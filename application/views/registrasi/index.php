@@ -21,7 +21,6 @@
           <div class="row">
             <div class="col">
               <?php if (count($search_result) > 0) : ?>
-
                 <table class="table table-responsive">
                   <thead>
                     <tr>

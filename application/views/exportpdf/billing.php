@@ -194,7 +194,7 @@
           <th colspan="5">Rincian Obat & Alkes</th>
         </tr>
         <tr>
-          <th>#</th>
+          <th width="15px">#</th>
           <th>Obat & Alkes</th>
           <th>Harga</th>
           <th>Jumlah</th>

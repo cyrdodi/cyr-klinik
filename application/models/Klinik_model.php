@@ -9,7 +9,22 @@ class Klinik_model extends CI_Model
 
   public function getDetailAntrean($reg)
   {
-    return $this->db->get_where('klinik_transaction', ['id' => $reg])->row_array();
+
+    return $this->db->query(
+      "SELECT 
+        kt.id,
+        kt.tgl_berobat,
+        kt.medrek,
+        kt.user_id,
+        cara_bayar.pembayaran,
+        kt.cara_bayar,
+        kt.status,
+        m_klinik.nama_klinik
+      FROM klinik_transaction AS kt
+      JOIN cara_bayar ON cara_bayar.id = kt.cara_bayar
+      JOIN m_klinik ON m_klinik.klinik_id = kt.klinik_id
+      WHERE kt.id = '" . $reg . "'"
+    )->row_array();
   }
 
   public function getDetailPasien($mr)
@@ -25,10 +40,12 @@ class Klinik_model extends CI_Model
         kt.medrek,
         dp.nama_lengkap,
         dp.alamat,
-        cara_bayar.pembayaran
+        cara_bayar.pembayaran,
+        m_klinik.nama_klinik
       FROM klinik_transaction AS kt
       JOIN data_pasien AS dp ON dp.medrek = kt.medrek
       JOIN cara_bayar ON cara_bayar.id = kt.cara_bayar
+      JOIN m_klinik ON m_klinik.klinik_id = kt.klinik_id
       WHERE kt.status = '1'
         "
     )->result_array();

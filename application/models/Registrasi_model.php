@@ -96,7 +96,8 @@ class Registrasi_model extends CI_Model
       'tgl_berobat' => $this->input->post('tgl_berobat', TRUE),
       'cara_bayar' => $this->input->post('caraBayar', TRUE),
       'user_id' => $this->session->userdata('user_id'),
-      'status' => 1
+      'status' => 1,
+      'klinik_id' => $this->input->post('klinik', TRUE)
     ];
 
     $this->db->insert('klinik_transaction', $data);

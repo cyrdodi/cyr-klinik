@@ -1,54 +1,80 @@
 <?php
-$totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['total']
+$totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['total'];
 ?>
 <div class="row">
   <div class="col">
-    <div class="font-weight-bold text-lg">Proses Input Klinik</div>
+    <div class="font-weight-bold text-lg"><?= $detail_antrean['nama_klinik'] ?></div>
     <div class="mb-4"></div>
     <?= $this->session->flashdata('msg') ?>
   </div>
+  <div class="col-auto">
+    <nav aria-label="breadcrumb ">
+      <ol class="breadcrumb bg-light">
+        <li class="breadcrumb-item"><a href="<?= base_url('Klinik') ?>">Daftar Antrean Klinik</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Proses Klinik</li>
+      </ol>
+    </nav>
+  </div>
 </div>
 <div class="row">
-  <div class="col-lg-6 mb-4">
-    <div class="card shadow  h-100">
-      <div class="card-body">
-        <div class="row no-gutters align-items-center">
-          <div class="col">
-            <h4>Biodata Pasien</h4>
-          </div>
-          <div class="col-auto">
-            <i class="far fa-id-card fa-2x text-gray-300"></i>
+  <div class="col-lg-6">
+    <div class="row">
+      <div class="col ">
+        <div class="card shadow mb-4">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col">
+                <h4>Biodata Pasien</h4>
+              </div>
+              <div class="col-auto">
+                <i class="far fa-id-card fa-2x text-gray-300"></i>
+              </div>
+            </div>
+            <div class="text-sm font-weight-bold text-gray-500">
+              # <?= $detail_antrean['id'] ?>
+              <div class="badge badge-primary ml-2 my-2 float-right"><?= $detail_antrean['pembayaran'] ?></div>
+            </div>
+            <table class="table">
+              <tr>
+                <td>Medrek</td>
+                <td><?= $pasien['medrek'] ?></td>
+              </tr>
+              <tr>
+                <td>Nama</td>
+                <td><?= $pasien['nama_lengkap'] ?></td>
+              </tr>
+              <tr>
+                <td>JK</td>
+                <td><?= $pasien['jk'] == 'l' ? 'Laki-laki' : 'Perempuan' ?></td>
+              </tr>
+              <tr>
+                <td>TTL</td>
+                <td><?= $pasien['tempat_lahir'] . ', ' . formatTanggal($pasien['tgl_lahir']) ?></td>
+              </tr>
+              <tr>
+                <td>Umur</td>
+                <td><?= umur($pasien['tgl_lahir']) ?></td>
+              </tr>
+              <tr>
+                <td>Alamat</td>
+                <td><?= $pasien['alamat'] . ', ' . $pasien['kelurahan'] . ', ' . $pasien['kecamatan'] . ', ' . $pasien['kabupaten'] . ', ' . $pasien['provinsi'] ?></td>
+              </tr>
+            </table>
           </div>
         </div>
-        <div class="text-sm font-weight-bold text-gray-500"># <?= $detail_antrean['id'] ?></div>
-        <table class="table">
-          <tr>
-            <td>Medrek</td>
-            <td><?= $pasien['medrek'] ?></td>
-          </tr>
-          <tr>
-            <td>Nama</td>
-            <td><?= $pasien['nama_lengkap'] ?></td>
-          </tr>
-          <tr>
-            <td>JK</td>
-            <td><?= $pasien['jk'] == 'l' ? 'Laki-laki' : 'Perempuan' ?></td>
-          </tr>
-          <tr>
-            <td>TTL</td>
-            <td><?= $pasien['tempat_lahir'] . ', ' . formatTanggal($pasien['tgl_lahir']) ?></td>
-          </tr>
-          <tr>
-            <td>Umur</td>
-            <td><?= umur($pasien['tgl_lahir']) ?></td>
-          </tr>
-          <tr>
-            <td>Alamat</td>
-            <td><?= $pasien['alamat'] . ', ' . $pasien['kelurahan'] . ', ' . $pasien['kecamatan'] . ', ' . $pasien['kabupaten'] . ', ' . $pasien['provinsi'] ?></td>
-          </tr>
-        </table>
       </div>
     </div>
+    <div class="row">
+      <div class="col">
+        <div class="card shadow mb-4 h-100">
+          <div class="card-body">
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#carabayarmodal">Ubah cara bayar pasien</button>
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#batalmodal">Batalkan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
   <div class="col-lg-6 mb-4">
     <div class="card shadow h-100">
@@ -282,6 +308,104 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
     </div>
   </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="carabayarmodal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ubah cara bayar pasien</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form action="<?= base_url('Klinik/ubah_cara_bayar') ?>" method="get">
+            <div class="form-group">
+              <label for="carabayar">Cara bayar</label>
+              <select class="form-control" name="carabayar" id="carabayar">
+                <option value="p1" <?= $detail_antrean['cara_bayar'] == 'p1' ? 'selected' : '' ?>>Bpjs Kesehatan</option>
+                <option value="p2" <?= $detail_antrean['cara_bayar'] == 'p2' ? 'selected' : '' ?>>Asuransi Lain</option>
+                <option value="p3" <?= $detail_antrean['cara_bayar'] == 'p3' ? 'selected' : '' ?>>Umum/Pribadi</option>
+              </select>
+              <input type="text" value="<?= $detail_antrean['id'] ?>" name="noreg" hidden>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-primary">Ubah</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="batalmodal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Batal Antrean Klinik</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div id="batalcontent">
+            <div class="alert alert-warning">Sebelum membatalkan antrean klinik, hapus dulu semua item biaya dan obat</div>
+          </div>
+          <table class="table">
+            <tr>
+              <td>Administrasi</td>
+              <td>
+                <?= empty($l_admin) == TRUE ? '<i class="fas fa-check "></i>' : '<i class="fas fa-times    "></i>' ?>
+              </td>
+            </tr>
+            <tr>
+              <td>Tindakan</td>
+              <td>
+                <?= empty($l_tindakan) == TRUE ? '<i class="fas fa-check "></i>' : '<i class="fas fa-times    "></i>' ?>
+              </td>
+            </tr>
+            <tr>
+              <td>Obat</td>
+              <td><?= empty($l_obat) == TRUE ? '<i class="fas fa-check "></i>' : '<i class="fas fa-times    "></i>' ?></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <?php if ($deleteable) : ?>
+          <a href="<?= base_url('Klinik/batalkan_antrean/' . encrypt_url($detail_antrean['id'])) ?>" type="button" class="btn btn-primary">Batalkan Antrean</a>
+        <?php endif; ?>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#exampleModal').on('show.bs.modal', event => {
+    var button = $(event.relatedTarget);
+    var modal = $(this);
+    // Use above variables to manipulate the DOM
+
+  });
+</script>
+
+<script>
+  $('#exampleModal').on('show.bs.modal', event => {
+    var button = $(event.relatedTarget);
+    var modal = $(this);
+    // Use above variables to manipulate the DOM
+
+  });
+</script>
 
 <script>
   var biaya = <?= $totalall ?>;

@@ -70,7 +70,7 @@ class Registrasi extends CI_Controller
     $mr = decrypt_url($mr);
     $data['title'] = 'Pendaftaran';
     $data['pasien'] = $this->Registrasi_model->getDataPasien($mr);
-
+    $data['l_klinik'] = $this->db->get('m_klinik')->result();
     /**
      * Pasien tidak bisa didaftarkan jika:
      * - Masih dalam antrean aktif 

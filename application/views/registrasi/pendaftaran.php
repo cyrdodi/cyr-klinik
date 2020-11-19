@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col">
-    <div class="card shadow">
+    <div class="card shadow mb-4">
       <div class="card-body">
         <h3>Pendaftaran</h3>
         <hr>
@@ -94,38 +94,47 @@
                 </tr>
               </table>
             </div>
-            <div class="col-lg-4">
-              <div class="card border-left-primary shadow">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col">
-                      <div class="text-sm font-weight-bold text-primary">Proses Pendaftaran</div>
-                    </div>
-                  </div>
-                  <form action="" method="post">
-                    <input type="text" name="medrek" value="<?= $pasien['medrek'] ?>" hidden>
-                    <input type="text" name="user_id" value="<?= $this->session->userdata('user_id') ?>" hidden>
-                    <div class="form-group">
-                      <label for="tanggal">Tanggal Berobat</label>
-                      <input type="date" class="form-control" name="tgl_berobat" value="<?= date('Y-m-d') ?>" readonly>
-                    </div>
-                    <div class="form-group">
-                      <label for="penjamin">Cara Bayar</label>
-                      <select name="caraBayar" id="caraBayar" class="form-control">
-                        <option value="p1">BPJS Kesehatan</option>
-                        <option value="p2">Asuransi Lain</option>
-                        <option value="p3">Umum / Pribadi</option>
-                      </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Daftar</button>
-                  </form>
-                </div>
-              </div>
-            </div>
+
           </div>
 
           <hr>
         <?php endif; ?>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <div class="text-sm font-weight-bold text-primary">Proses Pendaftaran</div>
+          </div>
+        </div>
+        <form action="" method="post">
+          <input type="text" name="medrek" value="<?= $pasien['medrek'] ?>" hidden>
+          <input type="text" name="user_id" value="<?= $this->session->userdata('user_id') ?>" hidden>
+          <div class="form-group">
+            <label for="tanggal">Tanggal Berobat</label>
+            <input type="date" class="form-control" name="tgl_berobat" value="<?= date('Y-m-d') ?>" readonly>
+          </div>
+          <div class="form-group">
+            <label for="klinik">Klinik</label>
+            <select class="form-control" name="klinik" id="klinik">
+              <?php foreach ($l_klinik as $klinik) : ?>
+                <option value="<?= $klinik->klinik_id ?>"><?= $klinik->nama_klinik ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="penjamin">Cara Bayar</label>
+            <select name="caraBayar" id="caraBayar" class="form-control">
+              <option value="p1">BPJS Kesehatan</option>
+              <option value="p2">Asuransi Lain</option>
+              <option value="p3">Umum / Pribadi</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Daftar</button>
+        </form>
       </div>
     </div>
   </div>

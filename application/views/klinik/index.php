@@ -1,14 +1,18 @@
 <div class="row">
+  <div class="col align-self-center">
+    <div class="font-weight-bold mb-4 text-uppercase ">daftar antrean klinik</div>
+  </div>
+</div>
+<div class="row">
   <div class="col">
     <div class="card shadow-sm">
       <div class="card-body">
-        <h3>Daftar Antrean Klinik</h3>
-        <hr>
         <?= $this->session->flashdata('msg') ?>
         <table class="table" id="myTable">
           <thead>
             <tr>
-              <th>No</th>
+              <th>#</th>
+              <th>Klinik</th>
               <th>MR</th>
               <th>Register</th>
               <th>Nama</th>
@@ -22,6 +26,7 @@
             <?php foreach ($daftar_pasien as $pasien) : ?>
               <tr>
                 <td><?= $i ?></td>
+                <td><?= $pasien['nama_klinik'] ?></td>
                 <td><?= $pasien['medrek'] ?></td>
                 <td><?= $pasien['id'] ?></td>
                 <td><?= $pasien['nama_lengkap'] ?></td>
@@ -39,13 +44,3 @@
     </div>
   </div>
 </div>
-
-<div class="form-group">
-  <label for=""></label>
-  <input type="text" class="form-control" name="">
-</div>
-<script>
-  $(document).ready(function() {
-    $('#myTable').DataTable();
-  })
-</script>

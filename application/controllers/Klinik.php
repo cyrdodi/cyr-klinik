@@ -31,6 +31,9 @@ class Klinik extends CI_Controller
     $data['pasien'] = $this->Klinik_model->getDetailPasien($data['detail_antrean']['medrek']);
 
     // prevent access jika status selain antrean
+    // 1 = Antrean
+    // 2 = Selesai
+    // 3 = Batal
     if ($data['detail_antrean']['status'] != 1) {
       $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">Pasien bukan dalam antrean</div>');
       redirect('Klinik');
@@ -44,7 +47,17 @@ class Klinik extends CI_Controller
     $data['rekap_tindakan'] = $this->Klinik_model->getRekapTindakan($reg);
     $data['rekap_obat'] = $this->Klinik_model->getRekapObat($reg);
 
-
+    // check eligible for delete
+    $data['deleteable'] = FALSE;
+    if (empty($data['l_admin'])) {
+      if (empty($data['l_tindakan'])) {
+        if (empty($data['l_obat'])) {
+          $data['deleteable'] = TRUE;
+        }
+      }
+    }
+    var_dump($data['deleteable']);
+    var_dump($data['l_obat']);
     $this->load->view('templates/header', $data);
     $this->load->view('klinik/proses/index', $data);
     $this->load->view('templates/footer');
@@ -168,6 +181,32 @@ class Klinik extends CI_Controller
     $nobilling = $this->Klinik_model->insertBilling($reg);
 
     redirect('Billing/billing_detail/' . encrypt_url($nobilling));
+  }
+
+  public function ubah_cara_bayar()
+  {
+    $get = $this->input->get();
+
+    $data = [
+      'cara_bayar' => $get['carabayar'],
+    ];
+
+    $this->db->update('Klinik_transaction', $data, ['id' => $get['noreg']]);
+
+    $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Cara bayar berhasil dirubah menjadi ' . $get['carabayar'] . '</div>');
+    redirect('Klinik/proses_klinik/' . encrypt_url($get['noreg']));
+  }
+
+  public function batalkan_antrean($reg)
+  {
+    $reg = decrypt_url($reg);
+    $data = [
+      'status' => '3'
+    ];
+
+    $this->db->update('klinik_transaction', $data, ['id' => $reg]);
+    $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Antrean berhasil dibatalkan</div>');
+    redirect('Klinik');
   }
 
   // ajax
