@@ -28,7 +28,7 @@
           </div>
         <?php else : ?>
           <div class="row">
-            <div class="col-lg-8">
+            <div class="col">
               <table class="table table-responsive">
                 <tr>
                   <th>Medrek</th>

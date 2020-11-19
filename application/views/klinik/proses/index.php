@@ -381,7 +381,7 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <?php if ($deleteable) : ?>
+        <?php if ($deletable) : ?>
           <a href="<?= base_url('Klinik/batalkan_antrean/' . encrypt_url($detail_antrean['id'])) ?>" type="button" class="btn btn-primary">Batalkan Antrean</a>
         <?php endif; ?>
       </div>
