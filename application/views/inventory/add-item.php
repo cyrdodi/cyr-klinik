@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col align-self-center">
-    <div class="font-weight-bold mb-4 uppercase">Add Item</div>
+    <div class="font-weight-bold mb-4 text-uppercase">Add Item</div>
   </div>
   <div class="col-auto">
     <nav aria-label="breadcrumb ">
       <ol class="breadcrumb bg-light">
-        <li class="breadcrumb-item"><a href="<?= base_url('Billing') ?>">Inventory</a></li>
+        <li class="breadcrumb-item"><a href="<?= base_url('Inventory') ?>">Inventory</a></li>
         <li class="breadcrumb-item active" aria-current="page">Add Item</li>
       </ol>
     </nav>
@@ -20,7 +20,7 @@
             <form action="" method="post">
               <div class="form-group">
                 <label for="nama_item">Nama Item</label>
-                <input type="text" class="form-control" name="nama_item" id="nama_item" value="<?= set_value('nama_item') ?>">
+                <input type="text" class="form-control" name="nama_item" id="nama_item" value="<?= set_value('nama_item') ?>" placeholder="Nama Obat / Alkes">
                 <?= form_error('nama_item', '<small class="text-danger pl-3">', '</small>'); ?>
               </div>
               <div class="form-group">
@@ -41,7 +41,7 @@
               </div>
               <div class="form-group">
                 <label for="harga">Harga</label>
-                <input type="number" class="form-control" name="harga" value="<?= set_value('harga') ?>">
+                <input type="number" class="form-control" name="harga" value="<?= set_value('harga') ?>" placeholder="Harga jual">
                 <?= form_error('harga', '<small class="text-danger pl-3">', '</small>'); ?>
               </div>
               <button class="btn btn-primary float-right" type="submit"><i class="fa fa-check" aria-hidden="true"></i> Simpan</button>

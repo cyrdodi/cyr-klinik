@@ -1,6 +1,12 @@
+<style>
+  .scroll {
+    max-height: 500px;
+    overflow-y: auto;
+  }
+</style>
 <div class="row">
   <div class="col align-self-center">
-    <div class="font-weight-bold mb-4 uppercase">Inventory</div>
+    <div class="font-weight-bold mb-4 text-uppercase">Inventory</div>
   </div>
   <div class="col-auto">
     <nav aria-label="breadcrumb ">
@@ -26,71 +32,53 @@
             </form>
           </div>
           <div class="col-auto">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus    "></i> Item</button>
+            <a href="<?= base_url('Inventory/add_item') ?>" class="btn btn-primary"><i class="fas fa-plus    "></i> Item</a>
           </div>
         </div>
-        <table class="table table-striped">
-          <thead>
-            <th>#</th>
-            <th>Nama Obat & Alkes</th>
-            <th>Satuan</th>
-            <th>Jenis Obat</th>
-            <th>Stok</th>
-            <th>Harga</th>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
+        <?= $this->session->flashdata('msg') ?>
+        <div class="row">
+          <div class="col scroll">
+            <?php if (count($search_result) > 0) : ?>
+              <table class="table table-striped table-sm">
+                <thead>
+                  <th>#</th>
+                  <th>Nama Obat & Alkes</th>
+                  <th>Satuan</th>
+                  <th>Jenis Obat</th>
+                  <th>Stok</th>
+                  <th>Harga</th>
+                  <th>Action</th>
+                </thead>
+                <tbody>
+                  <?php $i = 1 ?>
+                  <?php foreach ($search_result as $result) : ?>
+                    <tr>
+                      <td><?= $i ?></td>
+                      <td><?= $result->nama_obat ?></td>
+                      <td><?= $result->satuan ?></td>
+                      <td><?= $result->jenis_obat ?></td>
+                      <td><?= $result->stok ?></td>
+                      <td><?= number_format($result->harga) ?></td>
+                      <td>
+                        <a href="" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt    "></i></a>
+                      </td>
+                    </tr>
+                    <?php $i++ ?>
+                  <?php endforeach; ?>
+                </tbody>
+              </table>
+              <div class="text-secondary">Search limit 50 records</div>
+          </div>
+        <?php else : ?>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="alert alert-warning" role="alert">
+                <h4><i class="fas fa-exclamation-circle"></i> Item tidak ditemukan</h4>
+              </div>
+            </div>
+          </div>
+        <?php endif; ?>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="" method="post">
-          <div class="form-group">
-            <label for="nama_item">Nama Item</label>
-            <input type="text" class="form-control" name="nama_item" id="nama_item" value="<?= set_value('nama_item') ?>">
-            <?= form_error('nama_item', '<small class="text-danger pl-3">', '</small>'); ?>
-          </div>
-          <div class="form-group">
-            <label for="satuan">Satuan</label>
-            <select name="satuan" id="satuan" class="form-control">
-              <?php foreach ($l_satuan as $satuan) : ?>
-                <option value="<?= $satuan['nama_satuan'] ?>" <?= set_select('satuan', $satuan) ?>><?= $satuan['nama_satuan'] ?></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="jenis">Jenis</label>
-            <select name="jenis" id="jenis" class="form-control">
-              <?php foreach ($l_jenis as $jenis) : ?>
-                <option value="<?= $jenis['nama_jenis'] ?>" <?= set_select('jenis', $jenis) ?>><?= $jenis['nama_jenis'] ?></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="harga">Harga</label>
-            <input type="number" class="form-control" name="harga" value="<?= set_value('harga') ?>">
-            <?= form_error('harga', '<small class="text-danger pl-3">', '</small>'); ?>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Tambahkan</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>

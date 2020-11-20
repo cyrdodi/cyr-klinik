@@ -132,7 +132,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Daftar Obat & Alkes</h6>
             <a class="collapse-item" href="<?= base_url('Inventory') ?>">Stock</a>
-            <a class="collapse-item" href="<?= base_url('Billing/pencarian') ?>"><i class="fas fa-search"></i> Cari Pasien</a>
+            <a class="collapse-item" href="<?= base_url('Inventory/transaksi') ?>">Transaksi</a>
           </div>
         </div>
       </li>
