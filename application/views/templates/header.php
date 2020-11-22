@@ -132,7 +132,8 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Daftar Obat & Alkes</h6>
             <a class="collapse-item" href="<?= base_url('Inventory') ?>">Stock</a>
-            <a class="collapse-item" href="<?= base_url('Inventory/transaksi') ?>">Transaksi</a>
+            <a class="collapse-item" href="<?= base_url('Inventory/stock_in') ?>">Stock In</a>
+            <a class="collapse-item" href="<?= base_url('Inventory/stock_out') ?>">Stock Out</a>
           </div>
         </div>
       </li>

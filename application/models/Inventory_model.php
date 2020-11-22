@@ -29,14 +29,22 @@ class Inventory_model extends CI_Model
   {
     $post = $this->input->post();
     $data = [
-      'nama_obat' => $post['nama_item'],
+      'nama_obat' => $this->input->post('nama_item'),
       'satuan' => $post['satuan'],
       'jenis_obat' => $post['jenis'],
       'stok' => 0,
       'harga' => $post['harga'],
-      'is_active' => '1'
+      'is_active' => '1',
     ];
 
     $this->db->insert('b_obat', $data);
+  }
+
+  public function insertStockIn()
+  {
+    $post = $this->input->post(true);
+    $data = [
+      'b_obat_id' => ''
+    ];
   }
 }

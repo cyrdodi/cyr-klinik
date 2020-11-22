@@ -8,13 +8,13 @@
         <form action="" method="post">
           <div class="form-group">
             <label for="obat">Obat & Alkes</label>
-            <select name="obat" id="obat" class="form-control" autofocus>
+            <select name="obat" id="obat" class="form-control" autofocus required>
             </select>
             <?= form_error('obat', '<small class="text-danger pl-3">', '</small>') ?>
           </div>
           <div class="form-group">
             <label for="jumlah">Jumlah</label>
-            <input type="number" class="form-control" id="jumlah" name="jumlah" min="0" max="">
+            <input type="number" class="form-control" id="jumlah" name="jumlah" min="1" max="" required>
             <?= form_error('jumlah', '<small class="text-danger pl-3">', '</small>') ?>
           </div>
           <div id="warning"></div>

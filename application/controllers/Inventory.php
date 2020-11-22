@@ -8,6 +8,7 @@ class Inventory extends CI_Controller
     parent::__construct();
 
     $this->load->model('Inventory_model', 'inventory_m');
+    $this->load->model('Klinik_model');
   }
 
   public function index()
@@ -48,12 +49,56 @@ class Inventory extends CI_Controller
     }
   }
 
-  public function transaksi()
+  public function stock_in()
   {
-    $data['title'] = 'Transaksi Item';
+    $data['title'] = 'Stock In';
 
     $this->load->view('templates/header', $data);
-    $this->load->view('inventory/transaksi', $data);
+    $this->load->view('inventory/stock-in', $data);
     $this->load->view('templates/footer');
+  }
+
+  public function stock_out()
+  {
+    $data['title'] = 'Stock In';
+    $data['l_supplier'] = $this->db->get('m_supplier')->result();
+
+    $this->load->view('templates/header', $data);
+    $this->load->view('inventory/stock_in', $data);
+    $this->load->view('templates/footer');
+  }
+
+  public function add_stock_in()
+  {
+    $data['title'] = 'Add Stock In';
+    $data['l_supplier'] = $this->db->get_where('m_supplier', ['is_active' => TRUE])->result_array();
+
+    $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
+    $this->form_validation->set_rules('item', 'Item', 'required');
+    $this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
+    if ($this->form_validation->run() == FALSE) {
+      $this->load->view('templates/header', $data);
+      $this->load->view('inventory/add-stock-in', $data);
+      $this->load->view('templates/footer');
+    } else {
+      $this->inventory_m->insertStockIn();
+    }
+  }
+
+  // ajax
+  public function searchObat()
+  {
+    $searchterm = $this->input->post('searchTerm');
+
+    $response = $this->Klinik_model->getObat($searchterm);
+
+    echo json_encode($response);
+  }
+
+  public function getStok()
+  {
+    $id = $this->input->post('id');
+    $response = $this->db->get_where('b_obat', ['id' => $id])->row_array();
+    echo json_encode($response);
   }
 }

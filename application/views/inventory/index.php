@@ -54,7 +54,7 @@
                   <?php foreach ($search_result as $result) : ?>
                     <tr>
                       <td><?= $i ?></td>
-                      <td><?= $result->nama_obat ?></td>
+                      <td><?= htmlentities($result->nama_obat) ?></td>
                       <td><?= $result->satuan ?></td>
                       <td><?= $result->jenis_obat ?></td>
                       <td><?= $result->stok ?></td>
