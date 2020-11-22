@@ -11,6 +11,7 @@
     </nav>
   </div>
 </div>
+<?= $this->session->flashdata('msg') ?>
 <div class="row">
   <div class="col-lg-4">
     <div class="card shadow mb-4">

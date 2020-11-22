@@ -4,6 +4,7 @@
     overflow-y: auto;
   }
 </style>
+
 <div class="font-weight-bold mb-4">BILLING</div>
 
 <?= $this->session->flashdata('msg') ?>

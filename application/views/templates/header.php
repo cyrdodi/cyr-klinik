@@ -40,6 +40,7 @@
   <script src="<?= base_url('assets/js/select2.min.js') ?>"></script>
   <script src="<?= base_url('assets/js/autocomplete.js') ?>"></script>
 
+
 </head>
 
 <body id="page-top">
@@ -100,9 +101,7 @@
         </a>
         <div id="collapseKlinik" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Proses Klinik:</h6>
             <a class="collapse-item" href="<?= base_url('Klinik') ?>">Antrean Klinik</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
           </div>
         </div>
       </li>
@@ -115,9 +114,7 @@
         </a>
         <div id="collapseBilling" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
             <a class="collapse-item" href="<?= base_url('Billing') ?>">Antrean</a>
-            <a class="collapse-item" href="<?= base_url('Billing/pencarian') ?>"><i class="fas fa-search"></i> Cari Pasien</a>
           </div>
         </div>
       </li>
@@ -130,8 +127,8 @@
         </a>
         <div id="collapseInventory" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Daftar Obat & Alkes</h6>
-            <a class="collapse-item" href="<?= base_url('Inventory') ?>">Stock</a>
+            <a class="collapse-item" href="<?= base_url('Inventory') ?>">Daftar Obat & Alkes</a>
+            <h6 class="collapse-header">Transaksi</h6>
             <a class="collapse-item" href="<?= base_url('Inventory/stock_in') ?>">Stock In</a>
             <a class="collapse-item" href="<?= base_url('Inventory/stock_out') ?>">Stock Out</a>
           </div>
@@ -175,7 +172,7 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $this->session->userdata('nama_akun') ?></span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= cetak($this->session->userdata('nama_akun')) ?></span>
                 <i class="fas fa-user-circle"></i>
               </a>
               <!-- Dropdown - User Information -->

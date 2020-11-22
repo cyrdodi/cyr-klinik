@@ -52,37 +52,67 @@ class Inventory extends CI_Controller
   public function stock_in()
   {
     $data['title'] = 'Stock In';
+    $data['l_stok_in'] = $this->inventory_m->getTStockIn();
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('inventory/stock-in', $data);
-    $this->load->view('templates/footer');
+    $data['l_supplier'] = $this->db->get_where('m_supplier', ['is_active' => TRUE])->result_array();
+    $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
+    $this->form_validation->set_rules('item', 'Item', 'required');
+    $this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
+    if ($this->form_validation->run() == FALSE) {
+      $this->load->view('templates/header', $data);
+      $this->load->view('inventory/stock-in', $data);
+      $this->load->view('templates/footer');
+    } else {
+      $this->inventory_m->insertStockIn();
+      $this->inventory_m->updateStock($this->input->post('item', true), 'in', $this->input->post('jumlah'));
+      $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Stock sudah ditambahkan</div>');
+      redirect('Inventory/stock_in');
+    }
   }
 
   public function stock_out()
   {
     $data['title'] = 'Stock In';
-    $data['l_supplier'] = $this->db->get('m_supplier')->result();
-
-    $this->load->view('templates/header', $data);
-    $this->load->view('inventory/stock_in', $data);
-    $this->load->view('templates/footer');
-  }
-
-  public function add_stock_in()
-  {
-    $data['title'] = 'Add Stock In';
-    $data['l_supplier'] = $this->db->get_where('m_supplier', ['is_active' => TRUE])->result_array();
+    $data['l_alasan'] = $this->db->get('m_alasan_item_out')->result_array();
+    $data['l_stock_out'] = $this->inventory_m->getTStockOut();
 
     $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
     $this->form_validation->set_rules('item', 'Item', 'required');
     $this->form_validation->set_rules('jumlah', 'Jumlah', 'required');
     if ($this->form_validation->run() == FALSE) {
       $this->load->view('templates/header', $data);
-      $this->load->view('inventory/add-stock-in', $data);
+      $this->load->view('inventory/stock-out', $data);
       $this->load->view('templates/footer');
     } else {
-      $this->inventory_m->insertStockIn();
+      $this->inventory_m->insertStockOut();
+      $this->inventory_m->updateStock($this->input->post('item', true), 'out', $this->input->post('jumlah'));
+      $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Stock sudah dikurangi</div>');
+      redirect('Inventory/stock_out');
     }
+  }
+
+  public function add_stock_in()
+  {
+    $data['title'] = 'Add Stock In';
+    $this->load->view('templates/header', $data);
+    $this->load->view('inventory/add-stock-in', $data);
+    $this->load->view('templates/footer');
+  }
+
+  public function delete_stock_in($id, $obat_id, $jumlah)
+  {
+    $this->db->delete('t_inventory_in', ['id' => $id]);
+    $this->inventory_m->updateStock($obat_id, 'out', $jumlah);
+    $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Trasaksi berhasil dihapus</div>');
+    redirect('Inventory/stock_in');
+  }
+
+  public function delete_stock_out($id, $obat_id, $jumlah)
+  {
+    $this->db->delete('t_inventory_out', ['id' => $id]);
+    $this->inventory_m->updateStock($obat_id, 'in', $jumlah);
+    $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Trasaksi berhasil dihapus</div>');
+    redirect('Inventory/stock_out');
   }
 
   // ajax
