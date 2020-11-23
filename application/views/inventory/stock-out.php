@@ -56,7 +56,6 @@
                 <?= form_error('jumlah', '<small class="text-danger pl-3">', '</small>'); ?>
               </div>
               <button class="btn btn-primary float-right" type="submit"><i class="fa fa-check" aria-hidden="true"></i> Simpan</button>
-              <a href="<?= base_url('Inventory/stock_in') ?>" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> Kembali </a>
             </form>
           </div>
         </div>
@@ -66,12 +65,12 @@
   <div class="col-lg-8 mb-4">
     <div class="card shadow mb-4  h-100">
       <div class="card-body ">
-        <div class="row">
+        <div class="row mb-4">
           <div class="col ">
             <h5>Transaksi terakhir</h5>
           </div>
           <div class="col-auto ">
-            <a href="<?= base_url('Inventory/add_stock_in') ?>" class="btn btn-sm btn-primary"><i class="fas fa-search    "></i> Cari berdasarkan tanggal</a>
+            <a href="<?= base_url('Inventory/search_stock_out') ?>" class="btn btn-sm btn-primary"><i class="fas fa-search    "></i> Cari berdasarkan tanggal</a>
           </div>
         </div>
         <div class="row">

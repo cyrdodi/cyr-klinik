@@ -39,6 +39,7 @@
   <script src="<?= base_url('assets/') ?>vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="<?= base_url('assets/js/select2.min.js') ?>"></script>
   <script src="<?= base_url('assets/js/autocomplete.js') ?>"></script>
+  <script type="text/javascript" src="<?= base_url(); ?>assets/js/autoNumeric.min.js"></script>
 
 
 </head>
@@ -119,6 +120,11 @@
         </div>
       </li>
 
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Admin Area
+      </div>
+
       <!-- Nav Item - Inventory Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventory" aria-expanded="true" aria-controls="collapseInventory">
@@ -131,6 +137,18 @@
             <h6 class="collapse-header">Transaksi</h6>
             <a class="collapse-item" href="<?= base_url('Inventory/stock_in') ?>">Stock In</a>
             <a class="collapse-item" href="<?= base_url('Inventory/stock_out') ?>">Stock Out</a>
+          </div>
+        </div>
+      </li>
+      <!-- Nav Item - Tindakan Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTindakan" aria-expanded="true" aria-controls="collapseTindakan">
+          <i class="fas fa-syringe"></i>
+          <span>Tindakan</span>
+        </a>
+        <div id="collapseTindakan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="<?= base_url('Tindakan') ?>">Daftar Tindakan</a>
           </div>
         </div>
       </li>

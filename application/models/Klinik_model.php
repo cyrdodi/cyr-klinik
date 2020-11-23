@@ -113,7 +113,7 @@ class Klinik_model extends CI_Model
 
   public function getObat($searchTerm = "")
   {
-    $fetched_records = $this->db->query("SELECT * FROM b_obat WHERE nama_obat LIKE '%" . $searchTerm . "%' LIMIT 30");
+    $fetched_records = $this->db->query("SELECT * FROM b_obat WHERE nama_obat LIKE '%" . $searchTerm . "%' AND is_active='1' LIMIT 30");
     $obat = $fetched_records->result_array();
 
     // initialize Array with fetched data

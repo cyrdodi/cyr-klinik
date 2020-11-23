@@ -52,7 +52,7 @@
                 <tbody>
                   <?php $i = 1 ?>
                   <?php foreach ($search_result as $result) : ?>
-                    <tr>
+                    <tr style="<?= redRow($result->is_active) ?>"">
                       <td><?= $i ?></td>
                       <td><?= htmlentities($result->nama_obat) ?></td>
                       <td><?= $result->satuan ?></td>
@@ -60,7 +60,7 @@
                       <td><?= $result->stok ?></td>
                       <td><?= number_format($result->harga) ?></td>
                       <td>
-                        <a href="" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt    "></i></a>
+                        <a href=" <?= base_url('Inventory/edit_item/' . $result->id) ?>" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt    "></i></a>
                       </td>
                     </tr>
                     <?php $i++ ?>

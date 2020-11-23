@@ -9,8 +9,9 @@
 - [ ] inventory system
 - [ ] input data medis
 - [ ] data dokter
+- [ ] histori in/out per item
+- [ ] menajemen tindakan medis
+
 
 ## to do
-- tampilkan tabel transaksi stock in/out berdasarkan tanggal
-- edit item di inventory
-- 
+- set autonumeric in modal editTarif

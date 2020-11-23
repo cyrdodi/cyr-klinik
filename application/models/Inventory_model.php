@@ -40,6 +40,20 @@ class Inventory_model extends CI_Model
     $this->db->insert('b_obat', $data);
   }
 
+  public function updateItem()
+  {
+    $post = $this->input->post();
+    $data = [
+      'nama_obat' => $this->input->post('nama_item', TRUE),
+      'satuan' => $post['satuan'],
+      'jenis_obat' => $post['jenis'],
+      'harga' => $post['harga'],
+      'is_active' => $post['aktif'],
+    ];
+
+    $this->db->update('b_obat', $data, ['id' => $post['id']]);
+  }
+
   public function insertStockIn()
   {
 
@@ -118,6 +132,46 @@ class Inventory_model extends CI_Model
       JOIN m_alasan_item_out ON m_alasan_item_out.id = tout.alasan_id
       ORDER BY timestamp DESC
       LIMIT 50"
+    )->result();
+  }
+
+  public function getTStockInByDate($d1, $d2)
+  {
+    return $this->db->query(
+      "SELECT 
+      ti.id,
+      ti.b_obat_id,
+      b_obat.nama_obat,
+      ti.tanggal,
+      m_supplier.nama_supplier,
+      ti.keterangan,
+      ti.jumlah,
+      ti.timestamp
+      FROM t_inventory_in AS ti
+      JOIN b_obat ON b_obat.id = ti.b_obat_id
+      JOIN m_supplier ON m_supplier.id_supplier = ti.m_supplier_id
+      WHERE ti.tanggal  BETWEEN ' $d1 ' AND '$d2'
+      ORDER BY ti.timestamp ASC"
+    )->result();
+  }
+
+  public function getTStockOutByDate($d1, $d2)
+  {
+    return $this->db->query(
+      "SELECT 
+      tout.id,
+      tout.obat_id,
+      b_obat.nama_obat,
+      tout.tanggal,
+      m_alasan_item_out.alasan,
+      tout.keterangan,
+      tout.jumlah,
+      tout.timestamp
+      FROM t_inventory_out AS tout
+      JOIN b_obat ON b_obat.id = tout.obat_id
+      JOIN m_alasan_item_out ON m_alasan_item_out.id = tout.alasan_id
+      WHERE tout.tanggal  BETWEEN ' $d1 ' AND '$d2'
+      ORDER BY tout.timestamp ASC"
     )->result();
   }
 }

@@ -25,3 +25,10 @@ function badgePembayaran($status)
     return '<div class="badge badge-success">Lunas</div>';
   }
 }
+
+function redRow($data)
+{
+  if ($data == '0') {
+    return 'background-color: #ec5858; color: #fff';
+  }
+}

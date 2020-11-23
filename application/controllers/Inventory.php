@@ -44,7 +44,27 @@ class Inventory extends CI_Controller
       $this->load->view('templates/footer');
     } else {
       $this->inventory_m->insertItem();
-      $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Item sudah ditambahkan</div>');
+      $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Item berhasil ditambahkan</div>');
+      redirect('Inventory');
+    }
+  }
+
+  public function edit_item($id)
+  {
+    $data['title'] = 'Add Item';
+    $data['l_satuan'] = $this->db->get('m_obat_satuan')->result_array();
+    $data['l_jenis'] = $this->db->get('m_obat_jenis')->result_array();
+    $data['detail_item'] = $this->db->get_where('b_obat', ['id' => $id])->row_array();
+
+    $this->form_validation->set_rules('nama_item', 'Nama Item', 'required');
+    $this->form_validation->set_rules('harga', 'Harga Jual', 'required');
+    if ($this->form_validation->run() === FALSE) {
+      $this->load->view('templates/header', $data);
+      $this->load->view('inventory/edit-item', $data);
+      $this->load->view('templates/footer');
+    } else {
+      $this->inventory_m->updateItem();
+      $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Item berhasil diupdate</div>');
       redirect('Inventory');
     }
   }
@@ -91,11 +111,45 @@ class Inventory extends CI_Controller
     }
   }
 
-  public function add_stock_in()
+  public function search_stock_in()
   {
-    $data['title'] = 'Add Stock In';
+    $data['title'] = 'Search Stock In';
+
+    $data['is_keyword'] = FALSE;
+
+    $d1 = $this->input->get('d1');
+    $d2 = $this->input->get('d2');
+    // $data['search_result'] = $this->inventory_m->getTStockInByDate($d1, $d2);
+    if ($d1 !== NULL and $d2 !== NULL) {
+      if (strlen($d1) > 0 and strlen($d1) > 0) {
+        $data['is_keyword'] = TRUE;
+        $data['search_result'] = $this->inventory_m->getTStockInByDate($d1, $d2);
+      }
+    }
+
     $this->load->view('templates/header', $data);
-    $this->load->view('inventory/add-stock-in', $data);
+    $this->load->view('inventory/search-stock-in', $data);
+    $this->load->view('templates/footer');
+  }
+
+  public function search_stock_out()
+  {
+    $data['title'] = 'Search Stock Out';
+
+    $data['is_keyword'] = FALSE;
+
+    $d1 = $this->input->get('d1');
+    $d2 = $this->input->get('d2');
+    // $data['search_result'] = $this->inventory_m->getTStockInByDate($d1, $d2);
+    if ($d1 !== NULL and $d2 !== NULL) {
+      if (strlen($d1) > 0 and strlen($d1) > 0) {
+        $data['is_keyword'] = TRUE;
+        $data['search_result'] = $this->inventory_m->getTStockOutByDate($d1, $d2);
+      }
+    }
+
+    $this->load->view('templates/header', $data);
+    $this->load->view('inventory/search-stock-out', $data);
     $this->load->view('templates/footer');
   }
 
