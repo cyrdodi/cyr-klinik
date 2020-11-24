@@ -115,7 +115,7 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
         </a>
         <div class="my-2"></div>
         <div class="my-2"></div>
-        <a href="<?= base_url('Klinik/input_obat/' . encrypt_url($detail_antrean['id'])) ?>" class="btn btn-light btn-icon-split btn-lg d-flex justify-content-start border">
+        <a href="<?= base_url('Klinik/input_pemeriksaan/' . encrypt_url($detail_antrean['id'])) ?>" class="btn btn-light btn-icon-split btn-lg d-flex justify-content-start border">
           <span class="icon bg-primary text-white-50 col-2">
             <i class="fas fa-user-md"></i>
           </span>

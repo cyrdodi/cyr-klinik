@@ -91,11 +91,11 @@ class Klinik extends CI_Controller
   {
     $reg = decrypt_url($reg);
     $data['title'] = 'Input Tindakan';
-    $data['b_tindakan'] = $this->db->get_where('b_tindakan',  ['is_active' => '1'])->result_array();
+    $data['detail_antrean'] = $this->Klinik_model->getDetailAntrean($reg);
+    $data['b_tindakan'] = $this->db->get_where('b_tindakan',  ['is_active' => '1', 'klinik_id' => $data['detail_antrean']['klinik_id']])->result_array();
     $data['l_tindakan'] = $this->Klinik_model->getListTindakan($reg);
 
     // prevent access jika status selain antrean
-    $data['detail_antrean'] = $this->Klinik_model->getDetailAntrean($reg);
     if ($data['detail_antrean']['status'] != 1) {
       $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">Pasien bukan dalam antrean</div>');
       redirect('Klinik');
@@ -139,6 +139,16 @@ class Klinik extends CI_Controller
       $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Obat berhasil diinput</div>');
       redirect('Klinik/input_obat/' . encrypt_url($reg));
     }
+  }
+  public function input_pemeriksaan($reg)
+  {
+    $reg = decrypt_url($reg);
+    $data['title'] = "input Pemeriksaan";
+    $data['l_dokter'] = $this->db->get_where('dokter', ['is_active' => '1'])->result_array();
+
+    $this->load->view('templates/header', $data);
+    $this->load->view('klinik/proses/pemeriksaan/input-pemeriksaan', $data);
+    $this->load->view('templates/footer');
   }
 
   public function delete_obat($id)

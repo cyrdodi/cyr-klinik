@@ -29,6 +29,14 @@
             <?= form_error('tindakan', '<small class="text-danger pl-3">', '</small>') ?>
           </div>
           <div class="form-group">
+            <label for="klinik">Klinik</label>
+            <select name="klinik" id="klinik" class="form-control">
+              <?php foreach ($l_klinik as $klinik) : ?>
+                <option value="<?= $klinik['klinik_id'] ?>"><?= $klinik['nama_klinik'] ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="form-group">
             <label for="tarif">Tarif</label>
             <input type="text" id="tarif" class="form-control" name="tarif">
             <?= form_error('tarif', '<small class="text-danger pl-3">', '</small>') ?>
@@ -59,11 +67,12 @@
         <div class="row">
 
           <div class="col scroll">
-            <table class="table table-striped">
+            <table class="table table-striped table-sm">
               <thead>
                 <tr>
                   <th>#</th>
                   <th>Nama Tindakan</th>
+                  <th>Nama Klinik</th>
                   <th>Tarif</th>
                   <th>Action</th>
                 </tr>
@@ -74,11 +83,9 @@
                   <tr style="<?= redRow($tindakan['is_active']) ?>">
                     <td><?= $i ?></td>
                     <td><?= $tindakan['nama_tindakan'] ?></td>
+                    <td><?= $tindakan['nama_klinik'] ?></td>
                     <td><?= number_format($tindakan['tarif']) ?></td>
                     <td>
-                      <a href="<?= base_url('Tindakan/add_tag/' . $tindakan['id']) ?>" class="btn btn-sm btn-primary">
-                        <i class=" fas fa-hashtag"></i>
-                      </a>
                       <button class="btn btn-primary btn-sm" tindakan-id="<?= $tindakan['id'] ?>" type=" button" data-toggle="modal" data-target="#editModal">
                         <i class="fas fa-pen"></i>
                       </button>
@@ -111,6 +118,14 @@
           <div class="form-group">
             <label for="editTindakan">Nama Tindakan</label>
             <input type="text" class="form-control" id="editTindakan" name="editTindakan">
+          </div>
+          <div class="form-group">
+            <label for="editKlinik">Klinik</label>
+            <select name="editKlinik" id="editKlinik" class="form-control">
+              <?php foreach ($l_klinik as $klinik) : ?>
+                <option value="<?= $klinik['klinik_id'] ?>"><?= $klinik['nama_klinik'] ?></option>
+              <?php endforeach; ?>
+            </select>
           </div>
           <div class="form-group">
             <label for="editTarif">Tarif</label>
@@ -172,6 +187,7 @@
           $('#editTindakan').val(data.nama_tindakan);
           // set value to autonumeric input
           AutoNumeric.set('#editTarif', data.tarif);
+          $('#editKlinik').val(data.klinik_id);
           $('#aktif').val(data.is_active);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -185,6 +201,7 @@
       event.preventDefault();
       var id = $('#editId').val();
       var namaTindakan = $('#editTindakan').val();
+      var klinikId = $('#editKlinik').val();
       var tarif = editTarif.rawValue;
       var aktif = $('#aktif').val();
       $.ajax({
@@ -194,6 +211,7 @@
         data: {
           'id': id,
           'namaTindakan': namaTindakan,
+          'klinikId': klinikId,
           'tarif': tarif,
           'aktif': aktif
         },

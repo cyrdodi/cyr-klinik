@@ -6,12 +6,12 @@
 - [x] proses klinik
 - [x] cetak kwitansi
 - [x] billing
-- [ ] inventory system
+- [x] inventory system
+- [x] tindakan medis manager
 - [ ] input data medis
 - [ ] data dokter
 - [ ] histori in/out per item
-- [ ] menajemen tindakan medis
 
 
 ## to do
-- set autonumeric in modal editTarif
+- proses klinik input pemeriksaan

@@ -19,7 +19,8 @@ class Klinik_model extends CI_Model
         cara_bayar.pembayaran,
         kt.cara_bayar,
         kt.status,
-        m_klinik.nama_klinik
+        m_klinik.nama_klinik,
+        m_klinik.klinik_id
       FROM klinik_transaction AS kt
       JOIN cara_bayar ON cara_bayar.id = kt.cara_bayar
       JOIN m_klinik ON m_klinik.klinik_id = kt.klinik_id

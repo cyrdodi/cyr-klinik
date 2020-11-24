@@ -11,10 +11,11 @@ class Tindakan extends CI_Controller
   public function index()
   {
     $data['title'] = 'Daftar Tindakan';
+    $data['l_klinik'] = $this->db->get_where('m_klinik')->result_array();
 
     $data['is_keyword'] = FALSE;
     $keyword = $this->input->get('keyword');
-    $data['search_result'] = $this->db->get('b_tindakan')->result_array();
+    $data['search_result'] = $this->tindakan_m->getTindakan();
     if ($keyword !== NULL) {
       if (strlen($keyword) > 0) {
         $data['is_keyword'] = TRUE;
@@ -31,7 +32,9 @@ class Tindakan extends CI_Controller
       $this->load->view('templates/footer');
     } else {
       $this->tindakan_m->addTindakan();
-      $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Item berhasil ditambahkan</div>');
+      $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Item berhasil ditambahkan<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button></div>');
       redirect('Tindakan');
     }
   }
@@ -65,7 +68,9 @@ class Tindakan extends CI_Controller
   public function edit_tindakan()
   {
     $this->tindakan_m->updateTindakan();
-    $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Item berhasil diupdate</div>');
+    $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Item berhasil diupdate<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button></div>');
     // redirect('Tindakan');
     echo json_encode('mantul');
   }

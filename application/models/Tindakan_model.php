@@ -4,7 +4,16 @@ class Tindakan_model extends CI_Model
 {
   public function searchTindakan($keyword)
   {
+    $this->db->select('b_tindakan.id, b_tindakan.nama_tindakan, b_tindakan.tarif, b_tindakan.klinik_id, b_tindakan.is_active, b_tindakan.timestamp, m_klinik.nama_klinik');
+    $this->db->join('m_klinik', 'm_klinik.klinik_id = b_tindakan.klinik_id');
     $this->db->like('nama_tindakan', $keyword);
+    return $this->db->get('b_tindakan')->result_array();
+  }
+
+  public function getTindakan()
+  {
+    $this->db->select('b_tindakan.id, b_tindakan.nama_tindakan, b_tindakan.tarif, b_tindakan.klinik_id, b_tindakan.is_active, b_tindakan.timestamp, m_klinik.nama_klinik');
+    $this->db->join('m_klinik', 'm_klinik.klinik_id = b_tindakan.klinik_id');
     return $this->db->get('b_tindakan')->result_array();
   }
 
@@ -13,6 +22,7 @@ class Tindakan_model extends CI_Model
     $data = [
       'nama_tindakan' => $this->input->post('tindakan', TRUE),
       'tarif' => $this->input->post('tarif', TRUE),
+      'klinik_id' => $this->input->post('klinik', TRUE),
       'is_active' => '1',
     ];
 
@@ -23,6 +33,7 @@ class Tindakan_model extends CI_Model
   {
     $data = [
       'nama_tindakan' => $this->input->post('namaTindakan', TRUE),
+      'klinik_id' => $this->input->post('klinikId', TRUE),
       'tarif' => $this->input->post('tarif', TRUE),
       'is_active' => $this->input->post('aktif'),
     ];
