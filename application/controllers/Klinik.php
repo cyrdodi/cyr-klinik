@@ -91,7 +91,7 @@ class Klinik extends CI_Controller
   {
     $reg = decrypt_url($reg);
     $data['title'] = 'Input Tindakan';
-    $data['b_tindakan'] = $this->db->get('b_tindakan')->result_array();
+    $data['b_tindakan'] = $this->db->get_where('b_tindakan',  ['is_active' => '1'])->result_array();
     $data['l_tindakan'] = $this->Klinik_model->getListTindakan($reg);
 
     // prevent access jika status selain antrean

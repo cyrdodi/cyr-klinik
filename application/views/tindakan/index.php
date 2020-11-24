@@ -19,7 +19,7 @@
 <?= $this->session->flashdata('msg') ?>
 <div class="row">
   <div class="col-lg-4">
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4  h-100">
       <div class="card-body">
         <div class="font-weight-bold">Add Tindakan</div>
         <form action="" method="post">
@@ -38,8 +38,8 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-8">
-    <div class="card shadow mb-4">
+  <div class="col-lg-8 ">
+    <div class="card shadow mb-4 h-100">
       <div class="card-body">
         <div class="row">
           <div class="col">
@@ -71,14 +71,14 @@
               <tbody>
                 <?php $i = 1; ?>
                 <?php foreach ($search_result as $tindakan) : ?>
-                  <tr>
+                  <tr style="<?= redRow($tindakan['is_active']) ?>">
                     <td><?= $i ?></td>
                     <td><?= $tindakan['nama_tindakan'] ?></td>
                     <td><?= number_format($tindakan['tarif']) ?></td>
                     <td>
-                      <button class="btn btn-sm btn-primary">
+                      <a href="<?= base_url('Tindakan/add_tag/' . $tindakan['id']) ?>" class="btn btn-sm btn-primary">
                         <i class=" fas fa-hashtag"></i>
-                      </button>
+                      </a>
                       <button class="btn btn-primary btn-sm" tindakan-id="<?= $tindakan['id'] ?>" type=" button" data-toggle="modal" data-target="#editModal">
                         <i class="fas fa-pen"></i>
                       </button>
@@ -107,6 +107,7 @@
       </div>
       <div class="modal-body">
         <form action="" method="post">
+          <input type="text" class="form-control" id="editId" name="editId" hidden>
           <div class="form-group">
             <label for="editTindakan">Nama Tindakan</label>
             <input type="text" class="form-control" id="editTindakan" name="editTindakan">
@@ -117,16 +118,16 @@
           </div>
           <div class="form-group">
             <label for="aktif">Aktif</label>
-            <select name="aktif" id="aktif" id="aktif" class="form-control">
+            <select name="aktif" id="aktif" class="form-control">
               <option value="1">Ya</option>
               <option value="0">Tidak</option>
             </select>
           </div>
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" name="editTarif" id="edit-btn" class="btn btn-primary">Update</button>
+        </form>
       </div>
     </div>
   </div>
@@ -167,19 +168,44 @@
           'id': id
         },
         success: function(data) {
-          // $('#editMenu').find('[name="menu"]').val(menuName); // #editMenu = id form di modal
-          // $('#editTarif').find('[name="editTarif"]').val(data.tarif);
+          $('#editId').val(data.id);
           $('#editTindakan').val(data.nama_tindakan);
-          $('#editTarif').val(data.tarif);
-          // console.log(data)
+          // set value to autonumeric input
+          AutoNumeric.set('#editTarif', data.tarif);
+          $('#aktif').val(data.is_active);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
           alert("some error");
           console.log(errorThrown);
         }
       });
+    })
 
-      // alternative
+    $('#edit-btn').click(function() {
+      event.preventDefault();
+      var id = $('#editId').val();
+      var namaTindakan = $('#editTindakan').val();
+      var tarif = editTarif.rawValue;
+      var aktif = $('#aktif').val();
+      $.ajax({
+        type: 'post',
+        url: "<?= base_url('Tindakan/edit_tindakan') ?>",
+        dataType: 'json',
+        data: {
+          'id': id,
+          'namaTindakan': namaTindakan,
+          'tarif': tarif,
+          'aktif': aktif
+        },
+        success: function(data) {
+          $('#editModal').modal('toggle');
+          location.reload();
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert(textStatus);
+          console.log(errorThrown);
+        }
+      })
     })
   })
 </script>
