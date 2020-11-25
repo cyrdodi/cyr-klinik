@@ -32,7 +32,7 @@
                 <td><?= $pasien['nama_lengkap'] ?></td>
                 <td><?= $pasien['alamat'] ?></td>
                 <td>
-                  <div class="badge badge-info"> <?= $pasien['pembayaran'] ?></div>
+                  <div class="badge" <?= badgeCB($pasien['cara_bayar']) ?>> <?= $pasien['pembayaran'] ?></div>
                 </td>
                 <td><a href="<?= base_url('Klinik/proses_klinik/' . encrypt_url($pasien['id'])) ?>" class="btn btn-sm btn-primary">Proses</a></td>
               </tr>

@@ -42,6 +42,7 @@ class Klinik extends CI_Controller
     $data['l_admin'] = $this->Klinik_model->getListAdmin($reg);
     $data['l_tindakan'] = $this->Klinik_model->getListTindakan($reg);
     $data['l_obat'] = $this->Klinik_model->getListObat($reg);
+    $data['l_pemeriksaan'] = $this->Klinik_model->getListPemeriksaan($reg);
 
     $data['rekap_admin'] = $this->Klinik_model->getRekapAdmin($reg);
     $data['rekap_tindakan'] = $this->Klinik_model->getRekapTindakan($reg);
@@ -140,15 +141,24 @@ class Klinik extends CI_Controller
       redirect('Klinik/input_obat/' . encrypt_url($reg));
     }
   }
-  public function input_pemeriksaan($reg)
+  public function input_pemeriksaan($reg, $klinik)
   {
     $reg = decrypt_url($reg);
     $data['title'] = "input Pemeriksaan";
-    $data['l_dokter'] = $this->db->get_where('dokter', ['is_active' => '1'])->result_array();
+    $data['l_dokter'] = $this->db->get_where('dokter', ['is_active' => '1', 'klinik_id' => $klinik])->result_array();
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('klinik/proses/pemeriksaan/input-pemeriksaan', $data);
-    $this->load->view('templates/footer');
+    $this->form_validation->set_rules('keluhan', 'Keluhan', 'required|trim');
+    $this->form_validation->set_rules('pemeriksaan', 'Pemeriksaan', 'required|trim');
+    $this->form_validation->set_rules('diagnosa', 'Icd 10', 'required|trim');
+    if ($this->form_validation->run() === FALSE) {
+      $this->load->view('templates/header', $data);
+      $this->load->view('klinik/proses/pemeriksaan/input-pemeriksaan', $data);
+      $this->load->view('templates/footer');
+    } else {
+      $this->Klinik_model->inputPemeriksaan($reg);
+      $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">Pemeriksaan diinput</div>');
+      redirect('Klinik/proses_klinik/' . encrypt_url($reg));
+    }
   }
 
   public function delete_obat($id)
@@ -223,6 +233,24 @@ class Klinik extends CI_Controller
     $searchterm = $this->input->post('searchTerm');
 
     $response = $this->Klinik_model->getObat($searchterm);
+
+    echo json_encode($response);
+  }
+
+  public function searchDx()
+  {
+    $searchterm = $this->input->post('searchTerm');
+
+    $response = $this->Klinik_model->getDiagnosa($searchterm);
+
+    echo json_encode($response);
+  }
+
+  public function getNamaDx()
+  {
+    $id = $this->input->post('id');
+
+    $response = $this->db->get_where('icd10', ['kode_icd10' => $id])->row_array();
 
     echo json_encode($response);
   }

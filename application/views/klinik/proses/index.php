@@ -32,7 +32,7 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
             </div>
             <div class="text-sm font-weight-bold text-gray-500">
               # <?= $detail_antrean['id'] ?>
-              <div class="badge badge-primary ml-2 my-2 float-right"><?= $detail_antrean['pembayaran'] ?></div>
+              <div class="badge ml-2 my-2 float-right" <?= badgeCB($detail_antrean['cara_bayar']) ?>><?= $detail_antrean['pembayaran'] ?></div>
             </div>
             <table class="table">
               <tr>
@@ -66,7 +66,51 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
     </div>
     <div class="row">
       <div class="col">
-        <div class="card shadow mb-4 h-100">
+        <div class="card shadow mb-4">
+          <div class="card-body">
+            <table class="table table-sm">
+              <tr>
+                <th colspan="4" class="text-center"><?= $l_pemeriksaan['nama_dokter'] ?></th>
+              </tr>
+              <tr>
+                <th>Keluhan</th>
+                <td colspan="3"><?= $l_pemeriksaan['keluhan'] ?></td>
+              </tr>
+              <tr>
+                <th>Pemeriksaan</th>
+                <td colspan="3"><?= $l_pemeriksaan['pemeriksaan'] ?></td>
+              </tr>
+              <tr>
+                <th>Diagnosa</th>
+                <td colspan="3"><?= $l_pemeriksaan['icd10'] . ' - ' . $l_pemeriksaan['diagnosa'] ?></td>
+              </tr>
+              <tr>
+                <th>Keterangan</th>
+                <td colspan="3"><?= $l_pemeriksaan['keterangan'] ?></td>
+              </tr>
+
+            </table>
+            <table class="table table-sm table-bordered">
+              <tr>
+                <th>Suhu Tubuh</th>
+                <th>Tensi</th>
+                <th>Tinggi</th>
+                <th>Berat</th>
+              </tr>
+              <tr>
+                <td><?= $l_pemeriksaan['suhu_tubuh'] ?></td>
+                <td><?= $l_pemeriksaan['tensi'] ?></td>
+                <td><?= $l_pemeriksaan['tinggi'] ?></td>
+                <td><?= $l_pemeriksaan['berat'] ?></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col">
+        <div class="card shadow mb-4 ">
           <div class="card-body">
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#carabayarmodal">Ubah cara bayar pasien</button>
             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#batalmodal">Batalkan</button>
@@ -115,7 +159,7 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
         </a>
         <div class="my-2"></div>
         <div class="my-2"></div>
-        <a href="<?= base_url('Klinik/input_pemeriksaan/' . encrypt_url($detail_antrean['id'])) ?>" class="btn btn-light btn-icon-split btn-lg d-flex justify-content-start border">
+        <a href="<?= base_url('Klinik/input_pemeriksaan/' . encrypt_url($detail_antrean['id']) . '/' . $detail_antrean['klinik_id']) ?>" class="btn btn-light btn-icon-split btn-lg d-flex justify-content-start border">
           <span class="icon bg-primary text-white-50 col-2">
             <i class="fas fa-user-md"></i>
           </span>
@@ -390,30 +434,18 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
 </div>
 
 <script>
-  $('#exampleModal').on('show.bs.modal', event => {
-    var button = $(event.relatedTarget);
-    var modal = $(this);
-    // Use above variables to manipulate the DOM
-
-  });
-</script>
-
-<script>
-  $('#exampleModal').on('show.bs.modal', event => {
-    var button = $(event.relatedTarget);
-    var modal = $(this);
-    // Use above variables to manipulate the DOM
-
-  });
-</script>
-
-<script>
   var biaya = <?= $totalall ?>;
+  var pemeriksaan = <?= json_encode($l_pemeriksaan['nama_dokter']) ?>;
+  console.log(pemeriksaan)
 
   function checkBiaya(e) {
     if (biaya == 0) {
       e.preventDefault();
       return alert('Item biaya tidak boleh kosong!');
+    }
+    if (pemeriksaan == null) {
+      e.preventDefault();
+      return alert('Pemeriksaan tidak boleh kosong!');
     }
   }
 </script>

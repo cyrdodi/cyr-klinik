@@ -32,3 +32,29 @@ function redRow($data)
     return 'background-color: #ec5858; color: #fff';
   }
 }
+
+function badgeKlinik($data)
+{
+  switch ($data) {
+    case 'KL001';
+      return 'style="background-color: #16a596; color: #fff"';
+    case 'KL002';
+      return 'style="background-color: #e05297; color: #fff"';
+    default:
+      return '';
+  }
+}
+
+function badgeCB($data)
+{
+  switch ($data) {
+    case 'p1';
+      return 'style="background-color: #16a596; color: #fff"';
+    case 'p2';
+      return 'style="background-color: #31326f; color: #fff"';
+    case 'p3';
+      return 'style="background-color: #db6400; color: #fff"';
+    default:
+      return '';
+  }
+}

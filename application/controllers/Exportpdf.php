@@ -20,6 +20,7 @@ class Exportpdf extends CI_Controller
     $this->add_log($nobilling, 'billing', '');
 
     $data['detail_billing'] = $this->Billing_model->getBillingDetail($nobilling);
+    $data['detail_klinik'] = $this->db->get_where('m_informasi', ['id' => '1'])->row_array();
 
     $reg = $data['detail_billing']['id'];
 

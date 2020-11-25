@@ -8,10 +8,12 @@
 - [x] billing
 - [x] inventory system
 - [x] tindakan medis manager
-- [ ] input data medis
-- [ ] data dokter
+- [x] input data medis
+- [x] data dokter
 - [ ] histori in/out per item
+- [ ] dashboard
 
 
 ## to do
-- proses klinik input pemeriksaan
+- manage akun 
+- backup db

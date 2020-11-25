@@ -39,6 +39,7 @@ class Klinik_model extends CI_Model
       "SELECT 
         kt.id,
         kt.medrek,
+        kt.cara_bayar,
         dp.nama_lengkap,
         dp.alamat,
         cara_bayar.pembayaran,
@@ -91,6 +92,27 @@ class Klinik_model extends CI_Model
     $this->db->insert('t_obat', $data);
   }
 
+  public function inputPemeriksaan($reg)
+  {
+    $dokter = $this->db->get_where('dokter', ['id' => $this->input->post('dokter')])->row_array();
+    $data = [
+      'klinik_transaction_id' => $reg,
+      'dokter_id' => $dokter['id'],
+      'nama_dokter' => $dokter['nama_dokter'],
+      'keluhan' => $this->input->post('keluhan', TRUE),
+      'pemeriksaan' => $this->input->post('pemeriksaan', TRUE),
+      'icd10' => $this->input->post('diagnosa', TRUE),
+      'diagnosa' => $this->input->post('nama_diagnosa', TRUE),
+      'keterangan' => $this->input->post('keterangan', TRUE),
+      'suhu_tubuh' => $this->input->post('suhu', TRUE),
+      'tensi' => $this->input->post('tensi', TRUE),
+      'tinggi' => $this->input->post('tinggi', TRUE),
+      'berat' => $this->input->post('berat', TRUE),
+    ];
+
+    $this->db->insert('t_pemeriksaan_klinik', $data);
+  }
+
   public function penguranganStokObat()
   {
     $id_obat = html_escape($this->input->post('obat', TRUE));
@@ -125,6 +147,19 @@ class Klinik_model extends CI_Model
     return $data;
   }
 
+  public function getDiagnosa($searchTerm = "")
+  {
+    $fetched_records = $this->db->query("SELECT * FROM icd10 WHERE kode_icd10 LIKE '%" . $searchTerm . "%' OR  nama_diagnosa LIKE '%" . $searchTerm . "%' OR keterangan LIKE '%" . $searchTerm . "%' LIMIT 100");
+    $dx = $fetched_records->result_array();
+
+    // initialize Array with fetched data
+    $data = [];
+    foreach ($dx as $row) {
+      $data[] = ['id' => $row['kode_icd10'], 'text' => $row['kode_icd10'] . " - " . $row['nama_diagnosa'] . " - " . $row['keterangan']];
+    }
+    return $data;
+  }
+
   public function getListAdmin($reg)
   {
     return $this->db->get_where('t_admin', ['klinik_transaction_id' => $reg])->result_array();
@@ -138,6 +173,11 @@ class Klinik_model extends CI_Model
   public function getListObat($reg)
   {
     return $this->db->get_where('t_obat', ['klinik_transaction_id' => $reg])->result_array();
+  }
+
+  public function getListPemeriksaan($reg)
+  {
+    return $this->db->get_where('t_pemeriksaan_klinik', ['klinik_transaction_id' => $reg])->row_array();
   }
 
   public function getRekapAdmin($reg)

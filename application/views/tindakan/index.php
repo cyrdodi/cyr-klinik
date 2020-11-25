@@ -6,7 +6,7 @@
 </style>
 <div class="row">
   <div class="col align-self-center">
-    <div class="font-weight-bold mb-4 text-uppercase">Daftar Tindakan</div>
+    <div class="font-weight-bold mb-4 text-uppercase">Manage Tindakan</div>
   </div>
   <div class="col-auto">
     <nav aria-label="breadcrumb ">
@@ -60,9 +60,7 @@
               </div>
             </form>
           </div>
-          <div class="col-auto">
-            <a href="<?= base_url('Tindakan/add_tindakan') ?>" class="btn btn-primary"><i class="fas fa-plus    "></i> Tindakan</a>
-          </div>
+
         </div>
         <div class="row">
 
@@ -83,7 +81,9 @@
                   <tr style="<?= redRow($tindakan['is_active']) ?>">
                     <td><?= $i ?></td>
                     <td><?= $tindakan['nama_tindakan'] ?></td>
-                    <td><?= $tindakan['nama_klinik'] ?></td>
+                    <td>
+                      <div class="badge" <?= badgeKlinik($tindakan['klinik_id']) ?>><?= $tindakan['nama_klinik'] ?></div>
+                    </td>
                     <td><?= number_format($tindakan['tarif']) ?></td>
                     <td>
                       <button class="btn btn-primary btn-sm" tindakan-id="<?= $tindakan['id'] ?>" type=" button" data-toggle="modal" data-target="#editModal">

@@ -161,7 +161,7 @@ function terbilang($nilai)
         </tr>
         <tr>
           <th class="profil-table" style="width: 150px">Pembayaran</th>
-          <td class="profil-table">: Pelayanan Rawat Jalan</td>
+          <td class="profil-table">: Pelayanan Rawat Jalan / <?= $detail_billing['nama_klinik'] ?></td>
         </tr>
         <tr>
           <th class="profil-table">No Billing/Registrasi</th>

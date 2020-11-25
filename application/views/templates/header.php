@@ -116,6 +116,7 @@
         <div id="collapseBilling" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="<?= base_url('Billing') ?>">Antrean</a>
+            <a class="collapse-item" href="<?= base_url('Billing/pencarian') ?>">Pencarian</a>
           </div>
         </div>
       </li>
@@ -143,12 +144,13 @@
       <!-- Nav Item - Tindakan Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTindakan" aria-expanded="true" aria-controls="collapseTindakan">
-          <i class="fas fa-syringe"></i>
-          <span>Tindakan</span>
+          <i class="fas fa-cogs"></i>
+          <span>Manage</span>
         </a>
         <div id="collapseTindakan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?= base_url('Tindakan') ?>">Daftar Tindakan</a>
+            <a class="collapse-item" href="<?= base_url('Tindakan') ?>">Tindakan</a>
+            <a class="collapse-item" href="<?= base_url('Dokter') ?>">Dokter</a>
           </div>
         </div>
       </li>
@@ -178,13 +180,15 @@
             <i class="fa fa-bars"></i>
           </button>
 
+          <h4>Klinik Bhakti Yuana</h4>
 
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
 
-
+            <li>
+            </li>
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->

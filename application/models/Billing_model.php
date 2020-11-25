@@ -77,12 +77,14 @@ class Billing_model extends CI_Model
         bt.total_administrasi,
         bt.total_tindakan,
         bt.total_obat,
-        bt.total_bayar
+        bt.total_bayar,
+        m_klinik.nama_klinik
     FROM billing_transaction AS bt
     JOIN klinik_transaction AS kt ON kt.id = bt.klinik_transaction_id
     JOIN data_pasien AS dp ON dp.medrek = kt.medrek
     JOIN cara_bayar ON cara_bayar.id = kt.cara_bayar
     JOIN m_status_pembayaran AS sp ON sp.id = bt.status_pembayaran
+    JOIN m_klinik ON m_klinik.klinik_id = kt.klinik_id
     WHERE bt.no_billing='" . $nobilling . "'
       "
     )->row_array();

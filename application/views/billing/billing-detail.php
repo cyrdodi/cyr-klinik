@@ -52,13 +52,15 @@ function colorBadge($status)
           </div>
           <div class="col text-right">
             <div class="badge badge-primary "><?= $detail_billing['pembayaran'] ?></div>
-            <div class="font-weight-bold">Tanggal berobat</div>
-            <p><?= formatTanggal($detail_billing['tgl_berobat']) ?></p>
+            <p><?= $l_pemeriksaan['nama_dokter'] ?></p>
+            <p><?= $l_pemeriksaan['nama_dokter'] ?></p>
+            <span><?= $detail_billing['nama_klinik'] ?></span><br>
+            <span><?= $l_pemeriksaan['nama_dokter'] ?></span><br>
+            <span><?= formatTanggal($detail_billing['tgl_berobat']) ?></span><br>
             <?php if ($detail_billing['status_pembayaran'] == '2') : ?>
               <div class="font-weight-bold">Tanggal pembayaran</div>
               <p><?= formatTanggal($detail_billing['tgl_pembayaran']) ?></p>
             <?php endif; ?>
-
           </div>
 
         </div>
@@ -182,6 +184,7 @@ function colorBadge($status)
   <div class="col-lg-4">
     <div class="card shadow mb-4 h-100">
       <div class="card-body">
+
         <div class="row no-gutters align-items-center">
           <div class="col mb-4 mr-2">
             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Rekap Biaya</div>
@@ -215,7 +218,6 @@ function colorBadge($status)
         <div class="row">
           <div class="col">
             <a href="<?= base_url('Exportpdf/billing/' . encrypt_url($detail_billing['no_billing'])) ?>" class="btn btn-primary btn-block">Cetak Billing</a>
-            <a href="<?= base_url('Billing/test_print/' . encrypt_url($detail_billing['no_billing'])) ?>" class="btn btn-primary btn-block">Cetak Billing test</a>
             <?php if ($detail_billing['status_pembayaran'] == '1') : ?>
               <button type="button" class="btn btn-primary btn-primary btn-block" data-toggle="modal" data-target="#savebillingmodal">Simpan</button>
               <hr>

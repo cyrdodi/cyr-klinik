@@ -93,7 +93,7 @@
   <!-- header -->
   <div class="header">
     <img class="logo" src="<?= base_url('assets/img/logo-by.png') ?>" alt="" width="80px" style="float:right;">
-    <h3>Klinik Bhakti Yuana</h3>
+    <h3><?= $detail_klinik['nama_klinik'] ?></h3>
     <span class="serif-font">Jl. Multatuli No. 48</span><br>
     <span class="serif-font">Rangkasbitung - Lebak - Banten</span><br>
     <span class="serif-font">Tlp . 0252-5551022 email : klinikbhaktiyuana@gmail.com</span>
@@ -114,6 +114,10 @@
       <tr>
         <th class="profil-table">Tanggal Berobat</th>
         <td class="profil-table"><?= formatTanggal($detail_billing['tgl_berobat']) ?></td>
+      </tr>
+      <tr>
+        <th class="profil-table">Klinik</th>
+        <td class="profil-table"><?= $detail_billing['nama_klinik'] ?></td>
       </tr>
     </table>
     <table>
