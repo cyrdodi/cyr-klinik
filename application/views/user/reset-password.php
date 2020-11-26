@@ -1,24 +1,19 @@
 <div class="row mt-5 justify-content-center h-100">
   <div class="col-4">
-    <div class="card shadow-sm mt-5">
+    <div class="card shadow mt-5">
       <div class="card-body">
-        <div class="row text-center">
-          <div class="col">
-            <i class="far fa-user-circle fa-5x"></i>
-          </div>
-        </div>
         <h1 class="text-center">simklinik</h1>
+        <div class="text-uppercase font-weight-bold text-center">Reset Password</div>
         <hr>
         <form action="" method="POST">
-          <input type="text" class="form-control" name="nama" id="nama" placeholder="nama pengguna" value="<?= set_value('nama') ?>">
-          <?= form_error('nama', '<small class="text-danger pl-3">', '</small>'); ?>
-          <input type="text" class="form-control mt-2" name="username" id="username" placeholder="username" value="<?= set_value('username') ?>">
-          <?= form_error('username', '<small class="text-danger pl-3">', '</small>'); ?>
+          <input type="text" class="form-control" name="id" value="<?= $user['id'] ?>" hidden>
+          <input type="text" class="form-control" name="nama" id="nama" value="<?= $user['nama'] ?>" readonly>
+          <input type="text" class="form-control mt-2" name="username" id="username" value="<?= $user['username'] ?>" readonly>
           <input type="password" class="form-control mt-2" name="password1" placeholder="password">
           <?= form_error('password1', '<small class="text-danger pl-3">', '</small>'); ?>
           <input type="password" class="form-control mt-2" name="password2" placeholder="ulangi password">
           <?= form_error('password2', '<small class="text-danger pl-3">', '</small>'); ?>
-          <button class="btn btn-primary btn-block mt-2">Register</button>
+          <button class="btn btn-primary btn-block mt-2"><i class="fas fa-key"></i> Simpan</button>
           <a href="<?= base_url('User') ?>" class="btn btn-secondary btn-block mt-2">Kembali</a>
         </form>
         <hr>

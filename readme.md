@@ -15,5 +15,4 @@
 
 
 ## to do
-- manage akun 
-- backup db
+- customize ui

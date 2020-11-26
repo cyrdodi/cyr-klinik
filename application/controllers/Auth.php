@@ -37,6 +37,7 @@ class Auth extends CI_Controller
             'nama_akun' => $user['nama'],
             'username' => $user['username'],
             'role_id' => $user['role_id'],
+            'petugas' => $user['petugas'],
             'is_login' => TRUE
           ];
           $this->session->set_userdata($data);
@@ -59,6 +60,7 @@ class Auth extends CI_Controller
   {
     // form validation required dan trim=spasi sebelum dan sesudah value agar dihapus
     $this->form_validation->set_rules('nama', 'Name', 'required|trim');
+    $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[user.username]');
     $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[6]|matches[password2]', ["matches" => "password don't match!", 'min_length' => 'password too short!']);
     $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
     if ($this->form_validation->run() == false) {
@@ -70,14 +72,14 @@ class Auth extends CI_Controller
       $data = [
         'username' => htmlspecialchars($this->input->post('username', true)),
         'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-        'nama' => htmlspecialchars($this->input->post('nama', true)),
-        'role_id' => 1,
+        'nama' => ucwords(strtolower(htmlspecialchars($this->input->post('nama', true)))),
+        'role_id' => 3,
         'is_active' => 1
       ];
 
       $this->db->insert('user', $data);
-      $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akun anda sudah berhasil dibuat!</div>');
-      redirect('auth');
+      $this->session->set_flashdata('msg', '<div class="alert alert-success" role="alert">user berhasil dibuat!</div>');
+      redirect('user');
     }
   }
 

@@ -67,7 +67,7 @@
                             <td><?= $result['nama_lengkap']  ?></td>
                             <td><?= $result['kecamatan'] ?></td>
                             <td>
-                              <div class="badge badge-primary"><?= $result['pembayaran'] ?></div>
+                              <div class="badge" <?= badgeCB($result['cara_bayar']) ?>><?= $result['pembayaran'] ?></div>
                             </td>
                             <td>
                               <?= badgePembayaran($result['status_pembayaran']) ?>

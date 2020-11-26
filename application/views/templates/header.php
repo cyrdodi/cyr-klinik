@@ -24,19 +24,14 @@
   <link rel="stylesheet" href="<?= base_url('assets/vendor/datatables2/datatables.min.css') ?>">
 
   <!-- Bootstrap core JavaScript-->
-  <script src="<?= base_url('assets/') ?>vendor/jquery/jquery.min.js"></script>
+  <script src="<?= base_url('assets/') ?>js/jquery-3.4.1.min.js"></script>
   <script src="<?= base_url('assets/') ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="<?= base_url('assets/') ?>jquery-ui-1.12.1/jquery-ui.min.js"></script>
-  <script src="<?= base_url('assets/') ?>vendor/datatables2/datatables.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
   <script src="<?= base_url('assets/') ?>vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
   <script src="<?= base_url('assets/') ?>js/sb-admin-2.min.js"></script>
 
   <!-- js -->
-  <script src="<?= base_url('assets/') ?>vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="<?= base_url('assets/') ?>jquery-ui-1.12.1/jquery-ui.min.js"></script>
+  <script src="<?= base_url('assets/') ?>vendor/datatables2/datatables.min.js"></script>
   <script src="<?= base_url('assets/js/select2.min.js') ?>"></script>
   <script src="<?= base_url('assets/js/autocomplete.js') ?>"></script>
   <script type="text/javascript" src="<?= base_url(); ?>assets/js/autoNumeric.min.js"></script>
@@ -77,84 +72,89 @@
       <div class="sidebar-heading">
         Modul
       </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-users"></i>
-          <span>Registrasi</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?= base_url('Registrasi') ?>">Pendaftaran</a>
-            <a class="collapse-item" href="<?= base_url('Registrasi/Pasien_baru') ?>">Pasien Baru</a>
-            <div class="dropdown-divider"></div>
-            <a class="collapse-item" href="cards.html"><i class="fas fa-search"></i> Cari Pasien</a>
+      <?php if ($this->session->userdata('role_id') == '1' || $this->session->userdata('role_id') == '2' || $this->session->userdata('petugas') == 'perawat') : ?>
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-users"></i>
+            <span>Registrasi</span>
+          </a>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="<?= base_url('Registrasi') ?>">Pendaftaran</a>
+              <a class="collapse-item" href="<?= base_url('Registrasi/Pasien_baru') ?>">Pasien Baru</a>
+              <div class="dropdown-divider"></div>
+              <a class="collapse-item" href="cards.html"><i class="fas fa-search"></i> Cari Pasien</a>
+            </div>
           </div>
-        </div>
-      </li>
+        </li>
 
-      <!-- Nav Item - Klinik Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseKlinik" aria-expanded="true" aria-controls="collapseKlinik">
-          <i class="fas fa-clinic-medical"></i>
-          <span>Klinik</span>
-        </a>
-        <div id="collapseKlinik" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?= base_url('Klinik') ?>">Antrean Klinik</a>
+        <!-- Nav Item - Klinik Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseKlinik" aria-expanded="true" aria-controls="collapseKlinik">
+            <i class="fas fa-clinic-medical"></i>
+            <span>Klinik</span>
+          </a>
+          <div id="collapseKlinik" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="<?= base_url('Klinik') ?>">Antrean Klinik</a>
+            </div>
           </div>
-        </div>
-      </li>
+        </li>
 
-      <!-- Nav Item - Billing Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBilling" aria-expanded="true" aria-controls="collapseBilling">
-          <i class="fas fa-file-invoice-dollar"></i>
-          <span>Billing</span>
-        </a>
-        <div id="collapseBilling" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?= base_url('Billing') ?>">Antrean</a>
-            <a class="collapse-item" href="<?= base_url('Billing/pencarian') ?>">Pencarian</a>
+        <!-- Nav Item - Billing Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBilling" aria-expanded="true" aria-controls="collapseBilling">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span>Billing</span>
+          </a>
+          <div id="collapseBilling" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="<?= base_url('Billing') ?>">Antrean</a>
+              <a class="collapse-item" href="<?= base_url('Billing/pencarian') ?>">Pencarian</a>
+            </div>
           </div>
-        </div>
-      </li>
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Admin Area
-      </div>
-
-      <!-- Nav Item - Inventory Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventory" aria-expanded="true" aria-controls="collapseInventory">
-          <i class="fas fa-dolly-flatbed"></i>
-          <span>Inventory</span>
-        </a>
-        <div id="collapseInventory" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?= base_url('Inventory') ?>">Daftar Obat & Alkes</a>
-            <h6 class="collapse-header">Transaksi</h6>
-            <a class="collapse-item" href="<?= base_url('Inventory/stock_in') ?>">Stock In</a>
-            <a class="collapse-item" href="<?= base_url('Inventory/stock_out') ?>">Stock Out</a>
+        </li>
+      <?php endif; ?>
+      <?php if ($this->session->userdata('role_id') == '1' || $this->session->userdata('role_id') == '2' || $this->session->userdata('petugas') == 'farmasi') : ?>
+        <!-- Nav Item - Inventory Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventory" aria-expanded="true" aria-controls="collapseInventory">
+            <i class="fas fa-dolly-flatbed"></i>
+            <span>Inventory</span>
+          </a>
+          <div id="collapseInventory" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="<?= base_url('Inventory') ?>">Daftar Obat & Alkes</a>
+              <h6 class="collapse-header">Transaksi</h6>
+              <a class="collapse-item" href="<?= base_url('Inventory/stock_in') ?>">Stock In</a>
+              <a class="collapse-item" href="<?= base_url('Inventory/stock_out') ?>">Stock Out</a>
+            </div>
           </div>
+        </li>
+      <?php endif; ?>
+      <?php if ($this->session->userdata('role_id') == '1' || $this->session->userdata('role_id') == '2') : ?>
+        <!-- Heading -->
+        <div class="sidebar-heading">
+          Admin Area
         </div>
-      </li>
-      <!-- Nav Item - Tindakan Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTindakan" aria-expanded="true" aria-controls="collapseTindakan">
-          <i class="fas fa-cogs"></i>
-          <span>Manage</span>
-        </a>
-        <div id="collapseTindakan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="<?= base_url('Tindakan') ?>">Tindakan</a>
-            <a class="collapse-item" href="<?= base_url('Dokter') ?>">Dokter</a>
-          </div>
-        </div>
-      </li>
 
+        <!-- Nav Item - Tindakan Collapse Menu -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTindakan" aria-expanded="true" aria-controls="collapseTindakan">
+            <i class="fas fa-cogs"></i>
+            <span>Pengaturan</span>
+          </a>
+          <div id="collapseTindakan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" href="<?= base_url('Tindakan') ?>">Tindakan</a>
+              <a class="collapse-item" href="<?= base_url('Dokter') ?>">Dokter</a>
+              <a class="collapse-item" href="<?= base_url('User') ?>">User</a>
+              <a class="collapse-item" href="<?= base_url('Backup') ?>">Backup Database</a>
+            </div>
+          </div>
+        </li>
+      <?php endif; ?>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
