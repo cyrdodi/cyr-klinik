@@ -1,9 +1,19 @@
 <div class="row">
+  <div class="col align-self-center">
+    <div class="font-weight-bold mb-4 text-uppercase">Registrasi Klinik</div>
+  </div>
+  <div class="col-auto">
+    <nav aria-label="breadcrumb ">
+      <ol class="breadcrumb bg-light">
+        <li class="breadcrumb-item active" aria-current="page">Pencarian</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<div class="row">
   <div class="col">
     <div class="card shadow-sm">
       <div class="card-body">
-        <h3>Pendaftaran Klinik</h3>
-        <hr>
         <div class="row">
           <div class="col-lg-6">
             <form action="" method="get" autocomplete="off">

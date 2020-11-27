@@ -132,7 +132,7 @@ class Billing extends CI_Controller
   {
     $nobilling = decrypt_url($nobilling);
 
-    $reg = $this->db->get_where('Billing_transaction', ['no_billing' => $nobilling])->row_array();
+    $reg = $this->db->get_where('billing_transaction', ['no_billing' => $nobilling])->row_array();
     $reg = $reg['klinik_transaction_id'];
 
     $this->Billing_model->nonAktifBilling($nobilling);

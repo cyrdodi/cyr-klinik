@@ -78,6 +78,7 @@
                 </div>
               </div>
               <button type="submit" class="btn btn-primary float-right"><i class="fas fa-check    "></i> Simpan</button>
+              <a href="<?= base_url('Klinik/proses_klinik/' . $this->uri->segment(3)) ?>" class="btn btn-secondary">Kembali</a>
             </form>
           </div>
         </div>

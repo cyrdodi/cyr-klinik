@@ -16,9 +16,12 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="<?= base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet">
+  <!-- <link href="<?= base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet"> -->
+  <link href="<?= base_url('assets/') ?>css/main.css" rel="stylesheet">
 
   <link rel="stylesheet" href="<?= base_url('assets/') ?>jquery-ui-1.12.1/jquery-ui.css">
+
+  <link rel="icon" type="image/png" href="<?= base_url('assets/img/logo-by.png') ?>" />
 
   <!-- Bootstrap core JavaScript-->
   <script src="<?= base_url('assets/') ?>vendor/jquery/jquery.min.js"></script>
@@ -33,7 +36,7 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" class="bg-gradient-primary">
 
   <!-- Page Wrapper -->
   <div id="wrapper">

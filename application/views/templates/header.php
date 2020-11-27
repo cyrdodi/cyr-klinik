@@ -16,7 +16,8 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="<?= base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet">
+  <!-- <link href="<?= base_url('assets/') ?>css/sb-admin-2.min.css" rel="stylesheet"> -->
+  <link href="<?= base_url('assets/') ?>css/main.css" rel="stylesheet">
 
   <!-- css -->
   <link rel="stylesheet" href="<?= base_url('assets/') ?>jquery-ui-1.12.1/jquery-ui.css">
@@ -36,7 +37,8 @@
   <script src="<?= base_url('assets/js/autocomplete.js') ?>"></script>
   <script type="text/javascript" src="<?= base_url(); ?>assets/js/autoNumeric.min.js"></script>
 
-
+  <link rel="icon" type="image/png" href="<?= base_url('assets/img/logo-by.png') ?>" />
+  <!-- <link rel="icon" type="image/png" href="https://example.com/favicon.png" /> -->
 </head>
 
 <body id="page-top">
@@ -45,14 +47,14 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon">
           <!-- <i class="fas fa-mug-hot"></i> -->
         </div>
-        <div class="sidebar-brand-text mx-3">cyr-klinik</div>
+        <div class="sidebar-brand-text mx-3">cyr-simklinik</div>
       </a>
 
       <!-- Divider -->
@@ -60,7 +62,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="#">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>

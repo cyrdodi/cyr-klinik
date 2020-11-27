@@ -4,10 +4,10 @@
       <div class="card-body">
         <div class="row text-center">
           <div class="col">
-            <i class="far fa-user-circle fa-10x"></i>
+            <img src="<?= base_url('assets/img/logo-by.png') ?>" alt="" width="120px">
           </div>
         </div>
-        <h1 class="text-center">simklinik</h1>
+        <h1 class="text-center">cyr-simklinik</h1>
         <hr>
         <?= $this->session->flashdata('message') ?>
         <form action="" method="POST">

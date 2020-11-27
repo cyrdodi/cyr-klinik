@@ -3,7 +3,7 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
 ?>
 <div class="row">
   <div class="col">
-    <div class="font-weight-bold text-lg"><?= $detail_antrean['nama_klinik'] ?></div>
+    <div class="font-weight-bold text-lg text-uppercase"><?= $detail_antrean['nama_klinik'] ?></div>
     <div class="mb-4"></div>
     <?= $this->session->flashdata('msg') ?>
   </div>
@@ -68,42 +68,46 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
       <div class="col">
         <div class="card shadow mb-4">
           <div class="card-body">
-            <table class="table table-sm">
-              <tr>
-                <th colspan="4" class="text-center"><?= $l_pemeriksaan['nama_dokter'] ?></th>
-              </tr>
-              <tr>
-                <th>Keluhan</th>
-                <td colspan="3"><?= $l_pemeriksaan['keluhan'] ?></td>
-              </tr>
-              <tr>
-                <th>Pemeriksaan</th>
-                <td colspan="3"><?= $l_pemeriksaan['pemeriksaan'] ?></td>
-              </tr>
-              <tr>
-                <th>Diagnosa</th>
-                <td colspan="3"><?= $l_pemeriksaan['icd10'] . ' - ' . $l_pemeriksaan['diagnosa'] ?></td>
-              </tr>
-              <tr>
-                <th>Keterangan</th>
-                <td colspan="3"><?= $l_pemeriksaan['keterangan'] ?></td>
-              </tr>
+            <?php if (!is_null($l_pemeriksaan)) : ?>
+              <table class="table table-sm">
+                <tr>
+                  <th colspan="4" class="text-center"><?= $l_pemeriksaan['nama_dokter'] ?></th>
+                </tr>
+                <tr>
+                  <th>Keluhan</th>
+                  <td colspan="3"><?= $l_pemeriksaan['keluhan'] ?></td>
+                </tr>
+                <tr>
+                  <th>Pemeriksaan</th>
+                  <td colspan="3"><?= $l_pemeriksaan['pemeriksaan'] ?></td>
+                </tr>
+                <tr>
+                  <th>Diagnosa</th>
+                  <td colspan="3"><?= $l_pemeriksaan['icd10'] . ' - ' . $l_pemeriksaan['diagnosa'] ?></td>
+                </tr>
+                <tr>
+                  <th>Keterangan</th>
+                  <td colspan="3"><?= $l_pemeriksaan['keterangan'] ?></td>
+                </tr>
 
-            </table>
-            <table class="table table-sm table-bordered">
-              <tr>
-                <th>Suhu Tubuh</th>
-                <th>Tensi</th>
-                <th>Tinggi</th>
-                <th>Berat</th>
-              </tr>
-              <tr>
-                <td><?= $l_pemeriksaan['suhu_tubuh'] ?></td>
-                <td><?= $l_pemeriksaan['tensi'] ?></td>
-                <td><?= $l_pemeriksaan['tinggi'] ?></td>
-                <td><?= $l_pemeriksaan['berat'] ?></td>
-              </tr>
-            </table>
+              </table>
+              <table class="table table-sm table-bordered">
+                <tr>
+                  <th>Suhu Tubuh</th>
+                  <th>Tensi</th>
+                  <th>Tinggi</th>
+                  <th>Berat</th>
+                </tr>
+                <tr>
+                  <td><?= $l_pemeriksaan['suhu_tubuh'] ?></td>
+                  <td><?= $l_pemeriksaan['tensi'] ?></td>
+                  <td><?= $l_pemeriksaan['tinggi'] ?></td>
+                  <td><?= $l_pemeriksaan['berat'] ?></td>
+                </tr>
+              </table>
+            <?php else : ?>
+              <div class="text-center text-secondary">Masukan Pemeriksaan Medis</div>
+            <?php endif; ?>
           </div>
         </div>
       </div>
@@ -133,7 +137,13 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
         </div>
         <hr>
         <?= $this->session->flashdata('msg_admin') ?>
-
+        <div class="my-2"></div>
+        <a href="<?= base_url('Klinik/input_pemeriksaan/' . encrypt_url($detail_antrean['id']) . '/' . $detail_antrean['klinik_id']) ?>" class="btn btn-light btn-icon-split btn-lg d-flex justify-content-start border">
+          <span class="icon bg-primary text-white-50 col-2">
+            <i class="fas fa-user-md"></i>
+          </span>
+          <span class="text">Pemeriksaan </span>
+        </a>
         <div class="my-2"></div>
         <a href="<?= base_url('Klinik/input_admin/' . encrypt_url($detail_antrean['id'])) ?>" class="btn btn-light btn-lg btn-icon-split btn-block d-flex justify-content-start border">
           <span class="icon bg-primary text-white-50 col-2">
@@ -158,13 +168,7 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
           <span class="text">Obat & Alkes</span>
         </a>
         <div class="my-2"></div>
-        <div class="my-2"></div>
-        <a href="<?= base_url('Klinik/input_pemeriksaan/' . encrypt_url($detail_antrean['id']) . '/' . $detail_antrean['klinik_id']) ?>" class="btn btn-light btn-icon-split btn-lg d-flex justify-content-start border">
-          <span class="icon bg-primary text-white-50 col-2">
-            <i class="fas fa-user-md"></i>
-          </span>
-          <span class="text">Pemeriksaan </span>
-        </a>
+
         <div class="my-2"></div>
         <hr>
         <div class="row no-gutters align-items-center">
@@ -435,8 +439,8 @@ $totalall = $rekap_admin['total'] + $rekap_tindakan['total'] + $rekap_obat['tota
 
 <script>
   var biaya = <?= $totalall ?>;
-  var pemeriksaan = <?= json_encode($l_pemeriksaan['nama_dokter']) ?>;
-  console.log(pemeriksaan)
+  var pemeriksaan = <?= json_encode($l_pemeriksaan) ?>;
+  // console.log(pemeriksaan)
 
   function checkBiaya(e) {
     if (biaya == 0) {

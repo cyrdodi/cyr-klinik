@@ -1,9 +1,20 @@
 <div class="row">
+  <div class="col align-self-center">
+    <div class="font-weight-bold mb-4 text-uppercase">Registrasi Pasien Baru</div>
+  </div>
+  <div class="col-auto">
+    <nav aria-label="breadcrumb ">
+      <ol class="breadcrumb bg-light">
+        <li class="breadcrumb-item"><a href="<?= base_url('Registrasi') ?>">Pencarian</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Pasien Baru</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<div class="row">
   <div class="col">
     <div class="card shadow-sm">
       <div class="card-body">
-        <h3> Registrasi Pasien Baru</h3>
-        <hr>
         <?= $this->session->flashdata('data_pasien_msg') ?>
         <div class="row">
           <div class="col-lg-8 border-right">
