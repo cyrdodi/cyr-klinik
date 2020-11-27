@@ -8,7 +8,14 @@ class Registrasi extends CI_Controller
 
     if ($this->session->userdata('is_login') !== TRUE) {
       redirect('Auth');
+    } else if ($this->session->userdata('role_id') != '1') {
+      if ($this->session->userdata('role_id') != '2') {
+        if ($this->session->userdata('petugas') != 'perawat') {
+          redirect('Auth');
+        }
+      }
     }
+
     $this->load->model('Registrasi_model');
   }
 

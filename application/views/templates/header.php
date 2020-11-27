@@ -45,14 +45,14 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-success sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
         <div class="sidebar-brand-icon">
-          <i class="fas fa-mug-hot"></i>
+          <!-- <i class="fas fa-mug-hot"></i> -->
         </div>
-        <div class="sidebar-brand-text mx-3">cyr-acutis</div>
+        <div class="sidebar-brand-text mx-3">cyr-klinik</div>
       </a>
 
       <!-- Divider -->
@@ -180,7 +180,9 @@
             <i class="fa fa-bars"></i>
           </button>
 
-          <h4>Klinik Bhakti Yuana</h4>
+          <div><img src="<?= base_url('assets/img/logo-by.png') ?>" alt="" width="35px">
+            <span class="font-weight-bold text-uppercase ml-2">Klinik Bhakti Yuana</span>
+          </div>
 
 
           <!-- Topbar Navbar -->

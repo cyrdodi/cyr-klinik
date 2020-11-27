@@ -8,7 +8,16 @@ class Billing extends CI_Controller
 
     if ($this->session->userdata('is_login') !== TRUE) {
       redirect('Auth');
+    } else if ($this->session->userdata('role_id') != '1') {
+      if ($this->session->userdata('role_id') != '2') {
+        if ($this->session->userdata('petugas') != 'perawat') {
+          redirect('Auth');
+        }
+      }
     }
+    // if ($this->session->userdata('is_login') !== TRUE || $this->session->userdata('role_id') !== '1' || $this->session->userdata('role_id') !== '2' || $this->session->userdata('petugas') !== 'perawat') {
+    //   redirect('Auth');
+    // }
 
     $this->load->model('Billing_model');
     $this->load->model('Klinik_model');

@@ -7,6 +7,16 @@ class Inventory extends CI_Controller
   {
     parent::__construct();
 
+    if ($this->session->userdata('is_login') !== TRUE) {
+      redirect('Auth');
+    } else if ($this->session->userdata('role_id') != '1') {
+      if ($this->session->userdata('role_id') != '2') {
+        if ($this->session->userdata('petugas') != 'farmasi') {
+          redirect('Auth');
+        }
+      }
+    }
+
     $this->load->model('Inventory_model', 'inventory_m');
     $this->load->model('Klinik_model');
   }

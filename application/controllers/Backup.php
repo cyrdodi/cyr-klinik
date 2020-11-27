@@ -2,7 +2,17 @@
 defined('BASEPATH') or exit('no direct access script allowed');
 class Backup extends CI_Controller
 {
-
+  public function __construct()
+  {
+    parent::__construct();
+    if ($this->session->userdata('is_login') !== TRUE) {
+      redirect('Auth');
+    } else if ($this->session->userdata('role_id') != '1') {
+      if ($this->session->userdata('role_id') != '2') {
+        redirect('Auth');
+      }
+    }
+  }
   public function index()
   {
     $data['title'] = 'Backup Database';
