@@ -1,4 +1,4 @@
-# CYR-SIMKLINIK
+# CYR-KLINIK
 [cyr-acutis](https://cyrdodi.github.io/cyr-acutis/)
 ## feature
 - [x] login page

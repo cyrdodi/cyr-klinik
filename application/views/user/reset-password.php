@@ -2,7 +2,7 @@
   <div class="col-4">
     <div class="card shadow mt-5">
       <div class="card-body">
-        <h1 class="text-center">simklinik</h1>
+        <h1 class="text-center">cyr-klinik</h1>
         <div class="text-uppercase font-weight-bold text-center">Reset Password</div>
         <hr>
         <form action="" method="POST">

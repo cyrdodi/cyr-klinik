@@ -7,7 +7,7 @@
             <img src="<?= base_url('assets/img/logo-by.png') ?>" alt="" width="120px">
           </div>
         </div>
-        <h1 class="text-center">cyr-simklinik</h1>
+        <h1 class="text-center">cyr-klinik</h1>
         <hr>
         <?= $this->session->flashdata('message') ?>
         <form action="" method="POST">

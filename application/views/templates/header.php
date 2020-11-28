@@ -37,6 +37,9 @@
   <script src="<?= base_url('assets/js/autocomplete.js') ?>"></script>
   <script type="text/javascript" src="<?= base_url(); ?>assets/js/autoNumeric.min.js"></script>
 
+  <!-- Page level plugins -->
+  <script src="<?= base_url('assets/') ?>vendor/chart.js/Chart.min.js"></script>
+
   <link rel="icon" type="image/png" href="<?= base_url('assets/img/logo-by.png') ?>" />
   <!-- <link rel="icon" type="image/png" href="https://example.com/favicon.png" /> -->
 </head>
@@ -54,7 +57,7 @@
         <div class="sidebar-brand-icon">
           <!-- <i class="fas fa-mug-hot"></i> -->
         </div>
-        <div class="sidebar-brand-text mx-3">cyr-simklinik</div>
+        <div class="sidebar-brand-text mx-3">cyr-klinik</div>
       </a>
 
       <!-- Divider -->
@@ -62,7 +65,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="<?= base_url('Home') ?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>

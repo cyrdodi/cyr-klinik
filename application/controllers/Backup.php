@@ -35,7 +35,7 @@ class Backup extends CI_Controller
     $backup = &$this->dbutil->backup($aturan);
 
     // nama database sudah ada tanggal downloadnya
-    $nama_database = 'backup-simklinik-' . date('Y-m-d') . '.zip';
+    $nama_database = 'backup-cyrklinik-' . date('Y-m-d') . '.zip';
     $simpan = './backup' . $nama_database;
 
     $this->load->helper('file');

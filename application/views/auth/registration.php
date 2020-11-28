@@ -7,7 +7,7 @@
             <i class="far fa-user-circle fa-5x"></i>
           </div>
         </div>
-        <h1 class="text-center">simklinik</h1>
+        <h1 class="text-center">cyr-klinik</h1>
         <hr>
         <form action="" method="POST">
           <input type="text" class="form-control" name="nama" id="nama" placeholder="nama pengguna" value="<?= set_value('nama') ?>">
