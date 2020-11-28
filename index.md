@@ -1,7 +1,7 @@
-## cyr-simklink
+## cyr-klink
 Sistem Informasi Manajemen untuk Klinik
 ### Fitur
-- [ ] Registrasi Pasien
-- [ ] Proses Klinik
-- [ ] Sistem Inventori Farmasi
+- [x] Registrasi Pasien
+- [x] Proses Klinik
+- [x] Sistem Inventori Farmasi
 
