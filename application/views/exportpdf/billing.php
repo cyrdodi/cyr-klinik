@@ -9,13 +9,8 @@
   <title>Document</title>
 </head>
 <style>
-  @font-face {
-    font-family: fontku;
-    src: url('<?= site_url(); ?>/assets/fonts/RobotoSlab.ttf');
-  }
-
   body {
-    font-family: fontku, helvetica, arial, sans-serif;
+    font-family: helvetica, arial, sans-serif;
     font-size: 14px;
   }
 
@@ -29,11 +24,12 @@
   th {
     border: 1px solid #dddddd;
     text-align: left;
-    padding: 8px;
+    padding: 5px;
   }
 
   .profil-table {
     border: none;
+    padding: 2px;
   }
 
   .card {
@@ -56,11 +52,17 @@
   }
 
   .subtotal {
-    background-color: #9ad3bc;
+    /* background-color: #9ad3bc; */
+    background-color: #583d72;
+    color: #fff;
   }
 
   .text-right {
     text-align: right;
+  }
+
+  .text-center {
+    text-align: center;
   }
 
   #cara-bayar {
@@ -161,7 +163,7 @@
         <?php endforeach; ?>
       <tfoot>
         <tr class="subtotal">
-          <th>Sub Total</th>
+          <th class="text-right">Sub Total</th>
           <th class="text-right">Rp. <?= number_format($total) ?></th>
         </tr>
       </tfoot>
@@ -186,7 +188,7 @@
       </tbody>
       <tfoot>
         <tr class="subtotal">
-          <th>Sub Total</th>
+          <th class="text-right">Sub Total</th>
           <th class="text-right">Rp. <?= number_format($total) ?></th>
         </tr>
       </tfoot>
@@ -200,8 +202,8 @@
         <tr>
           <th width="15px">#</th>
           <th>Obat & Alkes</th>
-          <th>Harga</th>
-          <th>Jumlah</th>
+          <th class="text-right">Harga</th>
+          <th class="text-center">Jumlah</th>
           <th class="text-right">Total</th>
         </tr>
       </thead>
@@ -213,8 +215,8 @@
           <tr>
             <td><?= $i ?></td>
             <td><?= $row['nama_obat'] . ' / ' . $row['satuan'] ?></td>
-            <td><?= number_format($row['harga']) ?></td>
-            <td><?= $row['jumlah'] ?></td>
+            <td class="text-right"><?= number_format($row['harga']) ?></td>
+            <td class="text-center"><?= $row['jumlah'] ?></td>
             <td width="100px" class="text-right"><?= number_format($totalrow) ?></td>
           </tr>
           <?php $total += $totalrow ?>
@@ -223,7 +225,7 @@
       </tbody>
       <tfoot>
         <tr class="subtotal">
-          <th colspan="4">Sub Total</th>
+          <th colspan="4" class="text-right">Sub Total</th>
           <th class="text-right">Rp. <?= number_format($total) ?></th>
         </tr>
       </tfoot>

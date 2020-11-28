@@ -51,12 +51,7 @@ function colorBadge($status)
             </div>
           </div>
           <div class="col text-right">
-            <div class="badge badge-primary "><?= $detail_billing['pembayaran'] ?></div>
-            <p><?= $l_pemeriksaan['nama_dokter'] ?></p>
-            <p><?= $l_pemeriksaan['nama_dokter'] ?></p>
-            <span><?= $detail_billing['nama_klinik'] ?></span><br>
-            <span><?= $l_pemeriksaan['nama_dokter'] ?></span><br>
-            <span><?= formatTanggal($detail_billing['tgl_berobat']) ?></span><br>
+            <div class="badge badge-primary "><?= $detail_billing['pembayaran'] ?></div><br>
             <?php if ($detail_billing['status_pembayaran'] == '2') : ?>
               <div class="font-weight-bold">Tanggal pembayaran</div>
               <p><?= formatTanggal($detail_billing['tgl_pembayaran']) ?></p>
@@ -82,6 +77,21 @@ function colorBadge($status)
         </div>
         <div class="row">
           <div class="col scroll">
+            <div class="font-weight-bold">Informasi Pendaftaran</div>
+            <table class="table table-sm">
+              <tr>
+                <td>Nama Klinik</td>
+                <td><?= $detail_billing['nama_klinik'] ?></td>
+              </tr>
+              <tr>
+                <td>Nama Dokter</td>
+                <td><?= $l_pemeriksaan['nama_dokter'] ?></td>
+              </tr>
+              <tr>
+                <td>Tanggal berobat</td>
+                <td><?= formatTanggal($detail_billing['tgl_berobat']) ?></td>
+              </tr>
+            </table>
             <div class="font-weight-bold">Administrasi</div>
             <table class="table table-sm table-striped">
               <thead>
@@ -188,8 +198,8 @@ function colorBadge($status)
         <div class="row no-gutters align-items-center">
           <div class="col mb-4 mr-2">
             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Rekap Biaya</div>
-            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <?= number_format($detail_billing['total_bayar']) ?></div>
-            <div class="font-weight-bold font-italic badge badge-<?= colorBadge($detail_billing['status_pembayaran']) ?>"><?= $detail_billing['nama_status'] ?></div>
+            <div class="h5 mb-2 font-weight-bold text-gray-800">Rp. <?= number_format($detail_billing['total_bayar']) ?></div>
+            <div class="font-weight-bold font-italic  badge badge-<?= colorBadge($detail_billing['status_pembayaran']) ?>"><?= $detail_billing['nama_status'] ?></div>
           </div>
           <div class="col-auto">
             <i class="fas fa-money-bill-alt fa-2x text-gray-300"></i>
