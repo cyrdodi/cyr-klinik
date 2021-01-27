@@ -1,3 +1,6 @@
+<?php
+exec("mysqldump --user=cyrdodi  --password=dobetter --host=localhost simklinik > /path/to/output/file.sql");
+?>
 <div class="row">
   <div class="col align-self-center">
     <div class="font-weight-bold mb-4 text-uppercase">Backup Database</div>

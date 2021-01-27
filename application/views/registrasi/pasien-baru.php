@@ -163,6 +163,8 @@
                 <option value="menikah" <?= set_select('status', 'menikah') ?>>Menikah</option>
                 <option value="belum menikah" <?= set_select('status', 'belum menikah') ?>>Belum Menikah</option>
                 <option value="tidak menikah" <?= set_select('status', 'tidak menikah') ?>>Tidak Menikah</option>
+                <option value="tidak menikah" <?= set_select('status', 'tidak menikah') ?>>Janda</option>
+                <option value="tidak menikah" <?= set_select('status', 'tidak menikah') ?>>Duda</option>
                 <option value="dibawah umur" <?= set_select('status', 'dibawah umur') ?>>Dibawah Umur</option>
               </select>
               <?= form_error('status', '<small class="text-danger ">', '</small>') ?>
