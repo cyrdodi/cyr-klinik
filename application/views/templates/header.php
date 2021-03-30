@@ -88,8 +88,6 @@
             <div class="bg-white py-2 collapse-inner rounded">
               <a class="collapse-item" href="<?= base_url('Registrasi') ?>">Pendaftaran</a>
               <a class="collapse-item" href="<?= base_url('Registrasi/Pasien_baru') ?>">Pasien Baru</a>
-              <div class="dropdown-divider"></div>
-              <a class="collapse-item" href="cards.html"><i class="fas fa-search"></i> Cari Pasien</a>
             </div>
           </div>
         </li>

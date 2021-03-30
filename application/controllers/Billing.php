@@ -40,10 +40,22 @@ class Billing extends CI_Controller
 
     $keyword = $this->input->get('keyword');
 
+    $bln = $this->input->get('bln');
+    $thn = $this->input->get('thn');
+
     if ($keyword !== NULL) {
       if (strlen($keyword) > 0) {
         $data['is_keyword'] = TRUE;
         $data['search_result'] = $this->Billing_model->searchPasien($keyword);
+      }
+    }
+
+    if ($bln !== NULL) {
+      if ($thn !== NULL) {
+        $data['is_keyword'] = TRUE;
+        $data['search_result'] = $this->Billing_model->searchPasienByDate($bln, $thn);
+      } else {
+        $this->session->set_flashdata('msg', '<div class="alert alert-danger" role="alert">Tahun belum diisi! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
       }
     }
 

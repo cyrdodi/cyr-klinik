@@ -52,7 +52,10 @@
                         <td><?= $result['no_bpjs'] ?></td>
                         <td><?= $result['tgl_lahir'] ?></td>
                         <td><?= $result['alamat'] ?></td>
-                        <td><a href="<?= base_url('Registrasi/pendaftaran/' . encrypt_url($result['medrek'])) ?>" class="btn btn-primary">Pilih</a></td>
+                        <td>
+                          <a href="<?= base_url('Registrasi/pendaftaran/' . encrypt_url($result['medrek'])) ?>" class="btn btn-primary">Pilih</a>
+                          <a href="<?= base_url('Registrasi/edit/' . encrypt_url($result['medrek'])) ?>" class="btn btn-warning">Edit</a>
+                        </td>
 
                       </tr>
                     <?php endforeach; ?>

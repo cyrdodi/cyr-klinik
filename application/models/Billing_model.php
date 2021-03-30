@@ -24,7 +24,32 @@ class Billing_model extends CI_Model
     JOIN cara_bayar ON cara_bayar.id = kt.cara_bayar
     WHERE CONCAT(dp.medrek, dp.nama_lengkap) LIKE '%" . $keyword . "%' 
     AND bt.is_active = '1'
-    LIMIT 100"
+    LIMIT 500"
+    )->result_array();
+  }
+
+  public function searchPasienByDate($bln, $thn)
+  {
+    return $this->db->query(
+      "SELECT 
+        dp.nama_lengkap,
+        dp.medrek,
+        dp.kecamatan,
+        dp.tgl_lahir,
+        kt.id,
+        kt.tgl_berobat,
+        kt.cara_bayar,
+        kt.status,
+        cara_bayar.pembayaran,
+        bt.no_billing,
+        bt.status_pembayaran
+    FROM billing_transaction AS bt
+    JOIN klinik_transaction AS kt ON kt.id = bt.klinik_transaction_id
+    JOIN data_pasien AS dp ON dp.medrek = kt.medrek
+    JOIN cara_bayar ON cara_bayar.id = kt.cara_bayar
+    WHERE MONTH(kt.tgl_berobat) = '" . $bln . "' AND YEAR(kt.tgl_berobat) = '" . $thn . "'
+    AND bt.is_active = '1'
+    LIMIT 500"
     )->result_array();
   }
 

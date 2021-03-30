@@ -38,6 +38,7 @@
             </div>
           </div>
         <?php else : ?>
+
           <div class="row">
             <div class="col">
               <table class="table table-responsive">
@@ -109,6 +110,16 @@
           </div>
 
           <hr>
+          <div class="row">
+            <div class="col mb-4">
+              <a href="<?= base_url('Registrasi/edit/' . encrypt_url($pasien['medrek'])) ?>" class="btn btn-warning btn-icon-split">
+                <span class="icon text-white-50">
+                  <i class="fas fa-edit"></i>
+                </span>
+                <span class="text">Update Data Pasien</span>
+              </a>
+            </div>
+          </div>
         <?php endif; ?>
       </div>
     </div>

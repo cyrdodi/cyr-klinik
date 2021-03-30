@@ -72,6 +72,41 @@ class Registrasi extends CI_Controller
     }
   }
 
+  public function edit($mr)
+  {
+    $mr = decrypt_url($mr);
+    $data['title'] = 'Edit Pasien';
+    $data['pasien'] = $this->Registrasi_model->getDataPasien($mr);
+    $data['provinsi'] = $this->Registrasi_model->getProvinsi();
+
+    $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required');
+    $this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
+    $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required');
+    $this->form_validation->set_rules('tgl_lhr', 'Tanggal Lahir', 'required');
+    $this->form_validation->set_rules('tahun_lhr', 'Tahun Lahir', 'required');
+    $this->form_validation->set_rules('bulan_lhr', 'Bulan Lahir', 'required');
+    $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+    $this->form_validation->set_rules('provinsi', 'Provinsi', 'required');
+    $this->form_validation->set_rules('kabupaten', 'Kabupaten', 'required');
+    $this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required');
+    $this->form_validation->set_rules('kelurahan', 'Kelurahan', 'required');
+    $this->form_validation->set_rules('pekerjaan', 'Pekerjaan', 'required');
+    $this->form_validation->set_rules('no_hp', 'Nomor Handphone', 'required');
+    $this->form_validation->set_rules('agama', 'Agama', 'required');
+    $this->form_validation->set_rules('status', 'Status', 'required');
+    $this->form_validation->set_rules('penjamin', 'Penjamin', 'required');
+    $this->form_validation->set_rules('hubungan', 'Hubungan', 'required');
+    if ($this->form_validation->run() === FALSE) {
+      $this->load->view('templates/header', $data);
+      $this->load->view('registrasi/edit-pasien', $data);
+      $this->load->view('templates/footer');
+    } else {
+      $this->Registrasi_model->editProfilPasien($mr);
+      $this->session->set_flashdata('data_pasien_msg', '<div class="alert alert-success" role="alert">Data pasien berhasil diedit</div>');
+      redirect('Registrasi/pendaftaran/' . encrypt_url($mr));
+    }
+  }
+
   public function pendaftaran($mr)
   {
     $mr = decrypt_url($mr);

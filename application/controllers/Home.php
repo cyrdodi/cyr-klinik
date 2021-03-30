@@ -14,6 +14,7 @@ class Home extends CI_Controller
     }
 
     $this->load->model('Klinik_model');
+    $this->load->model('Report_model');
   }
 
   public function index()
@@ -38,6 +39,18 @@ class Home extends CI_Controller
     // print_r($this->db->last_query());
     $this->load->view('templates/header', $data);
     $this->load->view('home/index');
+    $this->load->view('templates/footer');
+  }
+
+  public function laporan_pendapatan()
+  {
+    $data['title'] = 'Laporan Pendapatan';
+
+    $data['general'] = $this->Report_model->getPersonalBillingRecap($this->input->get('bln'), $this->input->get('thn'));
+
+
+    $this->load->view('templates/header', $data);
+    $this->load->view('home/laporan-pendapatan', $data);
     $this->load->view('templates/footer');
   }
 }

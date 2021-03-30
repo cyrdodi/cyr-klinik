@@ -19,11 +19,14 @@
 </div>
 <?= $this->session->flashdata('msg') ?>
 <div class="row">
-  <div class="col">
-    <div class="card shadow">
+  <div class="col-lg-4">
+    <div class="card shadow mb-4">
+      <div class="card-header">
+        Berdasarkan Nama / Medrek
+      </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col">
             <form action="" method="get" autocomplete="off">
               <div class="input-group mb-3">
                 <input type="text" minlength="2" class="form-control" placeholder="Masukan Nama / Medrek ..." aria-label="Example text with button addon" name="keyword" aria-describedby="button-addon1" value="<?= $is_keyword ? $this->input->get('keyword') : '' ?>" autofocus>
@@ -34,8 +37,64 @@
             </form>
           </div>
         </div>
-        <hr>
-        <?php if ($is_keyword) : ?>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card shadow mb-4">
+      <div class="card-header">
+        Berdasarkan Bulan & Tahun
+      </div>
+      <div class="card-body">
+        <div class="col">
+          <form>
+            <div class="form-row align-items-center">
+              <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Bulan</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Bulan</div>
+                  </div>
+                  <select name="bln" class="form-control">
+                    <option value="01" <?= $this->input->get('bln') === '01' ? 'selected' : '' ?>>Januari</option>
+                    <option value="02" <?= $this->input->get('bln') === '02' ? 'selected' : '' ?>>Februari</option>
+                    <option value="03" <?= $this->input->get('bln') === '03' ? 'selected' : '' ?>>Maret</option>
+                    <option value="04" <?= $this->input->get('bln') === '04' ? 'selected' : '' ?>>April</option>
+                    <option value="05" <?= $this->input->get('bln') === '05' ? 'selected' : '' ?>>Mei</option>
+                    <option value="06" <?= $this->input->get('bln') === '06' ? 'selected' : '' ?>>Juni</option>
+                    <option value="07" <?= $this->input->get('bln') === '07' ? 'selected' : '' ?>>Juli</option>
+                    <option value="08" <?= $this->input->get('bln') === '08' ? 'selected' : '' ?>>Agustus</option>
+                    <option value="09" <?= $this->input->get('bln') === '09' ? 'selected' : '' ?>>September</option>
+                    <option value="10" <?= $this->input->get('bln') === '10' ? 'selected' : '' ?>>Oktober</option>
+                    <option value="11" <?= $this->input->get('bln') === '11' ? 'selected' : '' ?>>November</option>
+                    <option value="12" <?= $this->input->get('bln') === '12' ? 'selected' : '' ?>>Desember</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Tahun</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Tahun</div>
+                  </div>
+                  <input type="text" name="thn" class="form-control" value="<?= $this->input->get('thn') ?>">
+                </div>
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-2" data-toggle="tooltip" title="Filter by Date"><i class="far fa-calendar-alt"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<?php if ($is_keyword) : ?>
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-body">
           <div class="row">
             <div class="col">
               <?php $i = 1; ?>
@@ -80,7 +139,7 @@
                     </table>
                   </div>
                 </div>
-                <div class="text-secondary">Search limit 100 records</div>
+                <div class="text-secondary">Search limit 500 records</div>
               <?php else : ?>
                 <div class="row">
                   <div class="col-lg-6">
@@ -94,8 +153,8 @@
               <?php endif; ?>
             </div>
           </div>
-        <?php endif; ?>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<?php endif; ?>

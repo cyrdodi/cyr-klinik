@@ -59,6 +59,34 @@ class Registrasi_model extends CI_Model
     return $data['medrek'];
   }
 
+  public function editProfilPasien($mr)
+  {
+    $tglLahir = $this->input->post('tahun_lhr') . '-' . $this->input->post('bulan_lhr') . "-" . sprintf('%02d', $this->input->post('tgl_lhr'));
+    $data = [
+      'nama_lengkap' => $this->input->post('nama_lengkap', TRUE),
+      'nik' => $this->input->post('nik', TRUE),
+      'no_bpjs' => $this->input->post('no_bpjs', TRUE),
+      'jk' => $this->input->post('jk', TRUE),
+      'tempat_lahir' => $this->input->post('tempat_lahir', TRUE),
+      'tgl_lahir' => $tglLahir,
+      'provinsi' => ucfirst(strtolower($this->input->post('provinsi', TRUE))),
+      'kabupaten' => ucfirst(strtolower($this->input->post('kabupaten', TRUE))),
+      'kecamatan' => ucfirst(strtolower($this->input->post('kecamatan', TRUE))),
+      'kelurahan' => ucfirst(strtolower($this->input->post('kelurahan', TRUE))),
+      'alamat' => $this->input->post('alamat', TRUE),
+      'no_hp' => $this->input->post('no_hp', TRUE),
+      'agama' => $this->input->post('agama', TRUE),
+      'pekerjaan' => $this->input->post('pekerjaan', TRUE),
+      'status_perkawinan' => $this->input->post('status', TRUE),
+      'nama_penjamin' => $this->input->post('penjamin', TRUE),
+      'no_hp_penjamin' => $this->input->post('no_hp_penjamin', TRUE),
+      'hubungan' => $this->input->post('hubungan', TRUE),
+      'is_active' => '1',
+    ];
+
+    $this->db->update('data_pasien', $data, ['medrek' => $mr]);
+  }
+
   public function generateMedrek()
   {
     // last record

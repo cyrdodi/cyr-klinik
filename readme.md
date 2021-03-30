@@ -13,6 +13,3 @@
 - [ ] histori in/out per item
 - [ ] dashboard
 
-
-## to do
-- customize ui
