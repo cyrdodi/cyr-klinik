@@ -32,9 +32,14 @@ class Home extends CI_Controller
       WHERE MONTH(tgl_berobat)= '" . date('m') . "'  AND YEAR(tgl_berobat) = '" . date('Y') . "' AND klinik_id = 'KL002' AND status='2'"
     )->row_array();
     $data['pendapatan'] = $this->db->query(
-      "SELECT SUM(total_bayar) AS total
-      FROM billing_transaction 
-      WHERE status_pembayaran='2' AND is_active='1' AND MONTH(tgl_pembayaran)='" . date('m') . "' AND YEAR(tgl_pembayaran) = '" . date('Y') . "'"
+      "SELECT 
+      SUM(a.total_bayar)
+      FROM billing_transaction a 
+      JOIN klinik_transaction b ON b.id = a.klinik_transaction_id
+      WHERE a.status_pembayaran='2' 
+      AND a.is_active='1' 
+      AND YEAR(b.tgl_berobat) = '" . date('Y') . "' 
+      AND MONTH(b.tgl_berobat) = '" . date('m') . "'"
     )->row_array();
     // print_r($this->db->last_query());
     $this->load->view('templates/header', $data);
