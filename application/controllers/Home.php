@@ -33,7 +33,7 @@ class Home extends CI_Controller
     )->row_array();
     $data['pendapatan'] = $this->db->query(
       "SELECT 
-      SUM(a.total_bayar)
+      SUM(a.total_bayar) total
       FROM billing_transaction a 
       JOIN klinik_transaction b ON b.id = a.klinik_transaction_id
       WHERE a.status_pembayaran='2' 
