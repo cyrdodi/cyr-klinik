@@ -29,7 +29,7 @@ class Registrasi_model extends CI_Model
 
   public function insertDataPasien()
   {
-    $medrek = sprintf('%06d', $this->generateMedrek());
+    $medrek = $this->generateMedrek();
     $tglLahir = $this->input->post('tahun_lhr') . '-' . $this->input->post('bulan_lhr') . "-" . sprintf('%02d', $this->input->post('tgl_lhr'));
     $data = [
       'medrek' => sprintf($medrek),
@@ -53,10 +53,23 @@ class Registrasi_model extends CI_Model
       'hubungan' => $this->input->post('hubungan', TRUE),
       'is_active' => '1',
     ];
+    $this->db->trans_begin();
 
     $this->db->insert('data_pasien', $data);
-
-    return $data['medrek'];
+    $ins = $this->db->affected_rows();
+    if ($this->db->trans_status()) {
+      // check double input
+      if ($ins === 1) {
+        $this->db->trans_commit();
+        return ['status' => TRUE, 'msg' => 'Pasien berhasil ditambahkan', 'mr' => $medrek];
+      } else {
+        $this->db->trans_rollback();
+        return ['status' => FALSE, 'msg' => 'Gagal insert pasien'];
+      }
+    } else {
+      $this->db->trans_rollback();
+      return ['status' => FALSE, 'msg' => 'Gagal transaksi'];
+    }
   }
 
   public function editProfilPasien($mr)
@@ -90,15 +103,36 @@ class Registrasi_model extends CI_Model
   public function generateMedrek()
   {
     // last record
-    $lastRecord = $this->db->query("SELECT medrek FROM data_pasien ORDER BY timestamp DESC")->row_array();
+    $lastRecord = $this->db->query("SELECT medrek FROM data_pasien ORDER BY medrek DESC")->row_array();
     // cek apakah ada row
     if ($lastRecord === NULL) {
-      $count = 1;
+      $mr =  sprintf('%06d', 1);;
     } else {
       $lastRecord = $lastRecord['medrek'];
-      $count = $lastRecord + 1;
+      $mr = $lastRecord + 1;
+      $mr = sprintf('%06d', $mr);
     }
-    return $count;
+
+
+    // check duplicate
+    $dup = $this->medrekIsDuplicate($mr);
+    for ($i = 0; $dup; $i++) {
+      $mr = $mr + 1;
+      $dup = $this->medrekIsDuplicate($mr);
+    }
+
+    return $mr;
+  }
+
+  // check dupliate medrek
+  private function medrekIsDuplicate($mr)
+  {
+    $dup = $this->db->get_where('data_pasien', ['medrek' => $mr])->num_rows();
+    if ($dup > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   public function searchPasien($keyword)

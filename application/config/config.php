@@ -1,5 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+require_once BASEPATH . 'dotenv/autoloader.php';
+$dotenv = new Dotenv\Dotenv(FCPATH);
+$dotenv->load();
 
 date_default_timezone_set('Asia/Jakarta');
 /*
@@ -24,8 +27,7 @@ date_default_timezone_set('Asia/Jakarta');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://192.168.1.2/cyr-klinik/';
-// $config['base_url'] = 'http://localhost/cyr-klinik/';
+$config['base_url'] = getenv('APP_URL');
 
 /*
 |--------------------------------------------------------------------------

@@ -66,9 +66,14 @@ class Registrasi extends CI_Controller
       $this->load->view('registrasi/pasien-baru', $data);
       $this->load->view('templates/footer');
     } else {
-      $mr = $this->Registrasi_model->insertDataPasien();
-      $this->session->set_flashdata('data_pasien_msg', '<div class="alert alert-success" role="alert">Data pasien berhasil ditambahkan ke database</div>');
-      redirect('Registrasi/pendaftaran/' . encrypt_url($mr));
+      $res = $this->Registrasi_model->insertDataPasien();
+      if ($res['status']) {
+        $this->session->set_flashdata('data_pasien_msg', '<div class="alert alert-success" role="alert">' . $res['msg'] . '/div>');
+        redirect('Registrasi/pendaftaran/' . encrypt_url($res['mr']));
+      } else {
+        $this->session->set_flashdata('data_pasien_msg', '<div class="alert alert-danger" role="alert">' . $res['msg'] . '</div>');
+        redirect('Registrasi/Pasien_baru');
+      }
     }
   }
 
